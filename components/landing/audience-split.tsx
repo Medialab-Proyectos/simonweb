@@ -1,0 +1,198 @@
+"use client"
+
+import { motion } from "framer-motion"
+import { Car, Building2, CheckCircle2, ArrowRight, MessageCircle } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { GooglePlayButton, AppStoreButton } from "./store-buttons"
+import Image from "next/image"
+import { useSegment } from "./segment-context"
+import Link from "next/link"
+import { cn } from "@/lib/utils"
+import { useDemoModal } from "./demo-modal-context"
+
+const segments = [
+  {
+    id: "personas" as const,
+    icon: Car,
+    title: "Para personas",
+    tagline: "Descarga la app y protege tu vehículo desde el primer día.",
+    benefits: [
+      "Descarga inmediata — sin instalaciones complejas",
+      "Tranquilidad: sabe siempre dónde está tu carro",
+      "Documentos al día con alertas automáticas",
+    ],
+    image: {
+      alt: "Persona usando la app Simon junto a su vehículo",
+      src: "/images/audience-personas.jpg",
+    },
+    activeAccent: "border-primary/35 bg-primary/4 shadow-lg shadow-primary/8",
+    iconBg: "bg-primary/10",
+    iconColor: "text-primary",
+    badge: "bg-primary/10 text-primary",
+  },
+  {
+    id: "empresas" as const,
+    icon: Building2,
+    title: "Para empresas",
+    tagline: "Agenda una demo y descubre cómo Simon optimiza tu operación.",
+    benefits: [
+      "Visibilidad operativa total de tu flota en tiempo real",
+      "Reducción de costos de combustible y mantenimiento",
+      "Trazabilidad, reportes y control en un solo panel",
+    ],
+    image: {
+      alt: "Administrador de flota monitoreando vehículos desde la plataforma Simon",
+      src: "/images/audience-empresas.jpg",
+    },
+    activeAccent: "border-secondary/35 bg-secondary/4 shadow-lg shadow-secondary/8",
+    iconBg: "bg-secondary/10",
+    iconColor: "text-secondary",
+    badge: "bg-secondary/10 text-secondary",
+  },
+]
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.45 } },
+}
+
+const stagger = {
+  visible: { transition: { staggerChildren: 0.12 } },
+}
+
+export function AudienceSplit() {
+  const { segment } = useSegment()
+  const { open: openDemo } = useDemoModal()
+
+  return (
+    <section
+      id="personas"
+      className="bg-surface py-20 lg:py-28"
+      aria-labelledby="audience-heading"
+    >
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        {/* Heading */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          variants={stagger}
+          className="text-center"
+        >
+          <motion.h2
+            id="audience-heading"
+            variants={fadeInUp}
+            className="text-3xl font-bold text-foreground sm:text-4xl text-balance"
+          >
+            Soluciones diseñadas para ti
+          </motion.h2>
+          <motion.p variants={fadeInUp} className="mx-auto mt-4 max-w-md text-muted-foreground">
+            Tanto si tienes un vehículo personal como si gestionas una flota empresarial.
+          </motion.p>
+        </motion.div>
+
+        {/* Cards */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          variants={stagger}
+          className="mt-12 grid gap-6 lg:grid-cols-2"
+          id="empresas"
+        >
+          {segments.map((seg) => {
+            const isActive = segment === seg.id
+            return (
+              <motion.div
+                key={seg.id}
+                variants={fadeInUp}
+                className={cn(
+                  "relative flex flex-col overflow-hidden rounded-2xl border bg-card transition-all duration-300",
+                  isActive ? seg.activeAccent : "border-border hover:border-border/60"
+                )}
+              >
+                {/* Active badge */}
+                {isActive && (
+                  <div className={cn("absolute top-4 right-4 z-10 rounded-full px-2.5 py-1 text-xs font-medium", seg.badge)}>
+                    Seleccionado
+                  </div>
+                )}
+
+                {/* ── Contextual image (40-50% of card height) ── */}
+                <div className="relative h-52 overflow-hidden rounded-t-2xl">
+                  <figure
+                    className="relative overflow-hidden h-full w-full rounded-none border-0 border-b border-border shadow-sm"
+                    role="img"
+                    aria-label={seg.image.alt}
+                  >
+                    <Image
+                      src={seg.image.src}
+                      alt={seg.image.alt}
+                      fill
+                      className="object-cover"
+                    />
+                  </figure>
+                  {/* Icon badge over image */}
+                  <div className={cn(
+                    "absolute bottom-4 left-4 flex h-12 w-12 items-center justify-center rounded-xl shadow-lg backdrop-blur-sm",
+                    seg.iconBg
+                  )}>
+                    <seg.icon className={cn("h-6 w-6", seg.iconColor)} aria-hidden="true" />
+                  </div>
+                </div>
+
+                {/* ── Card content ── */}
+                <div className="flex flex-col p-7">
+                  <h3 className="text-2xl font-bold text-foreground">{seg.title}</h3>
+                  <p className="mt-2 leading-relaxed text-muted-foreground">{seg.tagline}</p>
+
+                  {/* Benefits */}
+                  <ul className="mt-6 space-y-2.5" aria-label={`Beneficios ${seg.title}`}>
+                    {seg.benefits.map((benefit) => (
+                      <li key={benefit} className="flex items-start gap-3 text-muted-foreground">
+                        <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-success" aria-hidden="true" />
+                        <span className="text-sm">{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* CTAs — differentiated */}
+                  <div className="mt-8">
+                    {seg.id === "personas" ? (
+                      <div className="flex flex-col gap-2.5">
+                        <GooglePlayButton size="lg" variant="filled" className="w-full justify-center" />
+                        <AppStoreButton size="lg" variant="outline" className="w-full justify-center" />
+                      </div>
+                    ) : (
+                      <div className="flex flex-col gap-2.5">
+                        <Button
+                          size="lg"
+                          className="w-full justify-center bg-secondary text-white hover:opacity-90"
+                          onClick={openDemo}
+                        >
+                          Agendar demo
+                          <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+                        </Button>
+                        <Button
+                          size="lg"
+                          variant="outline"
+                          className="w-full justify-center border-border bg-transparent text-foreground hover:border-secondary/60 hover:bg-secondary/8"
+                          asChild
+                        >
+                          <Link href="https://wa.me/573001234567" target="_blank" rel="noopener noreferrer">
+                            <MessageCircle className="mr-2 h-4 w-4" aria-hidden="true" />
+                            WhatsApp
+                          </Link>
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+            )
+          })}
+        </motion.div>
+      </div>
+    </section>
+  )
+}
