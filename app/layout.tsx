@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { ThemeProvider } from '@/components/theme-provider'
+import Script from 'next/script'
 import './globals.css'
 
 const inter = Inter({
@@ -93,6 +94,17 @@ export default function RootLayout({
           {children}
         </ThemeProvider>
         <Analytics />
+        {/* Hotjar Tracking Code for SimonTest */}
+        <Script id="hotjar" strategy="afterInteractive">
+          {`(function(h,o,t,j,a,r){
+            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+            h._hjSettings={hjid:6668406,hjsv:6};
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+          })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`}
+        </Script>
       </body>
     </html>
   )
