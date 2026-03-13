@@ -56,7 +56,7 @@ export function TestimonialsSection() {
             aria-label="Usuario verificando seguridad del vehículo desde la app"
           >
             <Image
-              src="/images/testimonials.jpg"
+              src="/images/testimonials-new.png"
               alt="Usuario verificando seguridad del vehículo desde la app"
               fill
               className="object-cover"
@@ -99,7 +99,9 @@ export function TestimonialsSection() {
             <motion.figure
               key={i}
               variants={fadeInUp}
-              className="flex flex-col rounded-2xl border border-border bg-card p-6"
+              whileHover={{ scale: 1.03, y: -4 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="flex flex-col rounded-2xl border border-border bg-card p-6 cursor-default hover:border-primary/30 hover:shadow-xl hover:shadow-primary/8 transition-shadow"
             >
               {/* Stars */}
               <div className="mb-4 flex gap-1" aria-label="5 estrellas">

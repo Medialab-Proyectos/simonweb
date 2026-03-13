@@ -14,7 +14,9 @@
       "Bash(powershell -Command \"Remove-Item 'C:/Users/coben/Desktop/Simon/web1/public/images/test.jpg' -ErrorAction SilentlyContinue; Get-ChildItem 'C:/Users/coben/Desktop/Simon/web1/public/images/*.jpg' | Sort-Object Name | ForEach-Object { Write-Host \\('{0,-30} {1,8}KB' -f $_.Name, [math]::Round\\($_.Length/1024\\)\\) }\")",
       "Bash(powershell -Command \"Get-ChildItem 'C:/Users/coben/Desktop/Simon/web1/public/images/' | Select-Object Name, Length | Format-Table -AutoSize\")",
       "Bash(powershell -Command \"Remove-Item 'C:/Users/coben/Desktop/Simon/web1/public/images/test.jpg'; Get-ChildItem 'C:/Users/coben/Desktop/Simon/web1/public/images/' | Select-Object Name, Length | Format-Table -AutoSize\")",
-      "Bash(cd \"C:/Users/coben/OneDrive/Desktop/Simon/Web/Version1/simonweb\" && npm run build 2>&1 | tail -40)"
+      "Bash(cd \"C:/Users/coben/OneDrive/Desktop/Simon/Web/Version1/simonweb\" && npm run build 2>&1 | tail -40)",
+      "Bash(cd \"C:/Users/coben/OneDrive/Desktop/Simon/Web/Version1/simonweb\" && npm run build 2>&1 | tail -30)",
+      "Bash(cd \"C:\\\\Users\\\\coben\\\\OneDrive\\\\Desktop\\\\Simon\\\\Web\\\\Version1\\\\simonweb\" && npm run build 2>&1 | tail -30)"
     ]
   }
 }

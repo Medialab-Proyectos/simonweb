@@ -3,17 +3,9 @@
 import { useEffect, useRef } from "react"
 import { motion, useInView, animate } from "framer-motion"
 
-// ─── Animated numeric counter ─────────────────────────────────────────────────
-function Counter({
-  from = 0,
-  to,
-  suffix = "",
-  duration = 1.8,
-}: {
-  from?: number
-  to: number
-  suffix?: string
-  duration?: number
+// ─── Animated counter ─────────────────────────────────────────────────────────
+function Counter({ from = 0, to, suffix = "", duration = 1.8 }: {
+  from?: number; to: number; suffix?: string; duration?: number
 }) {
   const ref = useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, { once: true, margin: "-60px" })
@@ -24,49 +16,52 @@ function Counter({
     const controls = animate(from, to, {
       duration,
       ease: "easeOut",
-      onUpdate: (v) => {
-        el.textContent = Math.round(v).toString() + suffix
-      },
+      onUpdate: (v) => { el.textContent = Math.round(v).toLocaleString("es-CO") + suffix },
     })
     return controls.stop
   }, [inView, from, to, suffix, duration])
 
-  return (
-    <span ref={ref} aria-label={`${to}${suffix}`}>
-      {from}
-      {suffix}
-    </span>
-  )
+  return <span ref={ref} aria-label={`${to}${suffix}`}>{from}{suffix}</span>
 }
 
 // ─── Stats ────────────────────────────────────────────────────────────────────
 type Stat =
-  | { kind: "counter"; target: number; suffix: string; label: string }
+  | { kind: "counter"; prefix?: string; target: number; suffix: string; label: string }
   | { kind: "static"; value: string; label: string }
 
 const stats: Stat[] = [
-  { kind: "counter", target: 50, suffix: "k+", label: "Dispositivos conectados" },
-  { kind: "counter", target: 44, suffix: "k+", label: "Vehículos activos" },
-  { kind: "static", value: "24/7", label: "Monitoreo continuo" },
-  { kind: "static", value: "100%", label: "Cobertura nacional" },
+  { kind: "counter", prefix: "+", target: 50000, suffix: "",  label: "Dispositivos instalados" },
+  { kind: "counter", prefix: "+", target: 44000, suffix: "",  label: "Vehículos activos" },
+  { kind: "counter", prefix: "+", target: 19000, suffix: "",  label: "Vehículos productivos" },
+  { kind: "static",  value: "24/7",               label: "Monitoreo continuo" },
 ]
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 14 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.45 } },
 }
-
-const stagger = {
-  visible: { transition: { staggerChildren: 0.1 } },
-}
+const stagger = { visible: { transition: { staggerChildren: 0.1 } } }
 
 export function TrustBar() {
   return (
     <section
-      className="relative border-y border-border bg-surface py-12"
-      aria-label="Métricas de confianza"
+      className="relative border-y border-border bg-surface py-14"
+      aria-label="Impacto Simon — métricas de confianza"
     >
+      {/* Glow accent */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-primary/4 to-transparent" aria-hidden="true" />
+
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Section label */}
+        <motion.p
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-10 text-center text-xs font-semibold uppercase tracking-widest text-primary"
+        >
+          Impacto Simon
+        </motion.p>
+
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -82,7 +77,10 @@ export function TrustBar() {
             >
               <p className="text-3xl font-bold tracking-tight text-primary sm:text-4xl">
                 {stat.kind === "counter" ? (
-                  <Counter to={stat.target} suffix={stat.suffix} />
+                  <>
+                    {stat.prefix}
+                    <Counter to={stat.target} suffix={stat.suffix} />
+                  </>
                 ) : (
                   stat.value
                 )}
@@ -91,16 +89,6 @@ export function TrustBar() {
             </motion.div>
           ))}
         </motion.div>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-          className="mt-8 text-center text-sm text-muted-foreground"
-        >
-          Tecnología aplicada a seguridad, operación y control diario.
-        </motion.p>
       </div>
     </section>
   )

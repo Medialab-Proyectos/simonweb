@@ -2,30 +2,22 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { MapPin, MessageCircle, Menu, X, ArrowRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { useSegment } from "./segment-context"
-import { GooglePlayButton, AppStoreButton } from "./store-buttons"
+import { Menu, X } from "lucide-react"
 import { Logo } from "./logo"
-import { useDemoModal } from "./demo-modal-context"
 import Link from "next/link"
+import { cn } from "@/lib/utils"
 
 const navLinks = [
-  { href: "#soluciones", label: "Soluciones" },
-  { href: "#empresas", label: "Empresas" },
-  { href: "#personas", label: "Personas" },
-  { href: "#como-funciona", label: "Cómo funciona" },
-  { href: "#testimonios", label: "Casos" },
-  { href: "#faq", label: "FAQ" },
-  { href: "#contacto", label: "Contacto" },
+  { href: "#soluciones",      label: "Nosotros" },
+  { href: "#soluciones-grid", label: "Soluciones" },
+  { href: "#faq",             label: "FAQ" },
+  { href: "#noticias",        label: "Noticias" },
+  { href: "#demo",            label: "Contáctanos" },
 ]
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const { segment } = useSegment()
-  const { open: openDemo } = useDemoModal()
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20)
@@ -37,8 +29,10 @@ export function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "glass py-3 shadow-sm" : "bg-transparent py-5"
-        }`}
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        isScrolled ? "glass py-3 shadow-sm" : "bg-transparent py-5"
+      )}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <nav className="flex items-center justify-between" aria-label="Navegación principal">
@@ -53,7 +47,7 @@ export function Header() {
           </Link>
 
           {/* Desktop nav links */}
-          <div className="hidden items-center gap-5 lg:flex">
+          <div className="hidden items-center gap-6 lg:flex">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -65,57 +59,24 @@ export function Header() {
             ))}
           </div>
 
-          {/* Desktop CTAs — dynamic by segment */}
-          <div className="hidden items-center gap-2 lg:flex">
-            <ThemeToggle />
-            <AnimatePresence mode="wait">
-              {segment === "personas" ? (
-                <motion.div
-                  key="personas-header-ctas"
-                  initial={{ opacity: 0, x: 6 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -6 }}
-                  transition={{ duration: 0.2 }}
-                  className="flex items-center gap-2"
-                >
-                  <GooglePlayButton size="sm" variant="outline" />
-                  <AppStoreButton size="sm" variant="filled" />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="empresas-header-ctas"
-                  initial={{ opacity: 0, x: 6 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -6 }}
-                  transition={{ duration: 0.2 }}
-                  className="flex items-center gap-2"
-                >
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="border-border bg-transparent text-foreground hover:border-primary hover:bg-primary/10 hover:text-primary"
-                    onClick={openDemo}
-                  >
-                    Agendar demo
-                  </Button>
-                  <Button
-                    size="sm"
-                    className="bg-primary text-primary-foreground hover:bg-primary-hover glow-primary-sm"
-                    asChild
-                  >
-                    <Link href="https://wa.me/573001234567" target="_blank" rel="noopener noreferrer">
-                      <MessageCircle className="mr-1.5 h-4 w-4" aria-hidden="true" />
-                      WhatsApp
-                    </Link>
-                  </Button>
-                </motion.div>
+          {/* Desktop: Login button */}
+          <div className="hidden items-center gap-3 lg:flex">
+            <Link
+              href="https://app.simonmovilidad.com/login"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(
+                "rounded-lg border border-primary/60 px-5 py-2 text-sm font-semibold text-primary",
+                "transition-all duration-200 hover:bg-primary hover:text-primary-foreground hover:border-primary",
+                "focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
               )}
-            </AnimatePresence>
+            >
+              Login
+            </Link>
           </div>
 
-          {/* Mobile controls */}
-          <div className="flex items-center gap-2 lg:hidden">
-            <ThemeToggle />
+          {/* Mobile: hamburger */}
+          <div className="flex items-center lg:hidden">
             <button
               className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-card"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -154,47 +115,16 @@ export function Header() {
                     {link.label}
                   </Link>
                 ))}
-
-                {/* Mobile dynamic CTAs */}
-                <div className="mt-4 flex flex-col gap-2.5 border-t border-border pt-4">
-                  {segment === "personas" ? (
-                    <>
-                      <GooglePlayButton size="default" variant="filled" className="w-full justify-center" />
-                      <AppStoreButton size="default" variant="outline" className="w-full justify-center" />
-                      <Link
-                        href="https://wa.me/573001234567"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 rounded-lg py-2 text-sm text-muted-foreground hover:text-primary transition-colors"
-                        onClick={closeMobileMenu}
-                      >
-                        <MessageCircle className="h-4 w-4" aria-hidden="true" />
-                        Hablar por WhatsApp
-                      </Link>
-                    </>
-                  ) : (
-                    <>
-                      <Button className="w-full bg-primary text-primary-foreground hover:bg-primary-hover" onClick={() => { closeMobileMenu(); openDemo() }}>
-                        Agendar demo
-                        <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
-                      </Button>
-                      <Button
-                        variant="outline"
-                        className="w-full border-border bg-transparent text-foreground hover:border-primary hover:bg-primary/10"
-                        asChild
-                      >
-                        <Link
-                          href="https://wa.me/573001234567"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={closeMobileMenu}
-                        >
-                          <MessageCircle className="mr-2 h-4 w-4" aria-hidden="true" />
-                          WhatsApp
-                        </Link>
-                      </Button>
-                    </>
-                  )}
+                <div className="mt-4 border-t border-border pt-4">
+                  <Link
+                    href="https://app.simonmovilidad.com/login"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full rounded-xl border border-primary/60 px-5 py-3 text-center text-sm font-semibold text-primary hover:bg-primary hover:text-primary-foreground transition-all"
+                    onClick={closeMobileMenu}
+                  >
+                    Login
+                  </Link>
                 </div>
               </div>
             </motion.div>

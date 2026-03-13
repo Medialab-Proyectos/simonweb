@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Car, Eye, Zap } from "lucide-react"
+import { Car, Eye, Zap, CheckCircle2 } from "lucide-react"
 
 const steps = [
   {
@@ -10,12 +10,10 @@ const steps = [
     title: "Conecta tu vehículo o flota",
     description:
       "Instalamos el dispositivo en minutos, sin modificar tu vehículo. Compatible con cualquier tipo de automóvil.",
-    visual: (
-      /* Device illustration */
-      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border border-primary/30 bg-primary/8">
-        <Car className="h-8 w-8 text-primary" aria-hidden="true" />
-      </div>
-    ),
+    color: "text-primary",
+    bgColor: "bg-primary/8",
+    borderColor: "border-primary/30",
+    glowColor: "shadow-primary/10",
   },
   {
     step: "02",
@@ -23,12 +21,10 @@ const steps = [
     title: "Visualiza información clave",
     description:
       "Accede desde la app o web para ver ubicación, alertas, documentos y reportes en tiempo real.",
-    visual: (
-      /* App illustration */
-      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border border-secondary/30 bg-secondary/8">
-        <Eye className="h-8 w-8 text-secondary" aria-hidden="true" />
-      </div>
-    ),
+    color: "text-secondary",
+    bgColor: "bg-secondary/8",
+    borderColor: "border-secondary/30",
+    glowColor: "shadow-secondary/10",
   },
   {
     step: "03",
@@ -36,12 +32,10 @@ const steps = [
     title: "Actúa con alertas y reportes",
     description:
       "Toma decisiones informadas con alertas, documentos y reportes centralizados para máximo control.",
-    visual: (
-      /* Action illustration */
-      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border border-success/30 bg-success/8">
-        <Zap className="h-8 w-8 text-success" aria-hidden="true" />
-      </div>
-    ),
+    color: "text-success",
+    bgColor: "bg-success/8",
+    borderColor: "border-success/30",
+    glowColor: "shadow-success/10",
   },
 ]
 
@@ -99,31 +93,54 @@ export function HowItWorks() {
           variants={stagger}
           className="relative mt-16"
         >
-          {/* Desktop connector */}
+          {/* Desktop connector — animated gradient */}
           <div
-            className="absolute top-8 left-[16.5%] right-[16.5%] hidden h-px bg-gradient-to-r from-primary/20 via-primary/40 to-primary/20 lg:block"
+            className="absolute top-12 left-[16.5%] right-[16.5%] hidden h-px lg:block overflow-hidden"
             aria-hidden="true"
-          />
+          >
+            <motion.div
+              className="h-full bg-gradient-to-r from-primary/40 via-secondary/50 to-success/40"
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, delay: 0.5, ease: "easeOut" }}
+              style={{ transformOrigin: "left" }}
+            />
+          </div>
 
           <div className="grid gap-10 lg:grid-cols-3">
             {steps.map((step, index) => (
               <motion.div
                 key={step.step}
                 variants={fadeInUp}
-                className="relative flex flex-col items-center text-center"
+                whileHover={{ y: -8 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="relative flex flex-col items-center text-center cursor-default"
               >
-                {/* Step number badge */}
+                {/* Step number badge + icon */}
                 <div className="relative z-10 mb-5">
-                  {step.visual}
-                  <span className="absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
+                  <motion.div
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                    className={`mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border ${step.borderColor} ${step.bgColor} shadow-lg ${step.glowColor}`}
+                  >
+                    <step.icon className={`h-8 w-8 ${step.color}`} aria-hidden="true" />
+                  </motion.div>
+                  <motion.span
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 + index * 0.15, type: "spring", stiffness: 500, damping: 15 }}
+                    className="absolute -top-2 -right-2 flex h-7 w-7 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground shadow-lg"
+                  >
                     {step.step}
-                  </span>
+                  </motion.span>
                 </div>
 
                 {/* Mobile connector */}
                 {index < steps.length - 1 && (
                   <div
-                    className="absolute top-16 left-1/2 h-10 w-px -translate-x-1/2 bg-primary/20 lg:hidden"
+                    className="absolute top-16 left-1/2 h-10 w-px -translate-x-1/2 bg-gradient-to-b from-primary/30 to-transparent lg:hidden"
                     aria-hidden="true"
                   />
                 )}
@@ -132,6 +149,20 @@ export function HowItWorks() {
                 <p className="mt-2 max-w-xs text-muted-foreground leading-relaxed">
                   {step.description}
                 </p>
+
+                {/* Completion check — micro-interaction */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.6 + index * 0.2, type: "spring", stiffness: 400, damping: 15 }}
+                  className="mt-4"
+                >
+                  <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs ${step.bgColor} ${step.color}`}>
+                    <CheckCircle2 className="h-3 w-3" aria-hidden="true" />
+                    {index === 0 ? "Instalación fácil" : index === 1 ? "Datos en tiempo real" : "Control total"}
+                  </span>
+                </motion.div>
               </motion.div>
             ))}
           </div>

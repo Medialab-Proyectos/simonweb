@@ -3,65 +3,23 @@
 import { useState, useRef, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { X, Send, ChevronDown } from "lucide-react"
+import Image from "next/image"
 
-// ─── Simon avatar SVG ─────────────────────────────────────────────────────────
+// ─── Simon avatar — photorealistic human character ─────────────────────────────
 function SimonAvatar({ size = 36 }: { size?: number }) {
     return (
-        <svg
-            width={size}
-            height={size}
-            viewBox="0 0 64 64"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
+        <div
+            style={{ width: size, height: size }}
+            className="relative shrink-0 overflow-hidden rounded-full"
         >
-            {/* Background circle */}
-            <circle cx="32" cy="32" r="32" fill="#0B1320" />
-
-            {/* Shirt / body */}
-            <path d="M10 64 Q14 52 22 49 L32 54 L42 49 Q50 52 54 64Z" fill="#00E5D1" />
-
-            {/* Neck */}
-            <rect x="27" y="42" width="10" height="8" rx="4" fill="#F5C8A0" />
-
-            {/* Head */}
-            <ellipse cx="32" cy="30" rx="15" ry="16" fill="#F5C8A0" />
-
-            {/* Hair */}
-            <path d="M17 26 Q18 12 32 12 Q46 12 47 26 Q44 18 32 18 Q20 18 17 26Z" fill="#2C1A0E" />
-            {/* Side hair */}
-            <rect x="16" y="25" width="4" height="10" rx="2" fill="#2C1A0E" />
-            <rect x="44" y="25" width="4" height="10" rx="2" fill="#2C1A0E" />
-
-            {/* Eyebrows */}
-            <path d="M22 25 Q26 23 29 25" stroke="#2C1A0E" strokeWidth="1.5" strokeLinecap="round" fill="none" />
-            <path d="M35 25 Q38 23 42 25" stroke="#2C1A0E" strokeWidth="1.5" strokeLinecap="round" fill="none" />
-
-            {/* Eyes */}
-            <ellipse cx="26" cy="29" rx="3" ry="3.5" fill="white" />
-            <ellipse cx="38" cy="29" rx="3" ry="3.5" fill="white" />
-            {/* Irises */}
-            <circle cx="26.5" cy="30" r="2" fill="#00A896" />
-            <circle cx="38.5" cy="30" r="2" fill="#00A896" />
-            {/* Pupils */}
-            <circle cx="26.8" cy="30.3" r="1" fill="#050505" />
-            <circle cx="38.8" cy="30.3" r="1" fill="#050505" />
-            {/* Eye shine */}
-            <circle cx="27.4" cy="29.2" r="0.5" fill="white" />
-            <circle cx="39.4" cy="29.2" r="0.5" fill="white" />
-
-            {/* Nose */}
-            <path d="M32 31 Q30 35 29 36 Q32 37.5 35 36 Q34 35 32 31Z" fill="#E8A87C" />
-
-            {/* Smile */}
-            <path d="M26 39.5 Q32 44 38 39.5" stroke="#C47A5A" strokeWidth="1.5" strokeLinecap="round" fill="none" />
-            {/* Teeth hint */}
-            <path d="M27.5 40 Q32 43 36.5 40" stroke="white" strokeWidth="0.8" strokeLinecap="round" fill="none" />
-
-            {/* Headset mic dot — subtle Simon brand detail */}
-            <circle cx="18" cy="32" r="2.5" fill="#00E5D1" opacity="0.9" />
-            <rect x="18" y="27" width="1.5" height="5" rx="0.75" fill="#00E5D1" opacity="0.7" />
-        </svg>
+            <Image
+                src="/images/simon-character.png"
+                alt="Simón — Tu asistente en la vía"
+                fill
+                className="object-cover object-top"
+                sizes={`${size}px`}
+            />
+        </div>
     )
 }
 
@@ -199,10 +157,12 @@ export function ChatWidget() {
                         aria-label="Asistente virtual Simon"
                     >
                         {/* Header */}
-                        <div className="flex items-center justify-between gap-3 bg-primary/10 px-4 py-3">
+                        <div className="flex items-center justify-between gap-3 bg-gradient-to-r from-primary/15 to-secondary/10 px-4 py-3">
                             <div className="flex items-center gap-3">
-                                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full overflow-hidden ring-2 ring-primary/30">
-                                    <SimonAvatar size={36} />
+                                <div className="relative flex shrink-0 items-center justify-center rounded-full overflow-hidden ring-2 ring-primary/30">
+                                    <SimonAvatar size={40} />
+                                    {/* Online indicator */}
+                                    <div className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-success border-2 border-card" />
                                 </div>
                                 <div>
                                     <p className="text-sm font-semibold text-foreground">Simón</p>
@@ -212,24 +172,29 @@ export function ChatWidget() {
                                     </div>
                                 </div>
                             </div>
-                            <button
+                            <motion.button
                                 onClick={() => setIsOpen(false)}
+                                whileHover={{ scale: 1.1, rotate: 90 }}
+                                whileTap={{ scale: 0.9 }}
                                 className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
                                 aria-label="Cerrar chat"
                             >
                                 <X className="h-4 w-4" />
-                            </button>
+                            </motion.button>
                         </div>
 
                         {/* Messages */}
                         <div className="flex flex-col gap-3 overflow-y-auto p-4 h-72 bg-background">
-                            {messages.map((msg) => (
-                                <div
+                            {messages.map((msg, index) => (
+                                <motion.div
                                     key={msg.id}
+                                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                                    transition={{ duration: 0.3, delay: index === messages.length - 1 ? 0.1 : 0 }}
                                     className={`flex items-end gap-2 ${msg.from === "user" ? "flex-row-reverse" : "flex-row"}`}
                                 >
                                     {msg.from === "bot" && (
-                                        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full overflow-hidden ring-1 ring-primary/20">
+                                        <div className="flex shrink-0 items-center justify-center rounded-full overflow-hidden ring-1 ring-primary/20">
                                             <SimonAvatar size={28} />
                                         </div>
                                     )}
@@ -246,27 +211,36 @@ export function ChatWidget() {
                                             {msg.time}
                                         </p>
                                     </div>
-                                </div>
+                                </motion.div>
                             ))}
 
                             {/* Typing indicator */}
                             {isTyping && (
-                                <div className="flex items-end gap-2">
-                                    <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full overflow-hidden ring-1 ring-primary/20">
+                                <motion.div
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="flex items-end gap-2"
+                                >
+                                    <div className="flex shrink-0 items-center justify-center rounded-full overflow-hidden ring-1 ring-primary/20">
                                         <SimonAvatar size={28} />
                                     </div>
                                     <div className="rounded-2xl rounded-bl-sm bg-card px-4 py-3">
                                         <div className="flex gap-1">
                                             {[0, 1, 2].map((i) => (
-                                                <span
+                                                <motion.span
                                                     key={i}
                                                     className="h-1.5 w-1.5 rounded-full bg-muted-foreground"
-                                                    style={{ animation: `bounce 1s ${i * 0.2}s infinite` }}
+                                                    animate={{ y: [0, -4, 0] }}
+                                                    transition={{
+                                                        duration: 0.6,
+                                                        repeat: Infinity,
+                                                        delay: i * 0.15,
+                                                    }}
                                                 />
                                             ))}
                                         </div>
                                     </div>
-                                </div>
+                                </motion.div>
                             )}
                             <div ref={endRef} />
                         </div>
@@ -274,13 +248,15 @@ export function ChatWidget() {
                         {/* Quick replies */}
                         <div className="flex gap-2 overflow-x-auto px-4 py-2 bg-background border-t border-border scrollbar-none">
                             {suggestions.map((s) => (
-                                <button
+                                <motion.button
                                     key={s}
                                     onClick={() => sendMessage(s)}
+                                    whileHover={{ scale: 1.05, borderColor: "var(--primary)" }}
+                                    whileTap={{ scale: 0.95 }}
                                     className="shrink-0 rounded-full border border-border px-3 py-1 text-xs text-muted-foreground hover:border-primary hover:text-primary transition-colors"
                                 >
                                     {s}
-                                </button>
+                                </motion.button>
                             ))}
                         </div>
 
@@ -294,28 +270,30 @@ export function ChatWidget() {
                                 className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none"
                                 aria-label="Escribe tu mensaje"
                             />
-                            <button
+                            <motion.button
                                 type="submit"
                                 disabled={!input.trim()}
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.9 }}
                                 className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground disabled:opacity-40 hover:bg-primary-hover transition-colors"
                                 aria-label="Enviar mensaje"
                             >
                                 <Send className="h-4 w-4" />
-                            </button>
+                            </motion.button>
                         </form>
                     </motion.div>
                 )}
             </AnimatePresence>
 
-            {/* ── Toggle button ───────────────────────────────────────────────── */}
+            {/* ── Toggle button with Simon character ─────────────────────────── */}
             <motion.button
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: 1.5, type: "spring", stiffness: 260, damping: 20 }}
-                whileHover={{ scale: 1.06 }}
+                whileHover={{ scale: 1.08 }}
                 whileTap={{ scale: 0.94 }}
                 onClick={() => setIsOpen((v) => !v)}
-                className="fixed bottom-24 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-card border border-border shadow-xl shadow-black/30 hover:border-primary/50 transition-colors"
+                className="fixed bottom-24 right-6 z-50 flex h-16 w-16 items-center justify-center rounded-full bg-card border-2 border-border shadow-xl shadow-black/30 hover:border-primary/50 transition-colors"
                 aria-label={isOpen ? "Cerrar asistente" : "Abrir asistente"}
                 aria-expanded={isOpen}
             >
@@ -325,26 +303,43 @@ export function ChatWidget() {
                             <ChevronDown className="h-5 w-5 text-foreground" />
                         </motion.div>
                     ) : (
-                        <motion.div key="logo" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }} transition={{ duration: 0.2 }}>
-                            <SimonAvatar size={38} />
+                        <motion.div key="logo" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }} transition={{ duration: 0.2 }} className="rounded-full overflow-hidden">
+                            <SimonAvatar size={46} />
                         </motion.div>
                     )}
                 </AnimatePresence>
 
-                {/* Unread badge */}
+                {/* Unread badge with bounce */}
                 {hasUnread && !isOpen && (
-                    <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[9px] font-bold text-primary-foreground">
+                    <motion.span
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ type: "spring", stiffness: 500, damping: 15 }}
+                        className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-destructive text-[10px] font-bold text-white shadow-lg shadow-destructive/30 ring-2 ring-card"
+                    >
                         1
-                    </span>
+                    </motion.span>
                 )}
             </motion.button>
 
-            <style jsx>{`
-        @keyframes bounce {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-4px); }
-        }
-      `}</style>
+            {/* Floating tooltip when closed — appears once */}
+            <AnimatePresence>
+                {!isOpen && hasUnread && (
+                    <motion.div
+                        initial={{ opacity: 0, x: 10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 10 }}
+                        transition={{ delay: 2, duration: 0.3 }}
+                        className="fixed bottom-[118px] right-[84px] z-50 rounded-xl bg-card border border-border px-3 py-2 shadow-lg max-w-[180px]"
+                        aria-hidden="true"
+                    >
+                        <p className="text-xs text-foreground">
+                            👋 ¡Hola! Soy <strong className="text-primary">Simón</strong>. ¿Necesitas ayuda?
+                        </p>
+                        <div className="absolute top-1/2 -right-1.5 h-3 w-3 -translate-y-1/2 rotate-45 rounded-sm bg-card border-r border-t border-border" />
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </>
     )
 }

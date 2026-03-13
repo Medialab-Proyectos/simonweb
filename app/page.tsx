@@ -8,6 +8,8 @@ import { SolutionsGrid } from "@/components/landing/solutions-grid"
 import { HowItWorks } from "@/components/landing/how-it-works"
 import { ProductShowcase } from "@/components/landing/product-showcase"
 import { AudienceSplit } from "@/components/landing/audience-split"
+import { AppDownloadBanner } from "@/components/landing/app-download-banner"
+import { ClientLogos } from "@/components/landing/client-logos"
 import { TestimonialsSection } from "@/components/landing/testimonials-section"
 import { FAQSection } from "@/components/landing/faq-section"
 import { BlogPreview } from "@/components/landing/blog-preview"
@@ -34,7 +36,7 @@ const structuredData = {
       ],
       contactPoint: {
         "@type": "ContactPoint",
-        telephone: "+57-300-123-4567",
+        telephone: "+57-310-5511862",
         contactType: "sales",
         availableLanguage: ["Spanish"],
         areaServed: "CO",
@@ -62,7 +64,7 @@ const structuredData = {
       },
       geo: { "@type": "GeoCoordinates", latitude: 4.6534, longitude: -74.0621 },
       url: "https://simonmovilidad.com",
-      telephone: "+57-300-123-4567",
+      telephone: "+57-310-5511862",
       openingHoursSpecification: {
         "@type": "OpeningHoursSpecification",
         dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
@@ -75,7 +77,52 @@ const structuredData = {
       name: "Simon Movilidad",
       operatingSystem: "Android, iOS",
       applicationCategory: "UtilitiesApplication",
-      offers: { "@type": "Offer", price: "0", priceCurrency: "COP" },
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "COP" },
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo funciona el monitoreo vehicular en tiempo real?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Instalamos un dispositivo GPS discreto en tu vehículo que transmite su ubicación cada segundo. Puedes ver la posición exacta, velocidad y recorrido desde nuestra app o web, disponible 24/7."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué incluye la guantera digital?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Almacenas SOAT, tecnomecánica, seguro y más en un solo lugar accesible desde tu celular. Recibes alertas automáticas antes de los vencimientos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Simon funciona para vehículo particular y para empresas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Tenemos soluciones para personas con un solo vehículo y para empresas con flotas de cualquier tamaño."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo funcionan las geocercas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Las geocercas son zonas virtuales que defines en el mapa. Cuando tu vehículo entra o sale, recibes una alerta instantánea."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué pasa si necesito soporte?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nuestro equipo está disponible 24/7 por WhatsApp, teléfono y chat. El tiempo promedio de respuesta es menor a 1 hora en horario hábil."
+          }
+        }
+      ]
     },
   ],
 }
@@ -89,46 +136,48 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
-      {/*
-        SegmentProvider shares the active segment (personas | empresas)
-        across Header, Hero, ProductShowcase, AudienceSplit and FinalCTA.
-      */}
       <DemoModalProvider>
         <SegmentProvider>
           <Header />
 
           <main>
-            {/* 1. Hero */}
+            {/* 1. Hero — "Gestión vehicular inteligente" */}
             <Hero />
 
-            {/* 2. Credibilidad rápida */}
+            {/* 2. Impacto Simon — contadores animados */}
             <TrustBar />
 
-            {/* 3. Problema */}
+            {/* 3. Clientes que confían */}
+            <ClientLogos />
+
+            {/* 4. Problema */}
             <ProblemSection />
 
-            {/* 4. Solución */}
+            {/* 5. Nuestros servicios — 5 glassmorphism cards */}
             <SolutionsGrid />
 
-            {/* 5. Cómo funciona */}
+            {/* 6. Cómo funciona */}
             <HowItWorks />
 
-            {/* 6. Demostración del producto */}
+            {/* 7. Demostración del producto */}
             <ProductShowcase />
 
-            {/* 7. Beneficios segmentados */}
+            {/* 8. Beneficios segmentados — B2B */}
             <AudienceSplit />
 
-            {/* 8. Prueba / confianza */}
+            {/* 9. Descarga de app */}
+            <AppDownloadBanner />
+
+            {/* 10. Testimonios */}
             <TestimonialsSection />
 
-            {/* 9. FAQ */}
+            {/* 11. FAQ */}
             <FAQSection />
 
-            {/* 10. Blog */}
+            {/* 12. Blog / Noticias */}
             <BlogPreview />
 
-            {/* 11. CTA final */}
+            {/* 13. CTA final — Empresas: formulario inline */}
             <FinalCTA />
           </main>
 
@@ -137,7 +186,7 @@ export default function HomePage() {
           {/* Persistent WhatsApp CTA */}
           <WhatsAppButton />
 
-          {/* Chatbot assistant */}
+          {/* Chatbot Simón */}
           <ChatWidget />
 
           {/* Demo modal (empresas) */}

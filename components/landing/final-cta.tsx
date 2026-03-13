@@ -6,6 +6,7 @@ import { GooglePlayButton, AppStoreButton } from "./store-buttons"
 import { useSegment } from "./segment-context"
 import { ContactForm } from "./contact-form"
 import Image from "next/image"
+import { CheckCircle2, Shield, Clock, Headphones } from "lucide-react"
 
 const segmentContent = {
   personas: {
@@ -30,6 +31,13 @@ const fadeInUp = {
 const stagger = {
   visible: { transition: { staggerChildren: 0.12 } },
 }
+
+// ─── Trust badges for the demo section ─────────────────────────────────────────
+const trustBadges = [
+  { icon: Shield, text: "Sin compromiso" },
+  { icon: Clock, text: "Respuesta ≤ 1h" },
+  { icon: Headphones, text: "Soporte 24/7" },
+]
 
 export function FinalCTA() {
   const { segment } = useSegment()
@@ -124,10 +132,10 @@ export function FinalCTA() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.3 }}
-                  className="mt-10 flex flex-col gap-3 sm:flex-row"
+                  className="mt-10 flex flex-row flex-wrap gap-3 items-center justify-center lg:justify-start"
                 >
-                  <GooglePlayButton size="lg" variant="filled" className="px-8 text-base" />
-                  <AppStoreButton size="lg" variant="outline" className="px-8 text-base" />
+                  <GooglePlayButton />
+                  <AppStoreButton />
                 </motion.div>
               )}
             </AnimatePresence>
@@ -146,6 +154,52 @@ export function FinalCTA() {
                   {content.microcopy}
                 </motion.p>
               </AnimatePresence>
+            )}
+
+            {/* Trust badges — empresas */}
+            {segment === "empresas" && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="mt-8 flex flex-wrap gap-4 justify-center lg:justify-start"
+              >
+                {trustBadges.map((badge) => (
+                  <motion.div
+                    key={badge.text}
+                    whileHover={{ scale: 1.05 }}
+                    className="flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 cursor-default"
+                  >
+                    <badge.icon className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
+                    <span className="text-xs font-medium text-foreground">{badge.text}</span>
+                  </motion.div>
+                ))}
+              </motion.div>
+            )}
+
+            {/* Simon character — visible on empresas, as a visual companion */}
+            {segment === "empresas" && (
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.4, duration: 0.5 }}
+                className="mt-8 flex items-center gap-4 rounded-2xl border border-primary/15 bg-card/80 p-4 w-full max-w-md"
+              >
+                <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl">
+                  <Image
+                    src="/images/simon-character.png"
+                    alt="Simón — Asesor de movilidad"
+                    fill
+                    className="object-cover object-top"
+                  />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-foreground">Simón, tu asesor</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">
+                    &ldquo;Te ayudo a encontrar la solución ideal para tu flota. ¡Completa el formulario y te contacto!&rdquo;
+                  </p>
+                </div>
+              </motion.div>
             )}
           </motion.div>
 
@@ -175,11 +229,24 @@ export function FinalCTA() {
                   aria-label="Control de movilidad desde la aplicación Simon"
                 >
                   <Image
-                    src="/images/final-cta.jpg"
-                    alt="Control de movilidad desde la aplicación Simon"
+                    src="/images/audience-personas-new.png"
+                    alt="Persona usando la app Simon en su vehículo"
                     fill
                     className="object-cover"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                  {/* Floating badge */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.6 }}
+                    className="absolute bottom-4 left-4 glass-card rounded-xl px-3 py-2 flex items-center gap-2"
+                    aria-hidden="true"
+                  >
+                    <CheckCircle2 className="h-4 w-4 text-success" />
+                    <span className="text-xs font-medium text-foreground">Descarga gratuita</span>
+                  </motion.div>
                 </figure>
               </motion.div>
             )}

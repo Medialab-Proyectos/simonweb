@@ -85,7 +85,7 @@ export function ProblemSection() {
               aria-label="Usuario verificando la ubicación de su vehículo desde el celular"
             >
               <Image
-                src="/images/problem.jpg"
+                src="/images/audience-personas-new.png"
                 alt="Usuario verificando la ubicación de su vehículo desde el celular"
                 fill
                 className="object-cover"
@@ -178,7 +178,9 @@ export function ProblemSection() {
                   <motion.div
                     key={item.problem}
                     variants={fadeInUp}
-                    className="flex items-start gap-4 rounded-xl border border-border bg-card px-5 py-4 transition-colors hover:border-primary/40"
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    className="flex items-start gap-4 rounded-xl border border-border bg-card px-5 py-4 transition-colors hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 cursor-default"
                   >
                     <div className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
                       <item.icon className="h-5 w-5 text-primary" aria-hidden="true" />

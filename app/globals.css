@@ -6,29 +6,29 @@
 
 /* ─── Simon Movilidad — Dark Theme (default) ─────────────────────────── */
 :root {
-  --background: #050505;
+  --background: #121212;
   --foreground: #F5F7FA;
 
-  --card: #0B1320;
+  --card: #1c1c2e;
   --card-foreground: #F5F7FA;
 
-  --surface: #081018;
+  --surface: #181820;
 
-  --popover: #0B1320;
+  --popover: #1c1c2e;
   --popover-foreground: #F5F7FA;
 
-  --primary: #00E5D1;
-  --primary-foreground: #050505;
-  --primary-hover: #00CFC0;
+  --primary: #00FFC2;
+  --primary-foreground: #0a0a0a;
+  --primary-hover: #00E5B3;
 
   --secondary: #19B5FF;
-  --secondary-foreground: #050505;
+  --secondary-foreground: #0a0a0a;
 
-  --muted: #081018;
+  --muted: #181820;
   --muted-foreground: #A7B4C2;
 
-  --accent: #00E5D1;
-  --accent-foreground: #050505;
+  --accent: #00FFC2;
+  --accent-foreground: #0a0a0a;
 
   --success: #2AD67A;
   --warning: #FFB547;
@@ -37,9 +37,9 @@
 
   --border: rgba(255, 255, 255, 0.08);
   --input: rgba(255, 255, 255, 0.08);
-  --ring: #00E5D1;
+  --ring: #00FFC2;
 
-  --chart-1: #00E5D1;
+  --chart-1: #00FFC2;
   --chart-2: #19B5FF;
   --chart-3: #2AD67A;
   --chart-4: #FFB547;
@@ -47,14 +47,14 @@
 
   --radius: 0.75rem;
 
-  --sidebar: #081018;
+  --sidebar: #181820;
   --sidebar-foreground: #F5F7FA;
-  --sidebar-primary: #00E5D1;
-  --sidebar-primary-foreground: #050505;
-  --sidebar-accent: #0B1320;
+  --sidebar-primary: #00FFC2;
+  --sidebar-primary-foreground: #0a0a0a;
+  --sidebar-accent: #1c1c2e;
   --sidebar-accent-foreground: #F5F7FA;
   --sidebar-border: rgba(255, 255, 255, 0.08);
-  --sidebar-ring: #00E5D1;
+  --sidebar-ring: #00FFC2;
 }
 
 /* ─── Simon Movilidad — Light Theme ──────────────────────────────────── */
@@ -159,20 +159,19 @@ html.light {
   }
 }
 
-/* ─── Scrollbar — Dark ───────────────────────────────────────────────── */
+/* ─── Scrollbar ──────────────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-track { background: var(--background); }
-::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.25); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.22); }
 
-/* ─── Scrollbar — Light ──────────────────────────────────────────────── */
 html.light ::-webkit-scrollbar-track { background: #F7FAFC; }
 html.light ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 4px; }
 html.light ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.22); }
 
 /* ─── Glass ──────────────────────────────────────────────────────────── */
 .glass {
-  background: rgba(8, 16, 24, 0.85);
+  background: rgba(18, 18, 18, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -185,9 +184,24 @@ html.light .glass {
   border: 1px solid rgba(0, 0, 0, 0.07);
 }
 
+/* ─── Glassmorphism card ─────────────────────────────────────────────── */
+.glass-card {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+html.light .glass-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
 /* ─── Gradient text ──────────────────────────────────────────────────── */
 .gradient-text {
-  background: linear-gradient(135deg, #00E5D1 0%, #19B5FF 100%);
+  background: linear-gradient(135deg, #00FFC2 0%, #19B5FF 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -202,13 +216,109 @@ html.light .gradient-text {
 
 /* ─── Glow ───────────────────────────────────────────────────────────── */
 .glow-primary {
-  box-shadow: 0 0 20px rgba(0, 229, 209, 0.25);
+  box-shadow: 0 0 24px rgba(0, 255, 194, 0.30);
 }
 
 html.light .glow-primary {
-  box-shadow: 0 0 20px rgba(0, 207, 192, 0.3);
+  box-shadow: 0 0 20px rgba(0, 207, 192, 0.30);
 }
 
 .glow-primary-sm {
-  box-shadow: 0 0 10px rgba(0, 229, 209, 0.18);
+  box-shadow: 0 0 12px rgba(0, 255, 194, 0.20);
 }
+
+/* ─── Highway light streak animations ───────────────────────────────── */
+@keyframes highway-l {
+  0%   { transform: translateX(-120%); opacity: 0; }
+  6%   { opacity: 1; }
+  88%  { opacity: 1; }
+  100% { transform: translateX(300vw);  opacity: 0; }
+}
+
+@keyframes highway-r {
+  0%   { transform: translateX(300vw);  opacity: 0; }
+  6%   { opacity: 1; }
+  88%  { opacity: 1; }
+  100% { transform: translateX(-120%); opacity: 0; }
+}
+
+/* ─── Logo marquee ───────────────────────────────────────────────────── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee 22s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* ─── Shimmer border effect ──────────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer-border {
+  background: linear-gradient(
+    90deg,
+    rgba(0,255,194,0) 0%,
+    rgba(0,255,194,0.3) 25%,
+    rgba(25,181,255,0.3) 50%,
+    rgba(0,255,194,0.3) 75%,
+    rgba(0,255,194,0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+}
+
+/* ─── Float animation for decorative elements ────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float 4s ease-in-out 1s infinite;
+}
+
+.animate-float-slow {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* ─── Glow pulse animation ───────────────────────────────────────────── */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(0,255,194,0.15); }
+  50%      { box-shadow: 0 0 40px rgba(0,255,194,0.30); }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+/* ─── Scrollbar hide ─────────────────────────────────────────── */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ─── Enhanced focus ring ────────────────────────────────────────────── */
+.focus-ring {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  transition: outline-color 0.2s;
+}
+.focus-ring:focus-visible {
+  outline-color: var(--primary);
+}
+

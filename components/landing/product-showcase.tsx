@@ -303,7 +303,7 @@ export function ProductShowcase() {
                 }
               >
                 <Image
-                  src="/images/product-showcase.jpg"
+                  src="/images/product-showcase-new.png"
                   alt={
                     segment === "personas"
                       ? "Uso de la aplicación Simon para monitoreo vehicular"
