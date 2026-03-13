@@ -75,16 +75,25 @@ interface Message {
 
 // ─── Suggested quick replies ──────────────────────────────────────────────────
 const suggestions = [
+    "Agendar demo flota",
+    "Soporte GPS",
+    "Ver beneficios Simon Pay",
     "¿Cómo funciona Simon?",
-    "¿Qué incluye la app?",
-    "¿Tienen plan para empresas?",
-    "Quiero agendar una demo",
 ]
 
 // ─── Auto-responses ───────────────────────────────────────────────────────────
 function getResponse(input: string): string {
     const q = input.toLowerCase()
 
+    if (q.includes("agendar demo") || q.includes("demo flota")) {
+        return "¡Con mucho gusto! Para agendar tu demo de flota, completa el formulario en la sección 'Empieza hoy' o escríbenos directamente al +57 300 123 4567. Un asesor especializado en flotas te contactará en menos de 1 hora hábil. 🚛"
+    }
+    if (q.includes("soporte gps") || (q.includes("soporte") && q.includes("gps"))) {
+        return "Para soporte técnico GPS estoy aquí. Los problemas más comunes son: señal débil (verifica que el dispositivo no esté bloqueado), actualización de app (actualiza a la última versión) o sincronización (cierra y abre la app). Si el problema persiste, escríbenos al +57 300 123 4567. ¿Cuál es tu situación? 🔧"
+    }
+    if (q.includes("simon pay") || q.includes("beneficios simon pay") || q.includes("pago") || q.includes("billetera")) {
+        return "¡Simon Pay está llegando muy pronto! 🎉 Será una billetera integrada que te permitirá pagar peajes, seguros y servicios de movilidad en un solo lugar, directamente desde la app Simon. ¿Quieres que te avisemos cuando esté disponible? Déjanos tu correo."
+    }
     if (q.includes("cómo funciona") || q.includes("como funciona")) {
         return "¡Es muy sencillo! Descargas la app Simon, conectas tu dispositivo GPS al vehículo y listo. Desde la app puedes ver la ubicación en tiempo real, recibir alertas y gestionar tus documentos. 🚗"
     }
@@ -98,22 +107,22 @@ function getResponse(input: string): string {
         return "La app Simon incluye: 📍 Rastreo GPS en tiempo real · 🔔 Alertas inteligentes · 📄 Guantera digital (SOAT, Tecno, documentos) · 📊 Historial de rutas · 🔒 Geocercas de seguridad."
     }
     if (q.includes("demo") || q.includes("probar")) {
-        return "¡Perfecto! Puedes agendar tu demo gratuita sin compromiso. Escríbenos por WhatsApp al +57 300 123 4567 o haz clic en el botón de WhatsApp en la página. Te responderemos en menos de 1 hora hábil. ✅"
+        return "¡Perfecto! Puedes agendar tu demo gratuita sin compromiso. Completa el formulario en la sección 'Empieza hoy' o escríbenos por WhatsApp al +57 300 123 4567. Te responderemos en menos de 1 hora hábil. ✅"
     }
     if (q.includes("soat") || q.includes("document") || q.includes("guantera")) {
         return "La guantera digital de Simon te avisa automáticamente cuando tu SOAT o revisión técnico-mecánica están próximos a vencer. Nunca más olvides un documento importante. 📄✅"
     }
     if (q.includes("gps") || q.includes("ubicación") || q.includes("rastreo")) {
-        return "El rastreo GPS de Simon es en tiempo real, con actualización cada pocos segundos. Puedes ver la ubicación exacta de tu vehículo desde tu celular en cualquier momento. 📍"
+        return "El rastreo satelital 24/7 de Simon es en tiempo real, con actualización cada pocos segundos. Puedes ver la ubicación exacta de tu vehículo desde tu celular en cualquier momento. 📍"
     }
     if (q.includes("hola") || q.includes("buenas") || q.includes("hi")) {
-        return "¡Hola! 👋 Soy el asistente de Simon Movilidad. ¿En qué te puedo ayudar hoy?"
+        return "¡Hola! 👋 Soy Simón, tu asistente en la vía. ¿En qué te puedo ayudar hoy para optimizar tu movilidad?"
     }
     if (q.includes("gracias")) {
-        return "¡Con gusto! 😊 Si tienes más preguntas, aquí estaré. ¡Que tengas un excelente día!"
+        return "¡Con gusto! 😊 Si tienes más preguntas, aquí estaré. ¡Que tengas un excelente día en la vía!"
     }
 
-    return "Gracias por tu mensaje. Para atención personalizada puedes escribirnos por WhatsApp al +57 300 123 4567. ¡Te respondemos rápidamente! 🙌"
+    return "Gracias por tu mensaje. Para atención personalizada puedes escribirnos por WhatsApp al +57 300 123 4567 o completar el formulario de demo. ¡Te respondemos rápidamente! 🙌"
 }
 
 // ─── Helper ───────────────────────────────────────────────────────────────────
@@ -128,7 +137,7 @@ export function ChatWidget() {
         {
             id: "welcome",
             from: "bot",
-            text: "¡Hola! 👋 Soy el asistente de Simon Movilidad. ¿En qué te puedo ayudar hoy?",
+            text: "Hola, soy Simón, tu asistente en la vía. ¿En qué puedo ayudarte hoy para optimizar tu movilidad?",
             time: nowTime(),
         },
     ])
@@ -196,10 +205,10 @@ export function ChatWidget() {
                                     <SimonAvatar size={36} />
                                 </div>
                                 <div>
-                                    <p className="text-sm font-semibold text-foreground">Asistente Simon</p>
+                                    <p className="text-sm font-semibold text-foreground">Simón</p>
                                     <div className="flex items-center gap-1.5">
                                         <span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse" />
-                                        <p className="text-xs text-muted-foreground">En línea</p>
+                                        <p className="text-xs text-muted-foreground">Tu asistente en la vía</p>
                                     </div>
                                 </div>
                             </div>

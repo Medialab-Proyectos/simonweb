@@ -1,12 +1,54 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { useEffect, useRef } from "react"
+import { motion, useInView, animate } from "framer-motion"
 
-const stats = [
-  { value: "+44k", label: "Vehículos activos" },
-  { value: "24/7", label: "Monitoreo continuo" },
-  { value: "100%", label: "Cobertura nacional" },
-  { value: "< 1h", label: "Tiempo de respuesta" },
+// ─── Animated numeric counter ─────────────────────────────────────────────────
+function Counter({
+  from = 0,
+  to,
+  suffix = "",
+  duration = 1.8,
+}: {
+  from?: number
+  to: number
+  suffix?: string
+  duration?: number
+}) {
+  const ref = useRef<HTMLSpanElement>(null)
+  const inView = useInView(ref, { once: true, margin: "-60px" })
+
+  useEffect(() => {
+    if (!inView || !ref.current) return
+    const el = ref.current
+    const controls = animate(from, to, {
+      duration,
+      ease: "easeOut",
+      onUpdate: (v) => {
+        el.textContent = Math.round(v).toString() + suffix
+      },
+    })
+    return controls.stop
+  }, [inView, from, to, suffix, duration])
+
+  return (
+    <span ref={ref} aria-label={`${to}${suffix}`}>
+      {from}
+      {suffix}
+    </span>
+  )
+}
+
+// ─── Stats ────────────────────────────────────────────────────────────────────
+type Stat =
+  | { kind: "counter"; target: number; suffix: string; label: string }
+  | { kind: "static"; value: string; label: string }
+
+const stats: Stat[] = [
+  { kind: "counter", target: 50, suffix: "k+", label: "Dispositivos conectados" },
+  { kind: "counter", target: 44, suffix: "k+", label: "Vehículos activos" },
+  { kind: "static", value: "24/7", label: "Monitoreo continuo" },
+  { kind: "static", value: "100%", label: "Cobertura nacional" },
 ]
 
 const fadeInUp = {
@@ -39,7 +81,11 @@ export function TrustBar() {
               className="flex flex-col items-center gap-1 text-center"
             >
               <p className="text-3xl font-bold tracking-tight text-primary sm:text-4xl">
-                {stat.value}
+                {stat.kind === "counter" ? (
+                  <Counter to={stat.target} suffix={stat.suffix} />
+                ) : (
+                  stat.value
+                )}
               </p>
               <p className="text-sm text-muted-foreground">{stat.label}</p>
             </motion.div>

@@ -18,11 +18,13 @@ Landing page/marketing site for **Simon Movilidad**, a vehicle monitoring and fl
 ```
 app/
   layout.tsx      # Root layout, fonts (Inter, Geist Mono), metadata
-  page.tsx        # Single-page app (~1981 lines), all sections defined here
+  page.tsx        # Orchestrator (~149 lines), imports all landing sections
   globals.css     # Tailwind v4 @theme config, CSS variables
 components/
-  ui/             # shadcn/ui components (56 total)
+  landing/        # All page sections (22 components)
+  ui/             # shadcn/ui components (~55 total)
   theme-provider.tsx
+  theme-toggle.tsx
 hooks/
   use-mobile.ts   # Mobile breakpoint (<768px)
   use-toast.ts    # Toast queue system
@@ -45,19 +47,47 @@ npm run lint     # Run ESLint
 - **Path alias:** `@/` maps to the project root
 - **Components:** Import from `@/components/ui/<name>`
 - **Utilities:** Use `cn()` from `@/lib/utils` for classname merging
-- **Sections:** All page sections are co-located in `app/page.tsx`
+- **Sections:** All page sections live in `components/landing/`; `app/page.tsx` only composes them
 - **Theming:** Dark theme only; colors via CSS variables (see `globals.css`)
 - **Language:** Site content is in Spanish (es)
 
 ## Architecture Notes
 
-- Page sections are modular components in `components/landing/`
 - `SegmentProvider` (segment-context.tsx) shares `"personas" | "empresas"` state across Header, Hero, ProductShowcase, AudienceSplit, FinalCTA
 - `SegmentSwitcher` is the reusable UI toggle — placed in Hero; reads/writes global segment
+- `DemoModalProvider` (demo-modal-context.tsx) + `DemoModal` (demo-form.tsx) — global demo booking modal
 - `store-buttons.tsx` exports `GooglePlayButton` and `AppStoreButton` — reusable store CTAs
+- `WhatsAppButton` and `ChatWidget` — floating persistent widgets rendered in page.tsx
 - Dark/light mode via next-themes; `html.light` overrides CSS vars in globals.css
 - `next.config.mjs` disables TypeScript build errors and image optimization
 - Both `package-lock.json` and `pnpm-lock.yaml` are present; prefer `npm`
+
+## Landing Components (`components/landing/`)
+
+| File | Description |
+|------|-------------|
+| `header.tsx` | Sticky nav with segment switcher |
+| `hero.tsx` | Hero section with segment-aware CTAs |
+| `trust-bar.tsx` | Social proof / logo bar |
+| `problem-section.tsx` | Pain points section |
+| `solutions-grid.tsx` | Feature/solution cards |
+| `how-it-works.tsx` | Step-by-step walkthrough |
+| `product-showcase.tsx` | Segment-aware product visual (placeholder) |
+| `audience-split.tsx` | Personas vs Empresas split section |
+| `testimonials-section.tsx` | Customer testimonials |
+| `faq-section.tsx` | FAQ accordion |
+| `blog-preview.tsx` | Blog/content preview cards |
+| `final-cta.tsx` | Bottom conversion section |
+| `footer.tsx` | Site footer |
+| `segment-context.tsx` | SegmentProvider + useSegment hook |
+| `segment-switcher.tsx` | Personas/Empresas toggle UI |
+| `demo-modal-context.tsx` | DemoModalProvider + useDemoModal hook |
+| `demo-form.tsx` | DemoModal with booking form |
+| `store-buttons.tsx` | GooglePlayButton + AppStoreButton |
+| `whatsapp-button.tsx` | Floating WhatsApp CTA |
+| `chat-widget.tsx` | Floating chat widget |
+| `logo.tsx` | Simon Movilidad logo component |
+| `image-placeholder.tsx` | Dev placeholder for product images |
 
 ## Conversion Routes
 

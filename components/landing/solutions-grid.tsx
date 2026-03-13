@@ -9,6 +9,7 @@ import {
   BarChart3,
   Users,
   ArrowRight,
+  Wallet,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
@@ -16,9 +17,9 @@ import Link from "next/link"
 const solutions = [
   {
     icon: MapPin,
-    title: "Monitoreo en tiempo real",
+    title: "Rastreo satelital 24/7",
     description:
-      "Ubicación exacta con actualizaciones al segundo. Accede desde cualquier dispositivo, en cualquier momento.",
+      "Ubicación exacta con actualizaciones al segundo, las 24 horas del día. Accede desde cualquier dispositivo, en cualquier momento.",
   },
   {
     icon: Globe,
@@ -34,9 +35,10 @@ const solutions = [
   },
   {
     icon: Headphones,
-    title: "Asistencias",
+    title: "Asistencias de movilidad*",
     description:
-      "Accede a asistencia vial y emergencias las 24 horas con un solo toque desde la aplicación.",
+      "Accede a asistencia vial y emergencias con un solo toque desde la aplicación.",
+    disclaimer: "* Sujeto a disponibilidad del prestador de servicio.",
   },
   {
     icon: BarChart3,
@@ -119,8 +121,32 @@ export function SolutionsGrid() {
               <p className="mt-2 flex-grow text-sm leading-relaxed text-muted-foreground">
                 {item.description}
               </p>
+              {"disclaimer" in item && item.disclaimer && (
+                <p className="mt-3 text-[11px] text-muted-foreground/60 italic">
+                  {item.disclaimer}
+                </p>
+              )}
             </motion.div>
           ))}
+        </motion.div>
+
+        {/* Simon Pay teaser banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ delay: 0.15 }}
+          className="mt-10 flex items-center gap-3 rounded-2xl border border-secondary/25 bg-secondary/5 px-5 py-4"
+          role="note"
+          aria-label="Próximamente Simon Pay"
+        >
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-secondary/15">
+            <Wallet className="h-5 w-5 text-secondary" aria-hidden="true" />
+          </div>
+          <p className="text-sm text-muted-foreground">
+            <span className="font-semibold text-secondary">Muy pronto:</span>{" "}
+            Integra pagos de peajes, seguros y servicios en una sola billetera.
+          </p>
         </motion.div>
 
         {/* Single CTA */}
@@ -129,7 +155,7 @@ export function SolutionsGrid() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
-          className="mt-12 flex justify-center"
+          className="mt-10 flex justify-center"
         >
           <Button
             size="lg"
