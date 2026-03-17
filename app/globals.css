@@ -242,6 +242,12 @@ html.light .glow-primary {
   100% { transform: translateX(-120%); opacity: 0; }
 }
 
+/* ─── Hero Ken Burns (subtle zoom/pan) ───────────────────────────────── */
+@keyframes heroKenBurns {
+  0%   { transform: scale(1)    translate(0, 0); }
+  100% { transform: scale(1.08) translate(-1%, -1%); }
+}
+
 /* ─── Logo marquee ───────────────────────────────────────────────────── */
 @keyframes marquee {
   from { transform: translateX(0); }

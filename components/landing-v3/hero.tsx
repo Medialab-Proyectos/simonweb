@@ -26,9 +26,50 @@ function HighwayBackground() {
   const reduceMotion = useReducedMotion()
   return (
     <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a14] via-[#121212] to-[#0d0d18]" />
+      {/* ── Hero background image ─────────────────────────────────────── */}
       <div
-        className="absolute inset-x-0 bottom-0 h-3/4 opacity-[0.07]"
+        className="absolute inset-0"
+        style={{
+          backgroundImage: `url('/images/hero-road-night.png')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center 60%",
+          backgroundRepeat: "no-repeat",
+          animation: reduceMotion ? "none" : "heroKenBurns 25s ease-in-out infinite alternate",
+        }}
+      />
+
+      {/* ── Multi-layer gradient overlay for text readability ────────── */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `
+            linear-gradient(180deg,
+              rgba(10,10,20,0.82) 0%,
+              rgba(10,10,20,0.55) 30%,
+              rgba(10,10,20,0.35) 50%,
+              rgba(10,10,20,0.55) 70%,
+              rgba(10,10,20,0.88) 100%
+            )
+          `,
+        }}
+      />
+      {/* Left side extra dark for text area */}
+      <div
+        className="absolute inset-0 hidden lg:block"
+        style={{
+          background: `
+            linear-gradient(90deg,
+              rgba(10,10,20,0.72) 0%,
+              rgba(10,10,20,0.45) 40%,
+              transparent 65%
+            )
+          `,
+        }}
+      />
+
+      {/* ── Subtle perspective grid overlay ───────────────────────────── */}
+      <div
+        className="absolute inset-x-0 bottom-0 h-3/4 opacity-[0.04]"
         style={{
           backgroundImage: `
             linear-gradient(rgba(0,255,194,0.6) 1px, transparent 1px),
@@ -39,8 +80,12 @@ function HighwayBackground() {
           transformOrigin: "center bottom",
         }}
       />
-      <div className="absolute left-1/2 top-[38%] h-72 w-[40rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/6 blur-[90px]" />
-      <div className="absolute left-1/2 top-[38%] h-40 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-secondary/8 blur-[60px]" />
+
+      {/* ── Ambient color glows ───────────────────────────────────────── */}
+      <div className="absolute left-1/2 top-[38%] h-72 w-[40rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/5 blur-[100px]" />
+      <div className="absolute left-1/2 top-[45%] h-40 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-secondary/6 blur-[70px]" />
+
+      {/* ── Animated highway light streaks ─────────────────────────────── */}
       {!reduceMotion && streaks.map((s, i) => (
         <div
           key={i}
@@ -51,10 +96,14 @@ function HighwayBackground() {
             height: `${s.h}px`,
             background: `linear-gradient(90deg, transparent 0%, ${s.color} 50%, transparent 100%)`,
             filter: `blur(${s.blur}px)`,
+            opacity: 0.5,
             animation: `highway-${s.dir} ${s.dur}s linear ${s.delay}s infinite`,
           }}
         />
       ))}
+
+      {/* ── Bottom vignette for seamless section transition ────────────── */}
+      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0a0a14] to-transparent" />
     </div>
   )
 }
