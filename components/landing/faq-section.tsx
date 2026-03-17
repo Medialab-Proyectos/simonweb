@@ -15,9 +15,19 @@ const faqs = [
       "Instalamos un dispositivo GPS discreto en tu vehículo que transmite su ubicación cada segundo. Puedes ver la posición exacta, velocidad y recorrido desde nuestra app o web, disponible 24/7.",
   },
   {
-    question: "¿Qué incluye la guantera digital?",
+    question: "¿Qué documentos puedo guardar en Simon?",
     answer:
       "Almacenas SOAT, tecnomecánica, seguro y más en un solo lugar accesible desde tu celular. Recibes alertas automáticas antes de los vencimientos para que nunca te sorprenda una multa.",
+  },
+  {
+    question: "¿Cuánto cuesta Simon?",
+    answer:
+      "Tenemos planes desde $29.900 COP/mes para personas con un vehículo. Para empresas el precio depende del tamaño de la flota. Escríbenos por WhatsApp al +57 310 5511862 o completa el formulario para recibir una propuesta personalizada.",
+  },
+  {
+    question: "¿Cómo se instala el dispositivo GPS?",
+    answer:
+      "Nuestro equipo instala el dispositivo en tu vehículo en menos de 30 minutos, sin modificar ninguna pieza. Para flotas empresariales coordinamos la instalación en campo con nuestro equipo técnico. Una vez instalado, la app queda lista para usar.",
   },
   {
     question: "¿Simon funciona para vehículo particular y para empresas?",
@@ -47,7 +57,7 @@ const stagger = {
 
 export function FAQSection() {
   return (
-    <section id="faq" className="bg-surface py-20 lg:py-28" aria-labelledby="faq-heading">
+    <section id="faq" className="bg-[#080808] py-20 lg:py-28" aria-labelledby="faq-heading">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <motion.div
@@ -85,7 +95,7 @@ export function FAQSection() {
               <AccordionItem
                 key={index}
                 value={`item-${index}`}
-                className="rounded-xl border border-border bg-card px-5"
+                className="rounded-xl border border-border bg-card px-5 border-b-0"
               >
                 <AccordionTrigger className="py-4 text-left font-medium text-foreground hover:text-primary hover:no-underline">
                   {faq.question}

@@ -1,0 +1,506 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&display=swap');
+html,body{background:transparent !important;margin:0;padding:0;}
+*{box-sizing:border-box;margin:0;padding:0;}
+.scene{display:flex;align-items:center;justify-content:center;padding:0;background:transparent !important;min-height:auto;}
+.phone{width:390px;border-radius:54px;background:#000;box-shadow:0 0 0 1px #3a3a3a,0 0 0 3px #111,0 0 0 5px #3a3a3a,0 50px 140px rgba(0,0,0,0.95),inset 0 1px 0 rgba(255,255,255,0.04);position:relative;overflow:hidden;font-family:'Nunito Sans',sans-serif;}
+.phone::before{content:'';position:absolute;left:-5px;top:108px;width:4px;height:32px;background:#2a2a2a;border-radius:3px 0 0 3px;box-shadow:0 46px 0 #2a2a2a,0 84px 0 #2a2a2a;z-index:200;}
+.phone::after{content:'';position:absolute;right:-5px;top:140px;width:4px;height:64px;background:#2a2a2a;border-radius:0 3px 3px 0;z-index:200;}
+.dynamic-island{position:absolute;top:13px;left:50%;transform:translateX(-50%);width:124px;height:34px;background:#000;border-radius:20px;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 16px;}
+.di-cam{width:11px;height:11px;border-radius:50%;background:#111;border:1.5px solid #222;}
+.di-dot{width:8px;height:8px;border-radius:50%;background:#001a0a;border:1px solid #0d4a1a;}
+.screen{border-radius:53px;overflow:hidden;position:relative;display:flex;flex-direction:column;height:740px;}
+
+/* MAP fills entire screen */
+.map-full{position:absolute;inset:0;width:100%;height:100%;z-index:0;overflow:hidden;}
+#mapCvs{position:absolute;inset:0;display:block;}
+
+.status-bar{position:relative;z-index:20;height:52px;background:#000;display:flex;align-items:flex-end;justify-content:space-between;padding:0 26px 9px;flex-shrink:0;}
+.sb-time{font-size:15px;font-weight:800;color:#fff;letter-spacing:-0.3px;}
+.sb-icons{display:flex;align-items:center;gap:6px;}
+
+.app-header{position:relative;z-index:20;background:#000;padding:10px 20px 13px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.app-title{font-size:18px;font-weight:800;color:#fff;letter-spacing:-0.3px;}
+.hdr-right{display:flex;align-items:center;gap:12px;}
+.hdr-icon svg{width:20px;height:20px;stroke:#666;fill:none;stroke-width:1.8;}
+.avatar-w{position:relative;}
+.avatar-img{width:36px;height:36px;border-radius:50%;overflow:hidden;border:2px solid #222;}
+.avatar-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.avatar-dot{position:absolute;bottom:1px;right:1px;width:10px;height:10px;border-radius:50%;background:#22c55e;border:2.5px solid #000;}
+
+.map-spacer{flex:1;position:relative;z-index:1;}
+
+.bottom-sheet{position:relative;z-index:20;background:#0d0d0d;border-radius:22px 22px 0 0;flex-shrink:0;}
+.sheet-handle{width:36px;height:4px;background:#2a2a2a;border-radius:2px;margin:10px auto 0;}
+.sheet-head{padding:10px 18px 0;display:flex;justify-content:space-between;align-items:center;}
+.vehicle-plate{font-size:22px;font-weight:800;color:#fff;letter-spacing:0.5px;}
+.plate-meta{display:flex;align-items:center;gap:6px;margin-top:2px;}
+.plate-time{font-size:11px;font-weight:700;color:#22c55e;}
+.plate-label{font-size:11px;color:#444;}
+.view-maps{display:flex;align-items:center;gap:4px;font-size:11px;color:#555;background:none;border:none;cursor:pointer;font-family:'Nunito Sans',sans-serif;}
+.view-maps svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.8;}
+.tabs{display:flex;padding:10px 18px 0;border-bottom:0.5px solid #1c1c1c;gap:24px;}
+.tab{font-size:13px;font-weight:700;color:#444;padding-bottom:8px;cursor:pointer;position:relative;}
+.tab.active{color:#22c55e;}
+.tab.active::after{content:'';position:absolute;bottom:-0.5px;left:0;right:0;height:2px;background:#22c55e;border-radius:2px;}
+.info-rows{padding:2px 0;}
+.irow{display:flex;align-items:center;justify-content:space-between;padding:9px 18px;border-bottom:0.5px solid #151515;}
+.irow:last-child{border-bottom:none;}
+.row-l{display:flex;align-items:center;gap:9px;font-size:12px;color:#555;}
+.row-l svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.8;flex-shrink:0;}
+.row-r{text-align:right;}
+.row-val{font-size:13px;font-weight:600;color:#ddd;}
+.row-sub{font-size:10px;color:#3a3a3a;margin-top:1px;}
+.en-ruta{background:#22c55e;color:#052a10;border-radius:20px;padding:3px 12px;font-size:11px;font-weight:800;}
+.detenido{background:#fb923c;color:#3a1800;border-radius:20px;padding:3px 12px;font-size:11px;font-weight:800;}
+.nav-bar{background:#0a0a0a;border-top:0.5px solid #1a1a1a;display:flex;padding:8px 0 20px;flex-shrink:0;position:relative;z-index:20;}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;}
+.nav-item svg{width:20px;height:20px;stroke:#2e2e2e;fill:none;stroke-width:1.8;}
+.nav-item.active svg{stroke:#22c55e;}
+.nav-lbl{font-size:9px;font-weight:700;color:#2e2e2e;}
+.nav-item.active .nav-lbl{color:#22c55e;}
+.home-bar{height:26px;display:flex;align-items:center;justify-content:center;background:#000;flex-shrink:0;position:relative;z-index:20;}
+.home-line{width:110px;height:4px;background:#222;border-radius:3px;}
+</style>
+
+<div class="scene">
+<div class="phone">
+  <div class="dynamic-island"><div class="di-cam"></div><div class="di-dot"></div></div>
+  <div class="screen" id="screenEl">
+
+    <!-- MAP fills full screen -->
+    <div class="map-full" id="mapWrap">
+      <canvas id="mapCvs"></canvas>
+    </div>
+
+    <div class="status-bar">
+      <span class="sb-time" id="clockTime">9:41</span>
+      <div class="sb-icons">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M1.42 9a16 16 0 0 1 21.16 0M5 12.55a11 11 0 0 1 14.08 0M10.54 16.1a6 6 0 0 1 2.92 0M12 20h.01"/></svg>
+        <svg width="22" height="13" viewBox="0 0 26 13"><rect x="0" y="1" width="22" height="11" rx="2" fill="none" stroke="#fff" stroke-width="1.5"/><path d="M23 5v3" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><rect x="1.5" y="2.5" width="15" height="8" rx="1" fill="#fff"/></svg>
+      </div>
+    </div>
+
+    <div class="app-header">
+      <span class="app-title">Mapa</span>
+      <div class="hdr-right">
+        <div class="hdr-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg></div>
+        <div class="hdr-icon"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
+        <div class="avatar-w">
+          <div class="avatar-img"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face" alt=""/></div>
+          <div class="avatar-dot"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="map-spacer"></div>
+
+    <div class="bottom-sheet" id="bottomSheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-head">
+        <div>
+          <div class="vehicle-plate">DEF 123</div>
+          <div class="plate-meta">
+            <span class="plate-time">Hace 01 min</span>
+            <span class="plate-label">· Última actualización</span>
+          </div>
+        </div>
+        <button class="view-maps">
+          <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          Ver mapas
+        </button>
+      </div>
+      <div class="tabs">
+        <div class="tab active">Información</div>
+        <div class="tab">Comandos</div>
+      </div>
+      <div class="info-rows">
+        <div class="irow">
+          <div class="row-l"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Estado</div>
+          <div id="statusBadge" class="en-ruta">En ruta</div>
+        </div>
+        <div class="irow">
+          <div class="row-l"><svg viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>Dirección</div>
+          <div class="row-val" id="rowDir">Calle 63 # 24 – 10</div>
+        </div>
+        <div class="irow">
+          <div class="row-l"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Ubicación</div>
+          <div class="row-r">
+            <div class="row-val">Bogotá, Cundinamarca</div>
+            <div class="row-sub" id="rowCoords">4.65100, -74.06200</div>
+          </div>
+        </div>
+        <div class="irow">
+          <div class="row-l"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10"/><polyline points="12 6 12 12 16 14"/></svg>Velocidad</div>
+          <div class="row-val" id="rowSpeed">-- km/h</div>
+        </div>
+        <div class="irow">
+          <div class="row-l"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Distancia recorrida</div>
+          <div class="row-r">
+            <div class="row-val" id="rowToday">47.3 km</div>
+            <div class="row-sub" id="rowTotal">125.847 km</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-bar">
+      <div class="nav-item active"><svg viewBox="0 0 24 24" stroke="#22c55e"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="nav-lbl" style="color:#22c55e">Mapa</span></div>
+      <div class="nav-item"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg><span class="nav-lbl">Guantera</span></div>
+      <div class="nav-item"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span class="nav-lbl">Reportes</span></div>
+      <div class="nav-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span class="nav-lbl">Ajustes</span></div>
+    </div>
+    <div class="home-bar"><div class="home-line"></div></div>
+  </div>
+</div>
+</div>
+
+<script>
+const mapWrap = document.getElementById('mapWrap');
+const cvs = document.getElementById('mapCvs');
+const screen = document.getElementById('screenEl');
+const bottomSheet = document.getElementById('bottomSheet');
+let W, H, ctx;
+
+// MAP world size — much larger than viewport so we can pan
+const WORLD = 2200;
+// Camera offset: world coords of top-left of viewport
+let camX = 0, camY = 0;
+let targetCamX = 0, targetCamY = 0;
+
+// Header height (status bar + app header) to exclude from visible map area
+let headerH = 0;
+let sheetH = 0;
+
+function measure() {
+  const statusBar = screen.querySelector('.status-bar');
+  const appHeader = screen.querySelector('.app-header');
+  headerH = (statusBar ? statusBar.offsetHeight : 52) + (appHeader ? appHeader.offsetHeight : 57);
+  sheetH = bottomSheet ? bottomSheet.offsetHeight : 220;
+  const navBar = screen.querySelector('.nav-bar');
+  const homeBar = screen.querySelector('.home-bar');
+  sheetH += (navBar ? navBar.offsetHeight : 72) + (homeBar ? homeBar.offsetHeight : 26);
+}
+
+function initCvs() {
+  W = mapWrap.clientWidth;
+  H = mapWrap.clientHeight;
+  const dpr = window.devicePixelRatio || 1;
+  cvs.width = W * dpr;
+  cvs.height = H * dpr;
+  cvs.style.width = W + 'px';
+  cvs.style.height = H + 'px';
+  ctx = cvs.getContext('2d');
+  ctx.scale(dpr, dpr);
+  measure();
+}
+
+// World-space route (absolute coords on the WORLD canvas)
+const ROUTE_WORLD = [
+  {x:900,y:800},{x:900,y:600},{x:1100,y:600},{x:1100,y:400},
+  {x:1300,y:400},{x:1300,y:600},{x:1500,y:600},{x:1500,y:800},
+  {x:1300,y:800},{x:1300,y:1000},{x:1100,y:1000},{x:900,y:1000},
+  {x:900,y:800}
+];
+
+let ri = 0, rt = 0;
+let carWX = ROUTE_WORLD[0].x;
+let carWY = ROUTE_WORLD[0].y;
+let trail = [];
+let displaySpd = 0, targetSpd = 42, spdTimer = 0;
+let today = 47.3, total = 125.847, coordTimer = 0;
+let lat = 4.65100, lng = -74.06200;
+let panelTimer = 0, dotPulse = 0;
+const spdCycle = [0,0,18,32,42,52,58,60,55,48,40,30,20,10,0,0,22,38,50,58,62,60,52,42,30,18,0];
+let spdIdx = 5;
+const dirs = ['Norte','Noreste','Este','Sureste','Sur','Noroeste'];
+let dirIdx = 0;
+
+function lerp(a, b, t) { return a + (b - a) * t; }
+
+// Draw the big world-space Google-style dark map, offset by camera
+function drawWorld(ox, oy) {
+  // Background
+  ctx.fillStyle = '#1a2035';
+  ctx.fillRect(0, 0, W, H);
+
+  // City blocks — large grid
+  const blockDefs = [
+    [0,0,280,1100],[300,40,300,560],[300,720,300,400],[640,40,280,640],
+    [640,760,280,560],[960,40,280,560],[960,760,280,560],[1280,40,320,640],
+    [1280,760,320,560],[1640,40,380,1880],
+  ];
+  blockDefs.forEach(([bx,by,bw,bh]) => {
+    ctx.fillStyle = '#1c2848';
+    ctx.fillRect(bx - ox, by - oy, bw, bh);
+  });
+
+  // Parks
+  [[20,100,200,920],[320,1120,200,640]].forEach(([px,py,pw,ph]) => {
+    ctx.fillStyle = '#162820';
+    ctx.fillRect(px-ox, py-oy, pw, ph);
+    ctx.fillStyle = '#1e4230';
+    ctx.font = '11px Nunito Sans,sans-serif';
+    ctx.fillText('Parque', px-ox+6, py-oy+18);
+  });
+
+  // Water
+  ctx.fillStyle = '#111d32';
+  ctx.beginPath();
+  ctx.ellipse(1740-ox, 1720-oy, 140, 140, 0, 0, Math.PI*2);
+  ctx.fill();
+  ctx.fillStyle = '#1e3050';
+  ctx.font = '10px Nunito Sans,sans-serif';
+  ctx.fillText('Lago', 1660-ox, 1720-oy+4);
+
+  // Main avenues (thick, amber-tinted)
+  const avenues = [
+    {x1:0,y1:340,x2:WORLD,y2:340},
+    {x1:0,y1:1560,x2:WORLD,y2:1560},
+    {x1:300,y1:0,x2:300,y2:WORLD},
+    {x1:1280,y1:0,x2:1280,y2:WORLD},
+  ];
+  avenues.forEach(a => {
+    const isH = a.y1 === a.y2;
+    ctx.fillStyle = '#2c3518';
+    if(isH) ctx.fillRect(0, a.y1-oy-8, W, 16);
+    else ctx.fillRect(a.x1-ox-8, 0, 16, H);
+    ctx.fillStyle = '#3d4c22';
+    if(isH) ctx.fillRect(0, a.y1-oy-5, W, 10);
+    else ctx.fillRect(a.x1-ox-5, 0, 10, H);
+    ctx.fillStyle = '#4a5e28';
+    if(isH) ctx.fillRect(0, a.y1-oy-2.5, W, 5);
+    else ctx.fillRect(a.x1-ox-2.5, 0, 5, H);
+    // center dash
+    ctx.strokeStyle = 'rgba(80,120,25,0.2)';
+    ctx.lineWidth = 0.8; ctx.setLineDash([10,10]);
+    ctx.beginPath();
+    if(isH) { ctx.moveTo(0, a.y1-oy); ctx.lineTo(W, a.y1-oy); }
+    else { ctx.moveTo(a.x1-ox, 0); ctx.lineTo(a.x1-ox, H); }
+    ctx.stroke(); ctx.setLineDash([]);
+  });
+
+  // Secondary streets
+  const secStreets = [
+    {x1:0,y1:640,x2:WORLD,y2:640},{x1:0,y1:960,x2:WORLD,y2:960},
+    {x1:0,y1:1240,x2:WORLD,y2:1240},
+    {x1:600,y1:0,x2:600,y2:WORLD},{x1:1000,y1:0,x2:1000,y2:WORLD},
+    {x1:1640,y1:0,x2:1640,y2:WORLD},
+  ];
+  secStreets.forEach(s => {
+    const isH = s.y1 === s.y2;
+    ctx.fillStyle = '#1e2e58';
+    if(isH) ctx.fillRect(0, s.y1-oy-4, W, 8);
+    else ctx.fillRect(s.x1-ox-4, 0, 8, H);
+    ctx.fillStyle = '#243470';
+    if(isH) ctx.fillRect(0, s.y1-oy-2, W, 4);
+    else ctx.fillRect(s.x1-ox-2, 0, 4, H);
+  });
+
+  // Tertiary / local
+  for(let y = 200; y < WORLD; y += 200) {
+    ctx.fillStyle = '#1c2a52';
+    ctx.fillRect(0, y-oy-1, W, 2);
+  }
+  for(let x = 200; x < WORLD; x += 200) {
+    ctx.fillStyle = '#1c2a52';
+    ctx.fillRect(x-ox-1, 0, 2, H);
+  }
+
+  // Street labels
+  ctx.font = '9px Nunito Sans,sans-serif';
+  const streetLabels = [
+    {x:10,y:330,label:'Av. Calle 127',c:'#485e18'},
+    {x:10,y:630,label:'Calle 122',c:'#2a3c62'},
+    {x:10,y:950,label:'Calle 120',c:'#2a3c62'},
+    {x:10,y:1230,label:'Calle 118',c:'#2a3c62'},
+    {x:10,y:1550,label:'Av. Calle 116',c:'#485e18'},
+  ];
+  streetLabels.forEach(l => {
+    const sx = l.x - ox, sy = l.y - oy;
+    if(sy > -20 && sy < H+20) { ctx.fillStyle = l.c; ctx.fillText(l.label, sx, sy); }
+  });
+
+  const vertLabels = [
+    {x:290,y:400,label:'Cra 15',c:'#485e18'},
+    {x:590,y:600,label:'Cra 14B',c:'#2a3c62'},
+    {x:990,y:600,label:'Cra 14',c:'#2a3c62'},
+    {x:1270,y:400,label:'Cra 13',c:'#485e18'},
+  ];
+  vertLabels.forEach(l => {
+    const sx = l.x - ox, sy = l.y - oy;
+    if(sx > -40 && sx < W+40 && sy > 0 && sy < H) {
+      ctx.save(); ctx.translate(sx+4, sy); ctx.rotate(-Math.PI/2);
+      ctx.fillStyle = l.c; ctx.fillText(l.label, 0, 0); ctx.restore();
+    }
+  });
+
+  // District labels
+  ctx.font = 'bold 11px Nunito Sans,sans-serif';
+  const districts = [
+    {x:60,y:600,lines:['BENJAMÍN','HERRERA']},{x:1050,y:340,lines:['RAFAEL URIBE']},
+    {x:1050,y:840,lines:['BAQUERO']},{x:80,y:1000,lines:['EL CAMPÍN']},
+    {x:1100,y:1300,lines:['SAN LUIS']},
+  ];
+  districts.forEach(d => {
+    const sx = d.x - ox, sy = d.y - oy;
+    ctx.fillStyle = 'rgba(100,160,220,0.28)';
+    d.lines.forEach((l,i) => { if(sy>-30&&sy<H+30) ctx.fillText(l, sx, sy+i*13); });
+  });
+
+  // POIs
+  const pois = [
+    {x:340,y:1040,label:'Movistar Arena'},{x:360,y:1520,label:'Est. El Campín'},
+    {x:1100,y:160,label:'7 de agosto fruver'},
+  ];
+  pois.forEach(p => {
+    const sx = p.x-ox, sy = p.y-oy;
+    if(sx>-30&&sx<W+30&&sy>-30&&sy<H+30) {
+      ctx.fillStyle = '#7c3aed';
+      ctx.beginPath(); ctx.arc(sx,sy,8,0,Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#fff'; ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.font = 'bold 8px Nunito Sans,sans-serif'; ctx.fillText('M',sx,sy);
+      ctx.textAlign='left'; ctx.textBaseline='alphabetic';
+      ctx.fillStyle = '#a78bfa'; ctx.font = '9px Nunito Sans,sans-serif';
+      ctx.fillText(p.label, sx+12, sy+3);
+    }
+  });
+
+  ctx.fillStyle = 'rgba(80,120,180,0.18)';
+  ctx.font = 'bold 9px Nunito Sans,sans-serif';
+  ctx.fillText('Google', 8, H-8);
+}
+
+function drawGPS(screenX, screenY) {
+  // Trail
+  if(trail.length > 1) {
+    for(let i = 1; i < trail.length; i++) {
+      const a = (i/trail.length)*0.55;
+      const tx = trail[i].wx - camX;
+      const ty = trail[i].wy - camY;
+      const px = trail[i-1].wx - camX;
+      const py = trail[i-1].wy - camY;
+      ctx.beginPath(); ctx.moveTo(px,py); ctx.lineTo(tx,ty);
+      ctx.strokeStyle = `rgba(34,197,94,${a*0.5})`;
+      ctx.lineWidth = 1.8; ctx.setLineDash([4,5]); ctx.stroke(); ctx.setLineDash([]);
+    }
+  }
+
+  const grd = ctx.createRadialGradient(screenX,screenY,2,screenX,screenY,28);
+  grd.addColorStop(0,'rgba(34,197,94,0.5)');
+  grd.addColorStop(1,'rgba(34,197,94,0)');
+  ctx.beginPath(); ctx.arc(screenX,screenY,28,0,Math.PI*2); ctx.fillStyle=grd; ctx.fill();
+
+  const pr = 11 + Math.sin(dotPulse)*5;
+  ctx.beginPath(); ctx.arc(screenX,screenY,pr,0,Math.PI*2);
+  ctx.strokeStyle = `rgba(34,197,94,${0.4-Math.sin(dotPulse)*0.15})`; ctx.lineWidth=1.5; ctx.stroke();
+
+  ctx.beginPath(); ctx.arc(screenX,screenY,8,0,Math.PI*2); ctx.fillStyle='#22c55e'; ctx.fill();
+  ctx.beginPath(); ctx.arc(screenX,screenY,4.5,0,Math.PI*2); ctx.fillStyle='#fff'; ctx.fill();
+  ctx.beginPath(); ctx.arc(screenX,screenY,2.2,0,Math.PI*2); ctx.fillStyle='#22c55e'; ctx.fill();
+
+  if(displaySpd > 0) {
+    const lx = screenX+16, ly = screenY-14;
+    ctx.fillStyle = 'rgba(0,0,0,0.85)';
+    ctx.beginPath(); ctx.roundRect(lx-5,ly-13,58,19,5); ctx.fill();
+    ctx.fillStyle = '#0ed4a3'; ctx.font = 'bold 12px Nunito Sans,sans-serif';
+    ctx.fillText(displaySpd+' km/h', lx, ly);
+  }
+  dotPulse += 0.065;
+}
+
+function updateCar() {
+  if(!W) return;
+  const cur = ROUTE_WORLD[ri];
+  const next = ROUTE_WORLD[(ri+1) % ROUTE_WORLD.length];
+  rt += 0.0025;
+  if(rt >= 1) {
+    rt = 0; ri = (ri+1) % ROUTE_WORLD.length;
+    today = parseFloat((today+.06).toFixed(2));
+    total = parseFloat((total+.06).toFixed(3));
+    dirIdx = (dirIdx+1) % dirs.length;
+  }
+  carWX = lerp(cur.x, next.x, rt);
+  carWY = lerp(cur.y, next.y, rt);
+  trail.push({wx:carWX, wy:carWY});
+  if(trail.length > 55) trail.shift();
+
+  // Visible zone: from headerH to (H - sheetH)
+  // Car should stay centered vertically in the visible map zone
+  const visTop = headerH;
+  const visBottom = H - sheetH;
+  const visCenterY = (visTop + visBottom) / 2;
+  const visCenterX = W / 2;
+
+  // Target camera: place car at the visible center
+  targetCamX = carWX - visCenterX;
+  targetCamY = carWY - visCenterY;
+
+  // Clamp camera
+  targetCamX = Math.max(0, Math.min(WORLD - W, targetCamX));
+  targetCamY = Math.max(0, Math.min(WORLD - H, targetCamY));
+
+  // Smooth pan
+  camX = lerp(camX, targetCamX, 0.04);
+  camY = lerp(camY, targetCamY, 0.04);
+
+  spdTimer++;
+  if(spdTimer >= 100) { spdTimer=0; spdIdx=(spdIdx+1)%spdCycle.length; targetSpd=spdCycle[spdIdx]; }
+  if(displaySpd<targetSpd) displaySpd=Math.min(displaySpd+1,targetSpd);
+  else if(displaySpd>targetSpd) displaySpd=Math.max(displaySpd-1,targetSpd);
+
+  coordTimer++;
+  if(coordTimer >= 120) {
+    coordTimer=0;
+    lat = parseFloat((4.65100 + (carWY/WORLD - 0.5)*-0.08).toFixed(5));
+    lng = parseFloat((-74.06200 + (carWX/WORLD - 0.5)*0.10).toFixed(5));
+  }
+
+  panelTimer++;
+  if(panelTimer >= 90 || panelTimer === 1) {
+    panelTimer = 0;
+    const mv = displaySpd > 0;
+    document.getElementById('rowSpeed').textContent = mv ? displaySpd+' km/h' : '-- km/h';
+    document.getElementById('rowCoords').textContent = lat.toFixed(5)+', '+lng.toFixed(5);
+    document.getElementById('rowToday').textContent = today.toFixed(1)+' km';
+    document.getElementById('rowTotal').textContent = total.toFixed(3)+' km';
+    document.getElementById('rowDir').textContent = 'Calle 63 hacia el '+dirs[dirIdx];
+    const b = document.getElementById('statusBadge');
+    b.textContent = mv ? 'En ruta' : 'Detenido';
+    b.className = mv ? 'en-ruta' : 'detenido';
+  }
+}
+
+function tick() {
+  updateCar();
+  const screenX = carWX - camX;
+  const screenY = carWY - camY;
+  drawWorld(camX, camY);
+  drawGPS(screenX, screenY);
+  requestAnimationFrame(tick);
+}
+
+function start() {
+  initCvs();
+  camX = ROUTE_WORLD[0].x - W/2;
+  camY = ROUTE_WORLD[0].y - H/2;
+  targetCamX = camX; targetCamY = camY;
+  tick();
+}
+setTimeout(start, 120);
+
+function clock() {
+  const n = new Date();
+  document.getElementById('clockTime').textContent =
+    n.getHours().toString().padStart(2,'0')+':'+n.getMinutes().toString().padStart(2,'0');
+}
+clock(); setInterval(clock, 10000);
+
+document.querySelectorAll('.tab').forEach(t => {
+  t.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+  });
+});
+</script>

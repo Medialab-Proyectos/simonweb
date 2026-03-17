@@ -1,34 +1,50 @@
-import { Phone, Mail, MessageCircle } from "lucide-react"
+import { Phone, Mail, MessageCircle, Hash } from "lucide-react"
 import Link from "next/link"
 import { Logo } from "./logo"
 
 const footerLinks = {
   soluciones: [
-    { label: "Rastreo 24/7",     href: "#soluciones-grid" },
-    { label: "Geocercas",        href: "#soluciones-grid" },
-    { label: "Guantera digital", href: "#soluciones-grid" },
-    { label: "Reportes",         href: "#soluciones-grid" },
-    { label: "Gestión de flotas",href: "#soluciones-grid" },
+    { label: "Monitoreo 24/7",     href: "#soluciones-grid" },
+    { label: "Geocercas",          href: "#soluciones-grid" },
+    { label: "Documentos del vehículo", href: "#soluciones-grid" },
+    { label: "Reportes",           href: "#soluciones-grid" },
+    { label: "SimonPay",           href: "#soluciones-grid" },
   ],
   empresa: [
-    { label: "Para personas",   href: "#personas" },
-    { label: "Para empresas",   href: "#empresas" },
-    { label: "Cómo funciona",   href: "#como-funciona" },
-    { label: "Casos de éxito",  href: "#testimonios" },
-    { label: "Noticias",        href: "#noticias" },
+    { label: "¿Quiénes somos?",  href: "#soluciones" },
+    { label: "Para empresas",    href: "#empresas-section" },
+    { label: "Clientes",         href: "#clientes" },
+    { label: "FAQ",              href: "#faq" },
+    { label: "Contacto",         href: "#demo" },
   ],
   legal: [
-    { label: "Política de privacidad",    href: "/privacidad" },
-    { label: "Términos y condiciones",    href: "/terminos" },
-    { label: "Tratamiento de datos",      href: "/datos" },
+    { label: "Política de privacidad",  href: "/privacidad" },
+    { label: "Términos y condiciones",  href: "/terminos" },
+    { label: "Tratamiento de datos",    href: "/datos" },
   ],
+}
+
+// ─── Simon lock isotipo (small) ──────────────────────────────────────────────
+function SimonIsotipo({ className }: { className?: string }) {
+  return (
+    <svg
+      width="40"
+      height="40"
+      viewBox="319 0 96 149"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
+      <path d="M414.66 75.644C414.66 60.1547 407.255 46.4346 395.781 37.822V23.3341C395.181 15.2556 388.477 0 367.33 0C346.184 0 339.513 14.9886 338.913 22.9002V37.7218C327.272 46.3344 319.834 60.1213 319.834 75.644C319.834 79.8835 320.434 83.9228 321.435 87.8285C321.602 88.4961 321.768 89.1304 321.935 89.798C321.935 89.8314 321.935 89.8982 321.969 89.9315C326.371 105.588 338.579 117.939 354.155 122.513V148.45L391.679 117.705C405.454 109.46 414.66 94.3714 414.66 77.1128C414.66 76.8791 414.627 76.6788 414.627 76.4451C414.627 76.1781 414.66 75.911 414.66 75.644ZM354.956 23.668C355.256 21.3312 356.657 15.3224 367.33 15.3224C378.537 15.3224 379.771 21.7652 380.038 24.0352V30.0439C376.036 28.9423 371.8 28.3415 367.43 28.3415C363.061 28.3415 358.925 28.9089 354.956 29.9772V23.668ZM372.567 97.4425L373.367 108.926H361.16L362.227 97.4425C352.254 95.1392 344.95 86.3263 344.95 75.6106C344.95 63.2926 354.889 53.3447 367.364 53.3447C379.838 53.3447 389.611 63.2926 389.611 75.6106C389.611 86.3263 382.34 95.1058 372.534 97.4425H372.567Z" fill="#00FFC2"/>
+    </svg>
+  )
 }
 
 export function Footer() {
   return (
     <footer
       id="contacto"
-      className="border-t border-border bg-surface"
+      className="bg-[#080808]"
       aria-labelledby="footer-heading"
     >
       <h2 id="footer-heading" className="sr-only">Pie de página</h2>
@@ -37,18 +53,13 @@ export function Footer() {
 
         {/* Central brand block */}
         <div className="mb-12 flex flex-col items-center text-center">
-          <Link
-            href="/"
-            className="rounded-lg focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 hover:opacity-90 transition-opacity"
-            aria-label="Simon Movilidad — Inicio"
-          >
-            <Logo className="h-10 w-auto" />
-          </Link>
-          <p className="mt-4 text-sm font-medium text-muted-foreground">
+          <SimonIsotipo className="h-12 w-auto opacity-80" />
+          <p className="mt-5 text-base font-medium text-muted-foreground">
             La tecnología que transforma tu movilidad.
           </p>
+
           {/* Contact row */}
-          <address className="mt-5 not-italic flex flex-wrap items-center justify-center gap-5">
+          <address className="mt-6 not-italic flex flex-wrap items-center justify-center gap-5">
             <a
               href="https://wa.me/573105511862"
               target="_blank"
@@ -59,11 +70,25 @@ export function Footer() {
               +57 310 5511862
             </a>
             <a
-              href="tel:018000123456"
+              href="tel:018000189890"
               className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
             >
               <Phone className="h-4 w-4" aria-hidden="true" />
-              Línea Nacional: 01 8000 123 456
+              01 8000 189 890
+            </a>
+            <a
+              href="tel:#230"
+              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+            >
+              <Hash className="h-4 w-4" aria-hidden="true" />
+              #230
+            </a>
+            <a
+              href="tel:#280"
+              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+            >
+              <Hash className="h-4 w-4" aria-hidden="true" />
+              #280
             </a>
             <a
               href="mailto:info@simonmovilidad.com"

@@ -6,15 +6,15 @@
 
 /* ─── Simon Movilidad — Dark Theme (default) ─────────────────────────── */
 :root {
-  --background: #121212;
+  --background: #080808;
   --foreground: #F5F7FA;
 
-  --card: #1c1c2e;
+  --card: #111118;
   --card-foreground: #F5F7FA;
 
-  --surface: #181820;
+  --surface: #0c0c12;
 
-  --popover: #1c1c2e;
+  --popover: #111118;
   --popover-foreground: #F5F7FA;
 
   --primary: #00FFC2;
@@ -24,7 +24,7 @@
   --secondary: #19B5FF;
   --secondary-foreground: #0a0a0a;
 
-  --muted: #181820;
+  --muted: #0c0c12;
   --muted-foreground: #A7B4C2;
 
   --accent: #00FFC2;
@@ -47,11 +47,11 @@
 
   --radius: 0.75rem;
 
-  --sidebar: #181820;
+  --sidebar: #0c0c12;
   --sidebar-foreground: #F5F7FA;
   --sidebar-primary: #00FFC2;
   --sidebar-primary-foreground: #0a0a0a;
-  --sidebar-accent: #1c1c2e;
+  --sidebar-accent: #111118;
   --sidebar-accent-foreground: #F5F7FA;
   --sidebar-border: rgba(255, 255, 255, 0.08);
   --sidebar-ring: #00FFC2;
@@ -171,10 +171,10 @@ html.light ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.22); }
 
 /* ─── Glass ──────────────────────────────────────────────────────────── */
 .glass {
-  background: rgba(18, 18, 18, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(8, 8, 8, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 html.light .glass {
@@ -186,10 +186,10 @@ html.light .glass {
 
 /* ─── Glassmorphism card ─────────────────────────────────────────────── */
 .glass-card {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(17, 17, 24, 0.80);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 html.light .glass-card {
@@ -301,6 +301,18 @@ html.light .glow-primary {
 
 .animate-glow-pulse {
   animation: glow-pulse 3s ease-in-out infinite;
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track,
+  .animate-float,
+  .animate-float-delayed,
+  .animate-float-slow,
+  .animate-glow-pulse,
+  .shimmer-border {
+    animation: none;
+  }
 }
 
 /* ─── Scrollbar hide ─────────────────────────────────────────── */

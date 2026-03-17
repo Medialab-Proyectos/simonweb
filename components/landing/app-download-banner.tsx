@@ -23,7 +23,7 @@ export function AppDownloadBanner() {
   return (
     <section
       id="app"
-      className="py-20 lg:py-28"
+      className="bg-background py-20 lg:py-28"
       aria-labelledby="app-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -114,7 +114,7 @@ export function AppDownloadBanner() {
                 {/* Simon character as background */}
                 <div className="absolute inset-0 overflow-hidden rounded-3xl">
                   <Image
-                    src="/images/simon-character.png"
+                    src="/images/simon-avatar.jpg"
                     alt="Simón — Asistente de movilidad Simon"
                     fill
                     className="object-cover object-top"

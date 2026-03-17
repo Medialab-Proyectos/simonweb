@@ -1,5 +1,4 @@
 import Script from "next/script"
-import { SegmentProvider } from "@/components/landing/segment-context"
 import { Header } from "@/components/landing/header"
 import { Hero } from "@/components/landing/hero"
 import { TrustBar } from "@/components/landing/trust-bar"
@@ -12,13 +11,12 @@ import { AppDownloadBanner } from "@/components/landing/app-download-banner"
 import { ClientLogos } from "@/components/landing/client-logos"
 import { TestimonialsSection } from "@/components/landing/testimonials-section"
 import { FAQSection } from "@/components/landing/faq-section"
-import { BlogPreview } from "@/components/landing/blog-preview"
-import { DemoModal } from "@/components/landing/demo-form"
-import { DemoModalProvider } from "@/components/landing/demo-modal-context"
 import { FinalCTA } from "@/components/landing/final-cta"
+import { SimonPaySection } from "@/components/landing/simon-pay-section"
 import { Footer } from "@/components/landing/footer"
 import { WhatsAppButton } from "@/components/landing/whatsapp-button"
 import { ChatWidget } from "@/components/landing/chat-widget"
+import { SegmentProvider } from "@/components/landing/segment-context"
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -56,7 +54,7 @@ const structuredData = {
       priceRange: "$$",
       address: {
         "@type": "PostalAddress",
-        streetAddress: "Carrera 7 #71-52",
+        streetAddress: "Calle 74 # 15-80, Oficina 101 Edificio Osaka Center",
         addressLocality: "Bogotá",
         addressRegion: "Cundinamarca",
         postalCode: "110231",
@@ -92,10 +90,26 @@ const structuredData = {
         },
         {
           "@type": "Question",
-          "name": "¿Qué incluye la guantera digital?",
+          "name": "¿Qué documentos puedo guardar en Simon?",
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Almacenas SOAT, tecnomecánica, seguro y más en un solo lugar accesible desde tu celular. Recibes alertas automáticas antes de los vencimientos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto cuesta Simon?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tenemos planes desde $29.900 COP/mes para personas con un vehículo. Para empresas el precio depende del tamaño de la flota."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo se instala el dispositivo GPS?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nuestro equipo instala el dispositivo en tu vehículo en menos de 30 minutos, sin modificar ninguna pieza. Para flotas empresariales coordinamos la instalación en campo con nuestro equipo técnico."
           }
         },
         {
@@ -136,63 +150,58 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
-      <DemoModalProvider>
-        <SegmentProvider>
-          <Header />
+      <SegmentProvider>
+        <Header />
 
-          <main>
-            {/* 1. Hero — "Gestión vehicular inteligente" */}
-            <Hero />
+        <main>
+          {/* 1. Hero — segmento activo con SegmentSwitcher */}
+          <Hero />
 
-            {/* 2. Impacto Simon — contadores animados */}
-            <TrustBar />
+          {/* 2. Impacto Simon — contadores animados */}
+          <TrustBar />
 
-            {/* 3. Clientes que confían */}
-            <ClientLogos />
+          {/* 3. Nuestros servicios — 6 cards */}
+          <SolutionsGrid />
 
-            {/* 4. Problema */}
-            <ProblemSection />
+          {/* 4. Cómo funciona */}
+          <HowItWorks />
 
-            {/* 5. Nuestros servicios — 5 glassmorphism cards */}
-            <SolutionsGrid />
+          {/* 5. Demostración del producto — segmentada */}
+          <ProductShowcase />
 
-            {/* 6. Cómo funciona */}
-            <HowItWorks />
+          {/* 6. Simon para Empresas — B2B */}
+          <AudienceSplit />
 
-            {/* 7. Demostración del producto */}
-            <ProductShowcase />
+          {/* 7. ¿Quiénes somos? — credencial temprana (R8: moved up) */}
+          <ProblemSection />
 
-            {/* 8. Beneficios segmentados — B2B */}
-            <AudienceSplit />
+          {/* 8. Clientes — carrusel de logos */}
+          <ClientLogos />
 
-            {/* 9. Descarga de app */}
-            <AppDownloadBanner />
+          {/* 9. Testimonios */}
+          <TestimonialsSection />
 
-            {/* 10. Testimonios */}
-            <TestimonialsSection />
+          {/* 10. Descarga de app — captura B2C antes de FAQ */}
+          <AppDownloadBanner />
 
-            {/* 11. FAQ */}
-            <FAQSection />
+          {/* 11. Simon Pay — waitlist section (R13) */}
+          <SimonPaySection />
 
-            {/* 12. Blog / Noticias */}
-            <BlogPreview />
+          {/* 12. FAQ */}
+          <FAQSection />
 
-            {/* 13. CTA final — Empresas: formulario inline */}
-            <FinalCTA />
-          </main>
+          {/* 12. CTA final — Contacto / Formulario */}
+          <FinalCTA />
+        </main>
 
-          <Footer />
+        <Footer />
 
-          {/* Persistent WhatsApp CTA */}
-          <WhatsAppButton />
+        {/* Persistent WhatsApp CTA */}
+        <WhatsAppButton />
 
-          {/* Chatbot Simón */}
-          <ChatWidget />
-
-          {/* Demo modal (empresas) */}
-          <DemoModal />
-        </SegmentProvider>
-      </DemoModalProvider>
+        {/* Asistente virtual Simon */}
+        <ChatWidget />
+      </SegmentProvider>
     </>
   )
 }

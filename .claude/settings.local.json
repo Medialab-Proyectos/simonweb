@@ -16,7 +16,17 @@
       "Bash(powershell -Command \"Remove-Item 'C:/Users/coben/Desktop/Simon/web1/public/images/test.jpg'; Get-ChildItem 'C:/Users/coben/Desktop/Simon/web1/public/images/' | Select-Object Name, Length | Format-Table -AutoSize\")",
       "Bash(cd \"C:/Users/coben/OneDrive/Desktop/Simon/Web/Version1/simonweb\" && npm run build 2>&1 | tail -40)",
       "Bash(cd \"C:/Users/coben/OneDrive/Desktop/Simon/Web/Version1/simonweb\" && npm run build 2>&1 | tail -30)",
-      "Bash(cd \"C:\\\\Users\\\\coben\\\\OneDrive\\\\Desktop\\\\Simon\\\\Web\\\\Version1\\\\simonweb\" && npm run build 2>&1 | tail -30)"
+      "Bash(cd \"C:\\\\Users\\\\coben\\\\OneDrive\\\\Desktop\\\\Simon\\\\Web\\\\Version1\\\\simonweb\" && npm run build 2>&1 | tail -30)",
+      "Skill(ux-microcopy-audit)",
+      "Bash(cd:*)",
+      "Read(//c/RECURSOS/**)",
+      "Bash(for i:*)",
+      "Bash(do echo:*)",
+      "Read(//c/RECURSOS/Logos/svg/**)",
+      "Bash(done)",
+      "Read(//c/Users/coben/OneDrive/Desktop/Simon/Web/Version1/simonweb/**)",
+      "Bash(cp:*)",
+      "Bash(npm run:*)"
     ]
   }
 }

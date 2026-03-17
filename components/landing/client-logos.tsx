@@ -5,11 +5,12 @@ import { cn } from "@/lib/utils"
 
 // ─── Client list ──────────────────────────────────────────────────────────────
 const clients = [
-  { name: "Finanzauto",      abbr: "FA" },
-  { name: "Carfiao",         abbr: "CF" },
-  { name: "Banco Finandina", abbr: "BF" },
-  { name: "Equirent",        abbr: "EQ" },
-  { name: "Dongfeng",        abbr: "DF" },
+  { name: "Finanzauto",      logo: "/logos/finanzauto.png" },
+  { name: "Carfiao",         logo: "/logos/carfiao.png" },
+  { name: "Banco Finandina", logo: "/logos/finandina.png" },
+  { name: "Equirent",        logo: "/logos/equirent.png" },
+  { name: "Dongfeng",        logo: "/logos/dongfeng.png" },
+  { name: "Confirmeza",      logo: "/logos/confirmeza.png" },
 ]
 
 // Double for seamless loop
@@ -18,7 +19,8 @@ const doubled = [...clients, ...clients]
 export function ClientLogos() {
   return (
     <section
-      className="border-y border-border bg-surface py-12"
+      id="clientes"
+      className="bg-[#080808] py-12"
       aria-label="Clientes que confían en Simon"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -42,17 +44,18 @@ export function ClientLogos() {
               <div
                 key={`${client.name}-${i}`}
                 className={cn(
-                  "flex shrink-0 items-center gap-3 rounded-xl border border-border/50 px-6 py-3",
-                  "grayscale opacity-50 transition-all duration-300 hover:grayscale-0 hover:opacity-100 hover:border-primary/30"
+                  "flex shrink-0 items-center justify-center rounded-xl border border-border/50 px-6 py-3",
+                  "grayscale opacity-60 transition-all duration-300 hover:grayscale-0 hover:opacity-100 hover:border-primary/30"
                 )}
               >
-                {/* Logo placeholder badge */}
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-muted-foreground/15 text-xs font-bold text-muted-foreground">
-                  {client.abbr}
-                </div>
-                <span className="whitespace-nowrap text-sm font-semibold text-muted-foreground">
-                  {client.name}
-                </span>
+                {/* Real client logo */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={client.logo}
+                  alt={client.name}
+                  className="h-8 w-auto max-w-[110px] object-contain"
+                  loading="lazy"
+                />
               </div>
             ))}
           </div>

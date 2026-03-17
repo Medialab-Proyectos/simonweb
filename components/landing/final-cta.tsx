@@ -1,27 +1,12 @@
 "use client"
 
+import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Button } from "@/components/ui/button"
 import { GooglePlayButton, AppStoreButton } from "./store-buttons"
-import { useSegment } from "./segment-context"
 import { ContactForm } from "./contact-form"
 import Image from "next/image"
-import { CheckCircle2, Shield, Clock, Headphones } from "lucide-react"
-
-const segmentContent = {
-  personas: {
-    eyebrow: "Disponible ahora",
-    headline: "Descarga Simon y toma el control de tu vehículo",
-    body: "Monitorea, protege y gestiona tu vehículo desde tu celular. Disponible para Android e iOS.",
-    microcopy: "Descarga inmediata. Sin configuraciones complejas.",
-  },
-  empresas: {
-    eyebrow: "Empieza hoy",
-    headline: "Optimiza tu flota con Simon",
-    body: "Centraliza alertas, trazabilidad y operación en una sola plataforma diseñada para crecer con tu empresa.",
-    microcopy: null,
-  },
-}
+import { CheckCircle2, Shield, Clock, Headphones, ArrowRight, Download, Building2, Play, X } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 18 },
@@ -32,7 +17,6 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.12 } },
 }
 
-// ─── Trust badges for the demo section ─────────────────────────────────────────
 const trustBadges = [
   { icon: Shield, text: "Sin compromiso" },
   { icon: Clock, text: "Respuesta ≤ 1h" },
@@ -40,13 +24,12 @@ const trustBadges = [
 ]
 
 export function FinalCTA() {
-  const { segment } = useSegment()
-  const content = segmentContent[segment]
+  const [showDemo, setShowDemo] = useState(false)
 
   return (
     <section
       id="demo"
-      className="relative overflow-hidden py-24 lg:py-32"
+      className="relative overflow-hidden bg-background py-24 lg:py-32"
       aria-labelledby="final-cta-heading"
     >
       {/* Background */}
@@ -64,193 +47,182 @@ export function FinalCTA() {
       />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
 
-          {/* ── Left: copy + CTAs ── */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-80px" }}
-            variants={stagger}
-            className="flex flex-col items-center text-center lg:items-start lg:text-left"
+        {/* Section header */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          variants={stagger}
+          className="text-center mb-16"
+        >
+          <motion.span
+            variants={fadeInUp}
+            className="inline-block rounded-full border border-primary/30 bg-primary/10 px-4 py-1 text-sm text-primary"
           >
-            {/* Eyebrow */}
-            <motion.span
-              variants={fadeInUp}
-              className="inline-block rounded-full border border-primary/30 bg-primary/10 px-4 py-1 text-sm text-primary"
-            >
-              {content.eyebrow}
-            </motion.span>
+            Empieza hoy
+          </motion.span>
+          <motion.h2
+            id="final-cta-heading"
+            variants={fadeInUp}
+            className="mt-5 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl text-balance"
+          >
+            Menos incertidumbre.{" "}
+            <span className="gradient-text">Más control.</span>
+          </motion.h2>
+        </motion.div>
 
-            {/* Headline — static visual anchor */}
-            <motion.p
-              variants={fadeInUp}
-              className="mt-5 text-sm font-semibold uppercase tracking-widest text-muted-foreground"
-            >
-              Menos incertidumbre. Más control.
-            </motion.p>
+        {/* Two columns: App Download + Enterprise Form */}
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-start">
 
-            {/* Dynamic headline */}
-            <div className="mt-3 min-h-[4rem] overflow-hidden">
-              <AnimatePresence mode="wait">
-                <motion.h2
-                  id="final-cta-heading"
-                  key={segment}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -12 }}
-                  transition={{ duration: 0.35 }}
-                  className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl text-balance"
-                >
-                  {content.headline}
-                </motion.h2>
-              </AnimatePresence>
+          {/* ── Left: App Download ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="glass-card rounded-2xl p-8 border-primary/20"
+          >
+            <div className="flex items-center gap-3 mb-5">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15">
+                <Download className="h-5 w-5 text-primary" />
+              </div>
+              <h3 className="text-xl font-bold text-foreground">Para personas</h3>
             </div>
 
-            {/* Dynamic body */}
-            <div className="mt-4 min-h-[3rem] overflow-hidden">
-              <AnimatePresence mode="wait">
-                <motion.p
-                  key={segment + "-body"}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="max-w-xl text-lg leading-relaxed text-muted-foreground"
-                >
-                  {content.body}
-                </motion.p>
-              </AnimatePresence>
+            <p className="text-muted-foreground leading-relaxed mb-6">
+              Descarga Simon y toma el control de tu vehículo. Monitorea, protege y gestiona desde tu celular. Disponible para Android e iOS.
+            </p>
+
+            <div className="flex flex-row flex-wrap gap-3 items-center mb-5">
+              <GooglePlayButton />
+              <AppStoreButton />
             </div>
 
-            {/* Personas CTAs only */}
-            <AnimatePresence mode="wait">
-              {segment === "personas" && (
-                <motion.div
-                  key="personas-final-ctas"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
-                  className="mt-10 flex flex-row flex-wrap gap-3 items-center justify-center lg:justify-start"
-                >
-                  <GooglePlayButton />
-                  <AppStoreButton />
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <p className="text-xs text-muted-foreground flex items-center gap-1.5">
+              <CheckCircle2 className="h-3.5 w-3.5 text-success" aria-hidden="true" />
+              Descarga inmediata. Sin configuraciones complejas.
+            </p>
 
-            {/* Microcopy (personas only) */}
-            {content.microcopy && (
-              <AnimatePresence mode="wait">
-                <motion.p
-                  key={segment + "-micro"}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3, delay: 0.1 }}
-                  className="mt-5 text-sm text-muted-foreground"
-                >
-                  {content.microcopy}
-                </motion.p>
-              </AnimatePresence>
-            )}
-
-            {/* Trust badges — empresas */}
-            {segment === "empresas" && (
+            {/* Image */}
+            <div className="mt-6 relative h-48 rounded-xl overflow-hidden border border-border">
+              <Image
+                src="/images/companero-viaje.jpg"
+                alt="Persona usando la app Simon en su vehículo"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="mt-8 flex flex-wrap gap-4 justify-center lg:justify-start"
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.6 }}
+                className="absolute bottom-3 left-3 glass-card rounded-lg px-3 py-1.5 flex items-center gap-2"
+                aria-hidden="true"
               >
-                {trustBadges.map((badge) => (
-                  <motion.div
-                    key={badge.text}
-                    whileHover={{ scale: 1.05 }}
-                    className="flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 cursor-default"
-                  >
-                    <badge.icon className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
-                    <span className="text-xs font-medium text-foreground">{badge.text}</span>
-                  </motion.div>
-                ))}
+                <CheckCircle2 className="h-3.5 w-3.5 text-success" />
+                <span className="text-xs font-medium text-foreground">Descarga gratuita</span>
               </motion.div>
-            )}
-
-            {/* Simon character — visible on empresas, as a visual companion */}
-            {segment === "empresas" && (
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.4, duration: 0.5 }}
-                className="mt-8 flex items-center gap-4 rounded-2xl border border-primary/15 bg-card/80 p-4 w-full max-w-md"
-              >
-                <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl">
-                  <Image
-                    src="/images/simon-character.png"
-                    alt="Simón — Asesor de movilidad"
-                    fill
-                    className="object-cover object-top"
-                  />
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-foreground">Simón, tu asesor</p>
-                  <p className="text-xs text-muted-foreground mt-0.5">
-                    &ldquo;Te ayudo a encontrar la solución ideal para tu flota. ¡Completa el formulario y te contacto!&rdquo;
-                  </p>
-                </div>
-              </motion.div>
-            )}
+            </div>
           </motion.div>
 
-          {/* ── Right: ContactForm (empresas) / image (personas) ── */}
-          <AnimatePresence mode="wait">
-            {segment === "empresas" ? (
-              <motion.div
-                key="empresas-form"
-                initial={{ opacity: 0, x: 16 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 16 }}
-                transition={{ duration: 0.45 }}
-              >
-                <ContactForm />
-              </motion.div>
-            ) : (
-              <motion.div
-                key="personas-image"
-                initial={{ opacity: 0, x: 16 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 16 }}
-                transition={{ duration: 0.45, delay: 0.15 }}
-              >
-                <figure
-                  className="relative overflow-hidden rounded-2xl border border-border shadow-sm h-72 w-full sm:h-96 lg:h-[480px]"
-                  role="img"
-                  aria-label="Control de movilidad desde la aplicación Simon"
+          {/* ── Right: Enterprise Form ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            <div className="flex items-center gap-3 mb-5">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary/15">
+                <Building2 className="h-5 w-5 text-secondary" />
+              </div>
+              <h3 className="text-xl font-bold text-foreground">Para empresas</h3>
+            </div>
+
+            <p className="text-muted-foreground leading-relaxed mb-5">
+              Centraliza alertas, trazabilidad y operación en una sola plataforma diseñada para crecer con tu empresa.
+            </p>
+
+            {/* Trust badges */}
+            <div className="flex flex-wrap gap-3 mb-6">
+              {trustBadges.map((badge) => (
+                <motion.div
+                  key={badge.text}
+                  whileHover={{ scale: 1.05 }}
+                  className="flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 cursor-default"
                 >
-                  <Image
-                    src="/images/audience-personas-new.png"
-                    alt="Persona usando la app Simon en su vehículo"
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-                  {/* Floating badge */}
+                  <badge.icon className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
+                  <span className="text-xs font-medium text-foreground">{badge.text}</span>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Contact form */}
+            <ContactForm />
+
+            {/* R12: Demo video toggle */}
+            <div className="mt-4 flex flex-col gap-3">
+              <button
+                onClick={() => setShowDemo((v) => !v)}
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                aria-expanded={showDemo}
+              >
+                {showDemo
+                  ? <><X className="h-4 w-4" /> Cerrar video</>
+                  : <><Play className="h-4 w-4" /> Ver demo en video</>
+                }
+              </button>
+              <AnimatePresence>
+                {showDemo && (
                   <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.6 }}
-                    className="absolute bottom-4 left-4 glass-card rounded-xl px-3 py-2 flex items-center gap-2"
-                    aria-hidden="true"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="overflow-hidden rounded-xl border border-border"
                   >
-                    <CheckCircle2 className="h-4 w-4 text-success" />
-                    <span className="text-xs font-medium text-foreground">Descarga gratuita</span>
+                    <video
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      controls
+                      className="w-full rounded-xl"
+                      aria-label="Demo de monitoreo de flota Simon"
+                    >
+                      <source src="/videos/services/monitoreo.mp4" type="video/mp4" />
+                    </video>
                   </motion.div>
-                </figure>
-              </motion.div>
-            )}
-          </AnimatePresence>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Simon character */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+              className="mt-6 flex items-center gap-4 rounded-2xl border border-primary/15 bg-card/80 p-4"
+            >
+              <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-xl">
+                <Image
+                  src="/images/simon-avatar.jpg"
+                  alt="Simón — Asesor de movilidad"
+                  fill
+                  className="object-cover object-top"
+                />
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-foreground">Simón, tu asesor</p>
+                <p className="text-xs text-muted-foreground mt-0.5">
+                  &ldquo;Te ayudo a encontrar la solución ideal para tu flota. ¡Completa el formulario y te contacto!&rdquo;
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
 
         </div>
       </div>
