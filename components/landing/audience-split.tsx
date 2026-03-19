@@ -129,8 +129,7 @@ export function AudienceSplit() {
               variants={fadeInUp}
               className="mt-5 text-lg leading-relaxed text-muted-foreground max-w-lg"
             >
-              Centraliza alertas, trazabilidad y operación en una sola plataforma diseñada para crecer con tu empresa.
-              Toma decisiones basadas en datos, no en suposiciones.
+              Desde flotas de 1 vehículo hasta operaciones de cientos de unidades. Sin complicaciones, con datos reales.
             </motion.p>
 
             {/* Benefits grid */}

@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import Link from "next/link"
 import {
   Accordion,
   AccordionContent,
@@ -40,9 +41,34 @@ const faqs = [
       "Las geocercas son zonas virtuales que defines en el mapa. Cuando tu vehículo entra o sale, recibes una alerta instantánea. Son ideales para controlar rutas, detectar uso no autorizado o saber cuándo tu familia llega a casa.",
   },
   {
-    question: "¿Qué pasa si necesito soporte?",
+    question: "¿Cuántos vehículos necesita mi empresa para contratar Simon?",
     answer:
-      "Nuestro equipo está disponible 24/7 por WhatsApp, teléfono y chat. El tiempo promedio de respuesta es menor a 1 hora en horario hábil.",
+      "Simon para empresas está disponible desde una sola unidad. Tenemos planes adaptados para flotas pequeñas, medianas y grandes. Escríbenos para recibir una propuesta personalizada según tu operación.",
+  },
+  {
+    question: "¿El GPS funciona si el vehículo pierde señal de red?",
+    answer:
+      "Sí. El dispositivo almacena la ruta en memoria local cuando no hay cobertura. En cuanto el vehículo vuelve a zona con red, la trayectoria se sincroniza automáticamente en la app sin perder ningún punto del recorrido.",
+  },
+  {
+    question: "¿Puedo compartir el acceso con mi familia o equipo?",
+    answer:
+      "Por supuesto. Puedes crear perfiles adicionales con distintos niveles de acceso. Los planes familiares permiten que varios miembros vean el vehículo desde sus propias cuentas; en planes empresariales puedes asignar roles por conductor, supervisor o administrador.",
+  },
+  {
+    question: "¿Simon incluye asistencia en carretera?",
+    answer:
+      "Algunos planes incluyen cobertura de asistencia en carretera. Consulta los detalles de tu plan o escríbenos para conocer la cobertura disponible en tu zona.",
+  },
+  {
+    question: "¿Cómo cancelo mi plan?",
+    answer:
+      "Puedes cancelar en cualquier momento desde la app o contactando a soporte. No hay cláusulas de permanencia en los planes mensuales. Para planes anuales, aplica la política de reembolso proporcional al tiempo restante.",
+  },
+  {
+    question: "¿Cómo es el soporte de Simon?",
+    answer:
+      "Soporte real, disponible 24/7. Puedes contactarnos por WhatsApp al +57 310 5511862, llamar al 01 8000 189 890 (línea gratuita), marcar #230 o #280 desde tu celular, o usar el chat de la app. El tiempo promedio de respuesta es menor a 1 hora en horario hábil.",
   },
 ]
 
@@ -78,7 +104,7 @@ export function FAQSection() {
             variants={fadeInUp}
             className="mt-4 text-3xl font-bold text-foreground sm:text-4xl text-balance"
           >
-            Preguntas frecuentes
+            Todo lo que necesitas saber antes de empezar
           </motion.h2>
         </motion.div>
 
@@ -107,6 +133,25 @@ export function FAQSection() {
             ))}
           </Accordion>
         </motion.div>
+
+        {/* WhatsApp CTA */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="mt-10 text-center text-sm text-muted-foreground"
+        >
+          ¿Tienes otra pregunta?{" "}
+          <Link
+            href="https://wa.me/573105511862?text=Hola%2C+tengo+una+pregunta+sobre+Simon+Movilidad"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary hover:underline font-medium"
+          >
+            Escríbenos por WhatsApp →
+          </Link>
+        </motion.p>
       </div>
     </section>
   )

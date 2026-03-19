@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Star, CheckCircle2, User } from "lucide-react"
+import { Star, CheckCircle2 } from "lucide-react"
 import Image from "next/image"
 
 const testimonials = [
@@ -10,18 +10,24 @@ const testimonials = [
       "Desde que instalé Simon, mi esposa puede ver dónde estoy cuando viajo por trabajo. La tranquilidad que eso nos da no tiene precio.",
     author: "Carlos Rodríguez",
     role: "Usuario particular, Bogotá",
+    initials: "CR",
+    color: "bg-primary/20 text-primary",
   },
   {
     quote:
       "Pasamos de no saber dónde estaban nuestros 20 vehículos a tener control total. Redujimos costos de combustible un 15% en el primer trimestre.",
     author: "María González",
     role: "Gerente de Operaciones, Transportes del Valle",
+    initials: "MG",
+    color: "bg-secondary/20 text-secondary",
   },
   {
     quote:
       "La guantera digital me salvó de una multa. Me llegó la alerta del SOAT a punto de vencer y lo renové a tiempo. Pequeño detalle, gran impacto.",
     author: "Andrés Mejía",
     role: "Empresario independiente",
+    initials: "AM",
+    color: "bg-success/20 text-success",
   },
 ]
 
@@ -83,7 +89,7 @@ export function TestimonialsSection() {
             variants={fadeInUp}
             className="mt-4 text-3xl font-bold text-foreground sm:text-4xl"
           >
-            Lo que dicen nuestros clientes
+            Lo que dicen quienes ya viajan con Simon
           </motion.h2>
         </motion.div>
 
@@ -117,8 +123,8 @@ export function TestimonialsSection() {
 
               {/* Author */}
               <figcaption className="mt-6 flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
-                  <User className="h-5 w-5 text-primary" aria-hidden="true" />
+                <div className={`flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold shrink-0 ${t.color}`}>
+                  {t.initials}
                 </div>
                 <div>
                   <p className="font-semibold text-foreground">{t.author}</p>

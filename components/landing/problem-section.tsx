@@ -61,7 +61,7 @@ export function ProblemSection() {
               variants={fadeInUp}
               className="inline-block rounded-full bg-primary/10 px-4 py-1.5 text-sm text-primary"
             >
-              ¿Quiénes somos?
+              Por qué confiar en Simon
             </motion.span>
 
             <motion.h2
@@ -69,16 +69,16 @@ export function ProblemSection() {
               variants={fadeInUp}
               className="mt-5 text-3xl font-bold text-foreground sm:text-4xl lg:text-[2.75rem] leading-tight text-balance"
             >
-              Tu aliado tecnológico para una movilidad{" "}
-              <span className="gradient-text">más eficiente y segura</span>
+              Más de 4 años impulsando la movilidad{" "}
+              <span className="gradient-text">inteligente en Colombia</span>
             </motion.h2>
 
             <motion.p
               variants={fadeInUp}
               className="mt-5 text-lg leading-relaxed text-muted-foreground max-w-xl"
             >
-              Con más de 4 años impulsando la movilidad inteligente del país, somos tu aliado tecnológico
-              para una gestión vehicular más eficiente y segura.
+              Construidos con cada vehículo conectado. Con tecnología de punta, soporte real y
+              cobertura nacional, somos el aliado que tu vehículo necesita.
             </motion.p>
 
             {/* Key differentiators */}

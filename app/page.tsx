@@ -3,16 +3,13 @@ import { Header } from "@/components/landing/header"
 import { Hero } from "@/components/landing/hero"
 import { TrustBar } from "@/components/landing/trust-bar"
 import { ProblemSection } from "@/components/landing/problem-section"
-import { SolutionsGrid } from "@/components/landing/solutions-grid"
-import { HowItWorks } from "@/components/landing/how-it-works"
+import { PainPointsSection } from "@/components/landing/pain-points-section"
 import { ProductShowcase } from "@/components/landing/product-showcase"
+import { SolutionsGrid } from "@/components/landing/solutions-grid"
+import { ClientLogos } from "@/components/landing/client-logos"
+import { FAQSection } from "@/components/landing/faq-section"
 import { AudienceSplit } from "@/components/landing/audience-split"
 import { AppDownloadBanner } from "@/components/landing/app-download-banner"
-import { ClientLogos } from "@/components/landing/client-logos"
-import { TestimonialsSection } from "@/components/landing/testimonials-section"
-import { FAQSection } from "@/components/landing/faq-section"
-import { FinalCTA } from "@/components/landing/final-cta"
-import { SimonPaySection } from "@/components/landing/simon-pay-section"
 import { Footer } from "@/components/landing/footer"
 import { WhatsAppButton } from "@/components/landing/whatsapp-button"
 import { ChatWidget } from "@/components/landing/chat-widget"
@@ -130,10 +127,18 @@ const structuredData = {
         },
         {
           "@type": "Question",
-          "name": "¿Qué pasa si necesito soporte?",
+          "name": "¿Cuántos vehículos necesita mi empresa para contratar Simon?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Nuestro equipo está disponible 24/7 por WhatsApp, teléfono y chat. El tiempo promedio de respuesta es menor a 1 hora en horario hábil."
+            "text": "Simon para empresas está disponible desde una sola unidad. Tenemos planes adaptados para flotas pequeñas, medianas y grandes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo es el soporte de Simon?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Soporte real, disponible 24/7. Puedes contactarnos por WhatsApp al +57 310 5511862, llamar al #230 o #280 desde tu celular, o usar el chat de la app."
           }
         }
       ]
@@ -151,55 +156,46 @@ export default function HomePage() {
       />
 
       <SegmentProvider>
+        {/* 1. Header — versión principal */}
         <Header />
 
         <main>
-          {/* 1. Hero — segmento activo con SegmentSwitcher */}
+          {/* 2. Hero — V3: cinematic background, animated phone mockup */}
           <Hero />
 
-          {/* 2. Impacto Simon — contadores animados */}
+          {/* 3. Impacto Simon — V3: metric cards with photos */}
           <TrustBar />
 
-          {/* 3. Nuestros servicios — 6 cards */}
-          <SolutionsGrid />
-
-          {/* 4. Cómo funciona */}
-          <HowItWorks />
-
-          {/* 5. Demostración del producto — segmentada */}
-          <ProductShowcase />
-
-          {/* 6. Simon para Empresas — B2B */}
-          <AudienceSplit />
-
-          {/* 7. ¿Quiénes somos? — credencial temprana (R8: moved up) */}
+          {/* 4. Por qué confiar en Simon — versión principal */}
           <ProblemSection />
 
-          {/* 8. Clientes — carrusel de logos */}
+          {/* 5. El problema — versión principal: pain points segment-aware */}
+          <PainPointsSection />
+
+          {/* 6. El producto — V3: full-width image + personas mockup */}
+          <ProductShowcase />
+
+          {/* 7. Todo en un solo lugar — V3: 6 service cards */}
+          <SolutionsGrid />
+
+          {/* 8. Confían en Simon — versión principal: logo marquee */}
           <ClientLogos />
 
-          {/* 9. Testimonios */}
-          <TestimonialsSection />
-
-          {/* 10. Descarga de app — captura B2C antes de FAQ */}
-          <AppDownloadBanner />
-
-          {/* 11. Simon Pay — waitlist section (R13) */}
-          <SimonPaySection />
-
-          {/* 12. FAQ */}
+          {/* 9. FAQ — versión principal */}
           <FAQSection />
 
-          {/* 12. CTA final — Contacto / Formulario */}
-          <FinalCTA />
+          {/* 10. Simon para Empresas — versión principal */}
+          <AudienceSplit />
+
+          {/* 11. Descarga la app — V2 */}
+          <AppDownloadBanner />
         </main>
 
+        {/* 12. Footer — versión principal */}
         <Footer />
 
-        {/* Persistent WhatsApp CTA */}
+        {/* Persistent floating widgets */}
         <WhatsAppButton />
-
-        {/* Asistente virtual Simon */}
         <ChatWidget />
       </SegmentProvider>
     </>

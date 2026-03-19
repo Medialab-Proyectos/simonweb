@@ -9,10 +9,10 @@ import { cn } from "@/lib/utils"
 import { useSegment } from "./segment-context"
 
 const navLinks = [
-  { href: "#soluciones",      label: "Beneficios" },
-  { href: "#soluciones-grid", label: "Soluciones" },
+  { href: "#como-funciona",   label: "Cómo funciona" },
+  { href: "#soluciones-grid", label: "Servicios" },
+  { href: "#empresas-section", label: "Para empresas" },
   { href: "#faq",             label: "FAQ" },
-  { href: "#demo",            label: "Contacto" },
 ]
 
 export function Header() {

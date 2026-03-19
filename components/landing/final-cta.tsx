@@ -67,8 +67,8 @@ export function FinalCTA() {
             variants={fadeInUp}
             className="mt-5 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl text-balance"
           >
-            Menos incertidumbre.{" "}
-            <span className="gradient-text">Más control.</span>
+            Empieza hoy.{" "}
+            <span className="gradient-text">Sin complicaciones.</span>
           </motion.h2>
         </motion.div>
 
@@ -90,18 +90,30 @@ export function FinalCTA() {
               <h3 className="text-xl font-bold text-foreground">Para personas</h3>
             </div>
 
-            <p className="text-muted-foreground leading-relaxed mb-6">
-              Descarga Simon y toma el control de tu vehículo. Monitorea, protege y gestiona desde tu celular. Disponible para Android e iOS.
+            <p className="text-muted-foreground leading-relaxed mb-4">
+              Descarga Simon y toma el control de tu vehículo. Monitorea, protege y gestiona desde tu celular.
             </p>
 
-            <div className="flex flex-row flex-wrap gap-3 items-center mb-5">
-              <GooglePlayButton />
-              <AppStoreButton />
+            <div className="mb-4 space-y-1.5">
+              {[
+                "GPS activo en segundos",
+                "Alertas al instante",
+                "Documentos siempre a mano",
+              ].map((item) => (
+                <p key={item} className="text-xs text-muted-foreground flex items-center gap-1.5">
+                  <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-success" aria-hidden="true" />
+                  {item}
+                </p>
+              ))}
             </div>
 
-            <p className="text-xs text-muted-foreground flex items-center gap-1.5">
-              <CheckCircle2 className="h-3.5 w-3.5 text-success" aria-hidden="true" />
-              Descarga inmediata. Sin configuraciones complejas.
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 items-start mb-4">
+              <GooglePlayButton />
+              <AppStoreButton className="opacity-80 scale-95" />
+            </div>
+
+            <p className="text-xs font-medium text-primary">
+              +50.000 conductores en Colombia ya usan Simon
             </p>
 
             {/* Image */}
@@ -161,6 +173,14 @@ export function FinalCTA() {
 
             {/* Contact form */}
             <ContactForm />
+
+            <p className="mt-3 text-xs text-muted-foreground">
+              ¿Prefieres llamarnos?{" "}
+              <a href="tel:018000189890" className="text-primary font-medium hover:underline">
+                01 8000 189 890
+              </a>{" "}
+              — línea gratuita
+            </p>
 
             {/* R12: Demo video toggle */}
             <div className="mt-4 flex flex-col gap-3">

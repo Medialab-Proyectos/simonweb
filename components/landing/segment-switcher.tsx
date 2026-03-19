@@ -1,13 +1,12 @@
 "use client"
 
-import { Car, Building2, CreditCard } from "lucide-react"
+import { Car, Building2 } from "lucide-react"
 import { useSegment, type Segment } from "./segment-context"
 import { cn } from "@/lib/utils"
 
 const tabs: { value: Segment; label: string; Icon: typeof Car }[] = [
-  { value: "personas",    label: "Personas",    Icon: Car        },
-  { value: "empresas",    label: "Empresas",    Icon: Building2  },
-  { value: "finanzauto",  label: "Finanzauto",  Icon: CreditCard },
+  { value: "personas",  label: "Personas",  Icon: Car       },
+  { value: "empresas",  label: "Empresas",  Icon: Building2 },
 ]
 
 interface SegmentSwitcherProps {
