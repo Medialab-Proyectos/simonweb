@@ -29,7 +29,7 @@ export function Footer() {
   return (
     <footer
       id="contacto"
-      className="bg-[#080808]"
+      className="bg-background"
       aria-labelledby="footer-heading"
     >
       <h2 id="footer-heading" className="sr-only">Pie de página</h2>

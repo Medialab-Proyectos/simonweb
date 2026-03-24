@@ -44,7 +44,7 @@ export function ProblemSection() {
   return (
     <section id="soluciones" className="relative py-20 lg:py-28 overflow-hidden" aria-labelledby="about-heading">
       {/* Background */}
-      <div className="absolute inset-0 bg-[#080808]" aria-hidden="true" />
+      <div className="absolute inset-0 bg-background" aria-hidden="true" />
       <div className="pointer-events-none absolute left-0 top-0 h-full w-1/2 bg-gradient-to-r from-primary/3 to-transparent" aria-hidden="true" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

@@ -91,7 +91,7 @@ export function ProblemSection() {
               <Image
                 src={activeTab === "personas"
                   ? "/images/audience-personas-new.png"
-                  : "/images/audience-empresas.png"}
+                  : "/images/audience-empresas-new.png"}
                 alt={activeTab === "personas"
                   ? "Usuario verificando la ubicación de su vehículo desde el celular"
                   : "Administrador monitoreando flota de vehículos desde panel de control"}

@@ -6,6 +6,7 @@ import { Shield, MapPin, FileText, Headphones, BarChart3, Wallet, ArrowRight, Za
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { useSegment } from "./segment-context"
+import { useDemoModal } from "./demo-modal-context"
 
 // ─── Solutions segmentadas ────────────────────────────────────────────────────
 const solutionsPersonas = [
@@ -211,12 +212,8 @@ function SolutionCard({ item }: { item: SolutionItem }) {
 
 export function SolutionsGrid() {
   const { segment, setSegment } = useSegment()
+  const { open: openDemoModal } = useDemoModal()
   const solutions = segment === "empresas" ? solutionsEmpresas : solutionsPersonas
-
-  const handleAgendarDemo = () => {
-    setSegment("empresas")
-    document.getElementById("demo")?.scrollIntoView({ behavior: "smooth" })
-  }
 
   return (
     <section
@@ -320,23 +317,24 @@ export function SolutionsGrid() {
           * Sujeto a disponibilidad del prestador de servicio.
         </motion.p>
 
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-          className="mt-10 flex justify-center"
-        >
-          <Button
-            size="lg"
-            className="bg-primary text-primary-foreground hover:bg-primary-hover glow-primary group"
-            onClick={handleAgendarDemo}
+        {/* CTA — solo visible en tab Empresas */}
+        {segment === "empresas" && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className="mt-10 flex justify-center"
           >
-            Ver demo en vivo
-            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-          </Button>
-        </motion.div>
+            <Button
+              size="lg"
+              className="bg-primary text-primary-foreground hover:bg-primary-hover glow-primary group"
+              onClick={openDemoModal}
+            >
+              Agendar demo gratuita
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+            </Button>
+          </motion.div>
+        )}
 
       </div>
     </section>

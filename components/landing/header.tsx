@@ -7,9 +7,10 @@ import { Logo } from "./logo"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { useSegment } from "./segment-context"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 const navLinks = [
-  { href: "#como-funciona",   label: "Cómo funciona" },
+  { href: "#soluciones",      label: "Nosotros" },
   { href: "#soluciones-grid", label: "Servicios" },
   { href: "#empresas-section", label: "Para empresas" },
   { href: "#faq",             label: "FAQ" },
@@ -68,6 +69,7 @@ export function Header() {
 
           {/* Desktop: conversion CTA + Login */}
           <div className="hidden items-center gap-3 lg:flex">
+            <ThemeToggle />
             {segment === "personas" ? (
               <Link
                 href="https://play.google.com/store/apps/details?id=com.simonmovilidad"
@@ -124,7 +126,8 @@ export function Header() {
           </div>
 
           {/* Mobile: hamburger */}
-          <div className="flex items-center lg:hidden">
+          <div className="flex items-center gap-1 lg:hidden">
+            <ThemeToggle />
             <button
               className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-card"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -152,7 +155,7 @@ export function Header() {
               transition={{ duration: 0.2 }}
               className="overflow-hidden lg:hidden"
             >
-              <div className="flex flex-col gap-1 pt-4 pb-5 rounded-xl mt-2 bg-[#080808]/95 backdrop-blur-md px-2">
+              <div className="flex flex-col gap-1 pt-4 pb-5 rounded-xl mt-2 bg-background/95 backdrop-blur-md px-2">
                 {navLinks.map((link) => (
                   <Link
                     key={link.href}

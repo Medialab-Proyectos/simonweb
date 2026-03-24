@@ -83,7 +83,7 @@ const stagger = {
 
 export function FAQSection() {
   return (
-    <section id="faq" className="bg-[#080808] py-20 lg:py-28" aria-labelledby="faq-heading">
+    <section id="faq" className="bg-background py-20 lg:py-28" aria-labelledby="faq-heading">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <motion.div

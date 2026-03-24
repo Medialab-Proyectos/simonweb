@@ -20,7 +20,7 @@ export function ClientLogos() {
   return (
     <section
       id="clientes"
-      className="bg-[#080808] py-12"
+      className="bg-background py-12"
       aria-label="Clientes que confían en Simon"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

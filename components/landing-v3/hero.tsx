@@ -1,12 +1,9 @@
 "use client"
 
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
-import { Shield, MapPin, ArrowRight, MessageCircle, CheckCircle2, Activity, Fuel, Route } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Shield, MapPin, ArrowRight, CheckCircle2, Activity, Fuel } from "lucide-react"
 import { GooglePlayButton, AppStoreButton } from "./store-buttons"
-import { useSegment } from "./segment-context"
 import { cn } from "@/lib/utils"
-import Link from "next/link"
 import { useEffect, useState } from "react"
 
 // ─── Highway animated background ─────────────────────────────────────────────
@@ -103,7 +100,7 @@ function HighwayBackground() {
       ))}
 
       {/* ── Bottom vignette for seamless section transition ────────────── */}
-      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0a0a14] to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
     </div>
   )
 }
@@ -515,8 +512,7 @@ function HeroAppMockup() {
 
 // ─── Hero Component ───────────────────────────────────────────────────────────
 export function Hero() {
-  const { segment } = useSegment()
-  const content = segmentContent[segment]
+  const content = segmentContent.personas
 
   return (
     <section
@@ -535,104 +531,45 @@ export function Hero() {
             variants={stagger}
             className="flex flex-col items-center text-center lg:items-start lg:text-left"
           >
-            <div className="mt-6 min-h-[7rem] sm:min-h-[8rem] lg:min-h-[9rem] overflow-hidden">
-              <AnimatePresence mode="wait">
-                <motion.h1
-                  id="hero-heading"
-                  key={segment + "-h1"}
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -14 }}
-                  transition={{ duration: 0.35 }}
-                  className="text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl text-balance"
-                >
-                  {content.headline}{" "}
-                  <span className="gradient-text">{content.headlineAccent}</span>
-                </motion.h1>
-              </AnimatePresence>
+            <div className="mt-6 overflow-hidden">
+              <motion.h1
+                id="hero-heading"
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.35 }}
+                className="text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl text-balance"
+              >
+                {content.headline}{" "}
+                <span className="gradient-text">{content.headlineAccent}</span>
+              </motion.h1>
             </div>
 
-            <div className="mt-5 min-h-[3.5rem] overflow-hidden">
-              <AnimatePresence mode="wait">
-                <motion.p
-                  key={segment}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
-                  className="max-w-lg text-lg leading-relaxed text-muted-foreground"
-                >
-                  {content.sub}
-                </motion.p>
-              </AnimatePresence>
+            <div className="mt-5 overflow-hidden">
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="max-w-lg text-lg leading-relaxed text-muted-foreground"
+              >
+                {content.sub}
+              </motion.p>
             </div>
 
             <motion.div variants={fadeInUp} className="mt-7 flex flex-col gap-5 w-full max-w-sm lg:max-w-none">
-              <AnimatePresence mode="wait">
-                {segment === "personas" ? (
-                  <motion.div
-                    key="personas-ctas"
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -8 }}
-                    transition={{ duration: 0.25 }}
-                    className="flex flex-col gap-3"
-                  >
-                    {/* Google Play + App Store — misma línea */}
-                    <div className="flex items-center gap-3 justify-center lg:justify-start">
-                      <div className="glow-primary rounded-md">
-                        <GooglePlayButton />
-                      </div>
-                      <AppStoreButton />
-                    </div>
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="empresas-ctas"
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -8 }}
-                    transition={{ duration: 0.25 }}
-                    className="flex flex-col gap-2.5 sm:flex-row"
-                  >
-                    <Button
-                      size="lg"
-                      className="flex-1 justify-center bg-primary text-primary-foreground hover:bg-primary-hover glow-primary group"
-                      asChild
-                    >
-                      <Link href="#demo">
-                        Agendar demo gratis
-                        <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-                      </Link>
-                    </Button>
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      className="flex-1 justify-center border-border bg-transparent text-foreground hover:border-primary/60 hover:bg-primary/8"
-                      asChild
-                    >
-                      <Link href="https://wa.me/573105511862" target="_blank" rel="noopener noreferrer">
-                        <MessageCircle className="mr-2 h-5 w-5" aria-hidden="true" />
-                        WhatsApp
-                      </Link>
-                    </Button>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              <div className="flex flex-col gap-3">
+                {/* Google Play + App Store — misma línea */}
+                <div className="flex items-center gap-3 justify-center lg:justify-start">
+                  <div className="glow-primary rounded-md">
+                    <GooglePlayButton />
+                  </div>
+                  <AppStoreButton />
+                </div>
+              </div>
 
-              <AnimatePresence mode="wait">
-                <motion.p
-                  key={segment + "-micro"}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.25 }}
-                  className="text-xs text-muted-foreground flex items-center justify-center gap-1.5 lg:justify-start"
-                >
-                  <CheckCircle2 className="h-3.5 w-3.5 text-success" aria-hidden="true" />
-                  {content.microcopy}
-                </motion.p>
-              </AnimatePresence>
+              <p className="text-xs text-muted-foreground flex items-center justify-center gap-1.5 lg:justify-start">
+                <CheckCircle2 className="h-3.5 w-3.5 text-success" aria-hidden="true" />
+                {content.microcopy}
+              </p>
             </motion.div>
           </motion.div>
 

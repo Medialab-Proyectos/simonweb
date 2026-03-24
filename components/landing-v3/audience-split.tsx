@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { GooglePlayButton, AppStoreButton } from "./store-buttons"
 import Image from "next/image"
 import { useSegment } from "./segment-context"
+import { useDemoModal } from "./demo-modal-context"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 
@@ -66,12 +67,8 @@ const stagger = {
 }
 
 export function AudienceSplit() {
-  const { segment, setSegment } = useSegment()
-
-  const handleAgendarDemo = () => {
-    setSegment("empresas")
-    document.getElementById("demo")?.scrollIntoView({ behavior: "smooth" })
-  }
+  const { segment } = useSegment()
+  const { open: openDemoModal } = useDemoModal()
 
   return (
     <section
@@ -194,9 +191,9 @@ export function AudienceSplit() {
                         <Button
                           size="lg"
                           className="w-full justify-center bg-secondary text-white hover:opacity-90 group"
-                          onClick={handleAgendarDemo}
+                          onClick={openDemoModal}
                         >
-                          Agendar demo
+                          Agendar demo gratuita
                           <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
                         </Button>
                         <Button

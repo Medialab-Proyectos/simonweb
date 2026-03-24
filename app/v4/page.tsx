@@ -18,6 +18,8 @@ import { ProblemSection as ElProblema } from "@/components/landing-v3/problem-se
 import { ProductShowcase } from "@/components/landing-v3/product-showcase"
 import { SolutionsGrid } from "@/components/landing-v3/solutions-grid"
 import { FloatingFab } from "@/components/landing-v3/floating-fab"
+import { DemoModalProvider } from "@/components/landing-v3/demo-modal-context"
+import { DemoModal } from "@/components/landing-v3/demo-form"
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -151,6 +153,7 @@ export default function V4Page() {
       */}
       <SegmentProvider>
         <SegmentProviderV3>
+          <DemoModalProvider>
 
           {/* 1. Header — Versión Principal */}
           <Header />
@@ -193,6 +196,10 @@ export default function V4Page() {
           {/* Widgets flotantes — V3: FAB unificado (WhatsApp + Chat + Llamar) */}
           <FloatingFab />
 
+          {/* Demo modal global */}
+          <DemoModal />
+
+          </DemoModalProvider>
         </SegmentProviderV3>
       </SegmentProvider>
     </>

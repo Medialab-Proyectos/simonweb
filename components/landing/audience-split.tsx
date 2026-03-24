@@ -1,11 +1,11 @@
 "use client"
 
-import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Building2, CheckCircle2, ArrowRight, BarChart3, Shield, TrendingUp, Zap, Play, X } from "lucide-react"
+import { motion } from "framer-motion"
+import { Building2, CheckCircle2, ArrowRight, BarChart3, Shield, TrendingUp, Zap } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
+import { useDemoModal } from "@/components/landing-v3/demo-modal-context"
 
 const benefits = [
   {
@@ -37,11 +37,7 @@ const fadeInUp = {
 const stagger = { visible: { transition: { staggerChildren: 0.1 } } }
 
 export function AudienceSplit() {
-  const handleScrollToContact = () => {
-    document.getElementById("demo")?.scrollIntoView({ behavior: "smooth" })
-  }
-  // R12: demo video toggle
-  const [showDemo, setShowDemo] = useState(false)
+  const { open: openDemoModal } = useDemoModal()
 
   return (
     <section
@@ -50,7 +46,7 @@ export function AudienceSplit() {
       aria-labelledby="b2b-heading"
     >
       {/* Background */}
-      <div className="absolute inset-0 bg-[#080808]" aria-hidden="true" />
+      <div className="absolute inset-0 bg-background" aria-hidden="true" />
 
       {/* Ambient glows */}
       <div className="pointer-events-none absolute -left-32 top-1/3 h-[400px] w-[400px] bg-secondary/6 blur-[120px] rounded-full" aria-hidden="true" />
@@ -76,7 +72,7 @@ export function AudienceSplit() {
                 className="object-cover"
               />
               {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-60" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60" />
 
               {/* Floating stats badge */}
               <motion.div
@@ -155,53 +151,15 @@ export function AudienceSplit() {
             </motion.div>
 
             {/* CTA */}
-            <motion.div variants={fadeInUp} className="mt-10 flex flex-col gap-3">
-              <div className="flex flex-wrap items-center gap-3">
-                <Button
-                  size="lg"
-                  className="bg-primary text-primary-foreground hover:bg-primary-hover glow-primary group"
-                  onClick={handleScrollToContact}
-                >
-                  Agendar demo gratuita
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-                </Button>
-                {/* R12: Ver demo en video */}
-                <button
-                  onClick={() => setShowDemo((v) => !v)}
-                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
-                  aria-expanded={showDemo}
-                >
-                  {showDemo
-                    ? <><X className="h-4 w-4" /> Cerrar video</>
-                    : <><Play className="h-4 w-4" /> Ver demo en video</>
-                  }
-                </button>
-              </div>
-
-              {/* Inline demo video */}
-              <AnimatePresence>
-                {showDemo && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden rounded-xl border border-border"
-                  >
-                    <video
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      controls
-                      className="w-full rounded-xl"
-                      aria-label="Demo de monitoreo de flota Simon"
-                    >
-                      <source src="/videos/services/monitoreo.mp4" type="video/mp4" />
-                    </video>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+            <motion.div variants={fadeInUp} className="mt-10">
+              <Button
+                size="lg"
+                className="bg-primary text-primary-foreground hover:bg-primary-hover glow-primary group"
+                onClick={openDemoModal}
+              >
+                Agendar demo gratuita
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+              </Button>
             </motion.div>
           </motion.div>
 
