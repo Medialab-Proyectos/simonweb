@@ -32,7 +32,8 @@
       "Bash(del:*)",
       "Bash(ls \"/c/Users/coben/OneDrive/Desktop/Simon/Web/Version1/simonweb - Copy \\(2\\)/\")",
       "Bash(grep -l \"Todo en un solo\" \"/c/Users/coben/OneDrive/Desktop/Simon/Web/Version1/simonweb - Copy \\(2\\)/components/landing/\"*)",
-      "Bash(grep -l \"Todo en un solo\" \"/c/Users/coben/OneDrive/Desktop/Simon/Web/Version1/simonweb - Copy/components/landing/\"*)"
+      "Bash(grep -l \"Todo en un solo\" \"/c/Users/coben/OneDrive/Desktop/Simon/Web/Version1/simonweb - Copy/components/landing/\"*)",
+      "Bash(ls:*)"
     ]
   }
 }

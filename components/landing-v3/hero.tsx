@@ -1,7 +1,7 @@
 "use client"
 
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
-import { Shield, MapPin, ArrowRight, MessageCircle, Smartphone, Bell, CheckCircle2, Activity, Fuel, Route } from "lucide-react"
+import { Shield, MapPin, ArrowRight, MessageCircle, CheckCircle2, Activity, Fuel, Route } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { GooglePlayButton, AppStoreButton } from "./store-buttons"
 import { useSegment } from "./segment-context"
@@ -107,14 +107,6 @@ function HighwayBackground() {
     </div>
   )
 }
-
-// ─── Pillar chips ─────────────────────────────────────────────────────────────
-const pillars = [
-  { icon: Shield,     label: "Seguridad 24/7" },
-  { icon: MapPin,     label: "Control total" },
-  { icon: Bell,       label: "Alertas inteligentes" },
-  { icon: Smartphone, label: "App móvil" },
-]
 
 // ─── Segment content ──────────────────────────────────────────────────────────
 const segmentContent = {
@@ -523,7 +515,7 @@ function HeroAppMockup() {
 
 // ─── Hero Component ───────────────────────────────────────────────────────────
 export function Hero() {
-  const { segment, setSegment } = useSegment()
+  const { segment } = useSegment()
   const content = segmentContent[segment]
 
   return (
@@ -543,48 +535,6 @@ export function Hero() {
             variants={stagger}
             className="flex flex-col items-center text-center lg:items-start lg:text-left"
           >
-            {/* Segmentador — primera elección visible */}
-            <motion.div variants={fadeInUp} className="flex flex-col gap-2 w-full max-w-sm lg:max-w-xs">
-              <div className="flex gap-3" role="group" aria-label="Selecciona tu perfil">
-                <motion.button
-                  onClick={() => setSegment("personas")}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.97 }}
-                  className={cn(
-                    "flex-1 rounded-xl border px-5 py-3 text-sm font-semibold transition-all duration-200",
-                    segment === "personas"
-                      ? "border-primary bg-primary text-primary-foreground glow-primary"
-                      : "border-border bg-card/60 text-muted-foreground hover:border-primary/50 hover:text-foreground"
-                  )}
-                  aria-pressed={segment === "personas"}
-                >
-                  Personas
-                </motion.button>
-                <motion.button
-                  onClick={() => setSegment("empresas")}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.97 }}
-                  className={cn(
-                    "flex-1 rounded-xl border px-5 py-3 text-sm font-semibold transition-all duration-200",
-                    segment === "empresas"
-                      ? "border-primary bg-primary text-primary-foreground glow-primary"
-                      : "border-border bg-card/60 text-muted-foreground hover:border-primary/50 hover:text-foreground"
-                  )}
-                  aria-pressed={segment === "empresas"}
-                >
-                  Empresas
-                </motion.button>
-              </div>
-              {/* Acceso rápido Finanzauto */}
-              <Link
-                href="#faq"
-                className="flex items-center gap-1.5 self-center rounded-full border border-border/60 bg-card/40 px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary lg:self-start"
-              >
-                ¿Usuario Finanzauto?
-                <ArrowRight className="h-3 w-3" aria-hidden="true" />
-              </Link>
-            </motion.div>
-
             <div className="mt-6 min-h-[7rem] sm:min-h-[8rem] lg:min-h-[9rem] overflow-hidden">
               <AnimatePresence mode="wait">
                 <motion.h1
@@ -617,23 +567,6 @@ export function Hero() {
               </AnimatePresence>
             </div>
 
-            {/* Pillar chips — informativos, no interactivos */}
-            <motion.div
-              variants={fadeInUp}
-              className="mt-5 flex flex-wrap justify-center gap-2 lg:justify-start"
-              aria-label="Pilares de Simon Movilidad"
-            >
-              {pillars.map((p) => (
-                <div
-                  key={p.label}
-                  className="glass-card flex items-center gap-1.5 rounded-full px-3 py-2 text-xs text-muted-foreground"
-                >
-                  <p.icon className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
-                  {p.label}
-                </div>
-              ))}
-            </motion.div>
-
             <motion.div variants={fadeInUp} className="mt-7 flex flex-col gap-5 w-full max-w-sm lg:max-w-none">
               <AnimatePresence mode="wait">
                 {segment === "personas" ? (
@@ -651,18 +584,6 @@ export function Hero() {
                         <GooglePlayButton />
                       </div>
                       <AppStoreButton />
-                    </div>
-                    {/* WhatsApp secundario */}
-                    <div className="flex items-center gap-2 justify-center lg:justify-start">
-                      <Link
-                        href="https://wa.me/573105511862"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-primary group"
-                      >
-                        <MessageCircle className="h-4 w-4 group-hover:animate-bounce" aria-hidden="true" />
-                        WhatsApp
-                      </Link>
                     </div>
                   </motion.div>
                 ) : (

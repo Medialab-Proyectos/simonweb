@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react"
 import { motion, useInView, animate } from "framer-motion"
+import { Cpu, Car, TrendingUp, Clock } from "lucide-react"
 
 // ─── Animated counter ─────────────────────────────────────────────────────────
 function Counter({ from = 0, to, suffix = "", duration = 1.8 }: {
@@ -26,14 +27,14 @@ function Counter({ from = 0, to, suffix = "", duration = 1.8 }: {
 
 // ─── Stats ────────────────────────────────────────────────────────────────────
 type Stat =
-  | { kind: "counter"; prefix?: string; target: number; suffix: string; label: string }
-  | { kind: "static"; value: string; label: string }
+  | { kind: "counter"; prefix?: string; target: number; suffix: string; label: string; icon: React.ElementType }
+  | { kind: "static"; value: string; label: string; icon: React.ElementType }
 
 const stats: Stat[] = [
-  { kind: "counter", prefix: "+", target: 50000, suffix: "",  label: "Dispositivos instalados" },
-  { kind: "counter", prefix: "+", target: 44000, suffix: "",  label: "Vehículos activos" },
-  { kind: "counter", prefix: "+", target: 19000, suffix: "",  label: "Vehículos productivos" },
-  { kind: "static",  value: "24/7",               label: "Monitoreo continuo" },
+  { kind: "counter", prefix: "+", target: 50000, suffix: "", label: "Dispositivos instalados", icon: Cpu },
+  { kind: "counter", prefix: "+", target: 44000, suffix: "", label: "Vehículos activos",        icon: Car },
+  { kind: "counter", prefix: "+", target: 19000, suffix: "", label: "Vehículos productivos",    icon: TrendingUp },
+  { kind: "static",  value: "24/7",              label: "Monitoreo continuo",                   icon: Clock },
 ]
 
 const fadeInUp = {
@@ -75,6 +76,9 @@ export function TrustBar() {
               variants={fadeInUp}
               className="flex flex-col items-center gap-1 text-center"
             >
+              <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-full border border-primary text-primary">
+                <stat.icon className="h-5 w-5" aria-hidden="true" />
+              </div>
               <p className="text-3xl font-bold tracking-tight text-primary sm:text-4xl">
                 {stat.kind === "counter" ? (
                   <>

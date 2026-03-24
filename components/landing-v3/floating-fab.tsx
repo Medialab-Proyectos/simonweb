@@ -19,10 +19,10 @@ function SimonAvatar({ size = 36 }: { size?: number }) {
       className="relative shrink-0 overflow-hidden rounded-full"
     >
       <Image
-        src="/images/simon-character.png"
+        src="/images/avatar.png"
         alt="Simón — Asesor de Simon Movilidad"
         fill
-        className="object-cover object-top"
+        className="object-cover object-center"
         sizes={`${size}px`}
       />
     </div>

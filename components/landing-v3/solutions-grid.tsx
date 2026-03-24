@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Shield, MapPin, FileText, Headphones, BarChart3, Wallet, ArrowRight, Zap, Hash } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -71,75 +71,19 @@ const solutionsPersonas = [
 ]
 
 const solutionsEmpresas = [
+  ...solutionsPersonas.slice(0, -1), // todos excepto Simon Pay
   {
     icon: BarChart3,
-    title: "Control total de flota",
+    title: "Reportes inteligentes",
     description:
-      "Recorridos, consumos y KPIs operativos. Reportes exportables para reducir costos y tomar decisiones rápidas.",
+      "Detalle completo de desplazamientos, velocidad, paradas y consumos. Exporta reportes y toma decisiones informadas.",
     color: "text-warning",
     bgIcon: "bg-warning/15",
     borderHover: "hover:border-warning/40 hover:shadow-warning/10",
-    badge: null,
+    badge: "Resuelve: costos de flota",
     video: "/videos/services/reportes.mp4",
   },
-  {
-    icon: MapPin,
-    title: "Rastreo satelital 24/7",
-    description:
-      "Visibilidad en tiempo real de toda tu flota. Rutas y alertas centralizadas en un solo panel.",
-    color: "text-secondary",
-    bgIcon: "bg-secondary/15",
-    borderHover: "hover:border-secondary/40 hover:shadow-secondary/10",
-    badge: null,
-    video: "/videos/services/monitoreo.mp4",
-  },
-  {
-    icon: Shield,
-    title: "Seguridad y geocercas",
-    description:
-      "Define zonas autorizadas y recibe alertas inmediatas cuando un vehículo sale de ruta o área permitida.",
-    color: "text-primary",
-    bgIcon: "bg-primary/15",
-    borderHover: "hover:border-primary/40 hover:shadow-primary/10",
-    badge: null,
-    video: "/videos/services/geocercas.mp4",
-  },
-  {
-    icon: FileText,
-    title: "Documentos del vehículo",
-    description:
-      "Centraliza SOAT, revisiones técnicas y seguros de toda la flota. Alertas de vencimiento por vehículo para que nunca se te pase una fecha.",
-    color: "text-success",
-    bgIcon: "bg-success/15",
-    borderHover: "hover:border-success/40 hover:shadow-success/10",
-    badge: null,
-    video: "/videos/services/guantera.mp4",
-  },
-  {
-    icon: Headphones,
-    title: "Asistencias de movilidad*",
-    description:
-      "Llama al #280 desde la app con un toque para toda tu flota. Soporte prioritario en vía para que ningún vehículo quede varado.",
-    disclaimer: "* Sujeto a disponibilidad del prestador de servicio.",
-    color: "text-chart-5",
-    bgIcon: "bg-chart-5/15",
-    borderHover: "hover:border-chart-5/40 hover:shadow-chart-5/10",
-    badge: null,
-    ctaIcon: Hash,
-    ctaLabel: "#280 asistencia vial",
-    video: "/videos/services/asistencias.mp4",
-  },
-  {
-    icon: Wallet,
-    title: "Simon Pay — Peajes y pagos",
-    description:
-      "Gestión centralizada de peajes con Colpass, seguros y servicios de movilidad para toda la flota en una sola billetera.",
-    color: "text-secondary",
-    bgIcon: "bg-secondary/15",
-    borderHover: "hover:border-secondary/40 hover:shadow-secondary/10",
-    badge: "Acceso anticipado",
-    video: null,
-  },
+  solutionsPersonas[solutionsPersonas.length - 1], // Simon Pay siempre al final
 ]
 
 const fadeInUp = {
@@ -153,15 +97,20 @@ type SolutionItem = (typeof solutionsPersonas)[number]
 
 function SolutionCard({ item }: { item: SolutionItem }) {
   const videoRef = useRef<HTMLVideoElement>(null)
+  const [flipped, setFlipped] = useState(false)
 
   const handleMouseEnter = () => {
-    if (videoRef.current && item.video) {
+    if (!item.video) return
+    setFlipped(true)
+    if (videoRef.current) {
       videoRef.current.currentTime = 0
       videoRef.current.play().catch(() => {/* autoplay blocked */})
     }
   }
 
   const handleMouseLeave = () => {
+    if (!item.video) return
+    setFlipped(false)
     if (videoRef.current) {
       videoRef.current.pause()
       videoRef.current.currentTime = 0
@@ -176,11 +125,8 @@ function SolutionCard({ item }: { item: SolutionItem }) {
     >
       {/* Flip container */}
       <div
-        className={cn(
-          "group relative transition-all duration-500",
-          "[transform-style:preserve-3d]",
-          item.video ? "hover:[transform:rotateY(180deg)]" : ""
-        )}
+        className="relative transition-transform duration-500 [transform-style:preserve-3d]"
+        style={{ transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)" }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
@@ -189,7 +135,6 @@ function SolutionCard({ item }: { item: SolutionItem }) {
           className={cn(
             "glass-card flex flex-col rounded-2xl p-6 transition-shadow",
             item.borderHover,
-            "hover:shadow-xl",
             "[backface-visibility:hidden]"
           )}
         >
@@ -198,22 +143,22 @@ function SolutionCard({ item }: { item: SolutionItem }) {
               "absolute top-4 right-4 rounded-full px-2 py-0.5 text-[10px] font-semibold",
               item.badge === "Acceso anticipado"
                 ? "bg-primary/15 text-primary"
+                : item.badge.startsWith("Resuelve")
+                ? "bg-warning/15 text-warning"
                 : "bg-secondary/15 text-secondary"
             )}>
               {item.badge}
             </span>
           )}
 
-          <motion.div
-            whileHover={{ scale: 1.1, rotate: 5 }}
-            transition={{ type: "spring", stiffness: 400, damping: 15 }}
+          <div
             className={cn(
               "mb-4 flex h-12 w-12 items-center justify-center rounded-xl",
               item.bgIcon || "bg-primary/8"
             )}
           >
             <item.icon className={cn("h-6 w-6", item.color || "text-primary")} aria-hidden="true" />
-          </motion.div>
+          </div>
 
           <h3 className="text-lg font-semibold text-foreground">{item.title}</h3>
           <p className="mt-2 flex-grow text-sm leading-relaxed text-muted-foreground">{item.description}</p>
@@ -250,7 +195,7 @@ function SolutionCard({ item }: { item: SolutionItem }) {
               loop
               playsInline
               preload="none"
-              className="h-full w-full object-cover"
+              className="h-full w-full object-contain"
               aria-hidden="true"
             />
             {/* Title overlay at bottom */}
@@ -314,30 +259,53 @@ export function SolutionsGrid() {
           </motion.p>
         </motion.div>
 
+        {/* Tabs Personas / Empresas */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.35 }}
+          className="mt-8 flex justify-center"
+        >
+          <div
+            className="flex gap-2 rounded-2xl border border-border bg-card/60 p-1.5"
+            role="group"
+            aria-label="Selecciona tu perfil"
+          >
+            {(["personas", "empresas"] as const).map((seg) => (
+              <button
+                key={seg}
+                onClick={() => setSegment(seg)}
+                className={cn(
+                  "rounded-xl px-6 py-2.5 text-sm font-semibold transition-all duration-200 capitalize",
+                  segment === seg
+                    ? "bg-primary text-primary-foreground shadow-sm"
+                    : "text-muted-foreground hover:text-foreground"
+                )}
+                aria-pressed={segment === seg}
+              >
+                {seg.charAt(0).toUpperCase() + seg.slice(1)}
+              </button>
+            ))}
+          </div>
+        </motion.div>
+
         {/* Grid — con transición suave al cambiar segmento */}
         <AnimatePresence mode="wait">
           <motion.div
             key={segment}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.3 }}
+            initial="hidden"
+            animate="visible"
+            exit={{ opacity: 0, y: -8, transition: { duration: 0.2 } }}
+            variants={stagger}
+            className={cn(
+              "mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3",
+              solutions.length === 5 && "lg:[&>*:last-child]:col-start-2"
+            )}
           >
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-80px" }}
-              variants={stagger}
-              className={cn(
-                "mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3",
-                // Cuando hay 5 tarjetas, centramos la última fila
-                solutions.length === 5 && "lg:[&>*:last-child]:col-start-2"
-              )}
-            >
-              {solutions.map((item) => (
-                <SolutionCard key={item.title} item={item} />
-              ))}
-            </motion.div>
+            {solutions.map((item) => (
+              <SolutionCard key={item.title} item={item} />
+            ))}
           </motion.div>
         </AnimatePresence>
 

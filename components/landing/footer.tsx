@@ -24,21 +24,6 @@ const footerLinks = {
   ],
 }
 
-// ─── Simon lock isotipo (small) ──────────────────────────────────────────────
-function SimonIsotipo({ className }: { className?: string }) {
-  return (
-    <svg
-      width="40"
-      height="40"
-      viewBox="319 0 96 149"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-    >
-      <path d="M414.66 75.644C414.66 60.1547 407.255 46.4346 395.781 37.822V23.3341C395.181 15.2556 388.477 0 367.33 0C346.184 0 339.513 14.9886 338.913 22.9002V37.7218C327.272 46.3344 319.834 60.1213 319.834 75.644C319.834 79.8835 320.434 83.9228 321.435 87.8285C321.602 88.4961 321.768 89.1304 321.935 89.798C321.935 89.8314 321.935 89.8982 321.969 89.9315C326.371 105.588 338.579 117.939 354.155 122.513V148.45L391.679 117.705C405.454 109.46 414.66 94.3714 414.66 77.1128C414.66 76.8791 414.627 76.6788 414.627 76.4451C414.627 76.1781 414.66 75.911 414.66 75.644ZM354.956 23.668C355.256 21.3312 356.657 15.3224 367.33 15.3224C378.537 15.3224 379.771 21.7652 380.038 24.0352V30.0439C376.036 28.9423 371.8 28.3415 367.43 28.3415C363.061 28.3415 358.925 28.9089 354.956 29.9772V23.668ZM372.567 97.4425L373.367 108.926H361.16L362.227 97.4425C352.254 95.1392 344.95 86.3263 344.95 75.6106C344.95 63.2926 354.889 53.3447 367.364 53.3447C379.838 53.3447 389.611 63.2926 389.611 75.6106C389.611 86.3263 382.34 95.1058 372.534 97.4425H372.567Z" fill="#00FFC2"/>
-    </svg>
-  )
-}
 
 export function Footer() {
   return (
@@ -51,57 +36,45 @@ export function Footer() {
 
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
 
-        {/* Central brand block */}
-        <div className="mb-12 flex flex-col items-center text-center">
-          <SimonIsotipo className="h-12 w-auto opacity-80" />
-          <p className="mt-5 text-base font-medium text-muted-foreground">
-            La tecnología que transforma tu movilidad.
-          </p>
+        {/* Links grid — 4 columnas: Marca + Soluciones + Empresa + Legal */}
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-2 lg:grid-cols-4">
 
-          {/* Contact row */}
-          <address className="mt-6 not-italic flex flex-wrap items-center justify-center gap-5">
-            <a
-              href="https://wa.me/573105511862"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
-            >
-              <MessageCircle className="h-4 w-4" aria-hidden="true" />
-              +57 310 5511862
-            </a>
-            <a
-              href="tel:018000189890"
-              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
-            >
-              <Phone className="h-4 w-4" aria-hidden="true" />
-              01 8000 189 890
-            </a>
-            <a
-              href="tel:#230"
-              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
-            >
-              <Hash className="h-4 w-4" aria-hidden="true" />
-              #230
-            </a>
-            <a
-              href="tel:#280"
-              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
-            >
-              <Hash className="h-4 w-4" aria-hidden="true" />
-              #280
-            </a>
-            <a
-              href="mailto:info@simonmovilidad.com"
-              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
-            >
-              <Mail className="h-4 w-4" aria-hidden="true" />
-              info@simonmovilidad.com
-            </a>
-          </address>
-        </div>
+          {/* Col 1: Marca + contacto */}
+          <div className="col-span-2 sm:col-span-2 lg:col-span-1">
+            <Logo className="h-7 w-auto" />
+            <p className="mt-4 text-sm text-muted-foreground">
+              La tecnología que transforma tu movilidad.
+            </p>
+            <address className="mt-5 not-italic space-y-2.5">
+              <a href="https://wa.me/573105511862" target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+                <MessageCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
+                +57 310 5511862
+              </a>
+              <a href="tel:018000189890"
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+                <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
+                01 8000 189 890
+              </a>
+              <a href="tel:#230"
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+                <Hash className="h-4 w-4 shrink-0" aria-hidden="true" />
+                #230
+              </a>
+              <a href="tel:#280"
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+                <Hash className="h-4 w-4 shrink-0" aria-hidden="true" />
+                #280
+              </a>
+              <a href="mailto:info@simonmovilidad.com"
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+                <Mail className="h-4 w-4 shrink-0" aria-hidden="true" />
+                info@simonmovilidad.com
+              </a>
+            </address>
+          </div>
 
-        {/* Links grid */}
-        <div className="grid grid-cols-2 gap-8 border-t border-border pt-10 sm:grid-cols-3">
+          {/* Col 2: Soluciones */}
           <nav aria-label="Soluciones">
             <h3 className="text-sm font-semibold text-foreground">Soluciones</h3>
             <ul className="mt-4 space-y-3">
@@ -115,6 +88,7 @@ export function Footer() {
             </ul>
           </nav>
 
+          {/* Col 3: Empresa */}
           <nav aria-label="Empresa">
             <h3 className="text-sm font-semibold text-foreground">Empresa</h3>
             <ul className="mt-4 space-y-3">
@@ -128,7 +102,8 @@ export function Footer() {
             </ul>
           </nav>
 
-          <nav aria-label="Legal" className="col-span-2 sm:col-span-1">
+          {/* Col 4: Legal */}
+          <nav aria-label="Legal">
             <h3 className="text-sm font-semibold text-foreground">Legal</h3>
             <ul className="mt-4 space-y-3">
               {footerLinks.legal.map((link) => (
@@ -140,6 +115,7 @@ export function Footer() {
               ))}
             </ul>
           </nav>
+
         </div>
 
         {/* Bottom bar */}
