@@ -4,6 +4,7 @@ import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
 import { Shield, MapPin, ArrowRight, CheckCircle2, Activity, Fuel } from "lucide-react"
 import { GooglePlayButton, AppStoreButton } from "./store-buttons"
 import { cn } from "@/lib/utils"
+import Image from "next/image"
 import { useEffect, useState } from "react"
 
 // ─── Highway animated background ─────────────────────────────────────────────
@@ -516,54 +517,60 @@ export function Hero() {
 
   return (
     <section
-      className="relative min-h-screen overflow-hidden pt-24 pb-16 lg:pt-32 lg:pb-24"
+      className="relative min-h-[90vh] overflow-hidden pt-20 pb-0 lg:pt-28"
       aria-labelledby="hero-heading"
     >
       <HighwayBackground />
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-full">
+        <div className="grid items-end gap-8 lg:grid-cols-[1fr_1fr] lg:gap-4">
 
           {/* ── Left: copy ───────────────────────────────────────────── */}
           <motion.div
             initial="hidden"
             animate="visible"
             variants={stagger}
-            className="flex flex-col items-center text-center lg:items-start lg:text-left"
+            className="flex flex-col items-center text-center lg:items-start lg:text-left pb-20 lg:pb-24"
           >
-            <div className="mt-6 overflow-hidden">
+            {/* Eyebrow */}
+            <motion.div
+              variants={fadeInUp}
+              className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/8 px-4 py-1.5 text-sm text-primary mb-5"
+            >
+              <PulseRing />
+              Monitoreo vehicular en tiempo real
+            </motion.div>
+
+            <div className="overflow-hidden">
               <motion.h1
                 id="hero-heading"
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.35 }}
-                className="text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl text-balance"
+                className="text-4xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-[3.25rem] text-balance"
               >
                 {content.headline}{" "}
                 <span className="gradient-text">{content.headlineAccent}</span>
               </motion.h1>
             </div>
 
-            <div className="mt-5 overflow-hidden">
+            <div className="mt-4 overflow-hidden">
               <motion.p
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3 }}
-                className="max-w-lg text-lg leading-relaxed text-muted-foreground"
+                transition={{ duration: 0.3, delay: 0.1 }}
+                className="max-w-md text-base leading-relaxed text-muted-foreground"
               >
                 {content.sub}
               </motion.p>
             </div>
 
-            <motion.div variants={fadeInUp} className="mt-7 flex flex-col gap-5 w-full max-w-sm lg:max-w-none">
-              <div className="flex flex-col gap-3">
-                {/* Google Play + App Store — misma línea */}
-                <div className="flex items-center gap-3 justify-center lg:justify-start">
-                  <div className="glow-primary rounded-md">
-                    <GooglePlayButton />
-                  </div>
-                  <AppStoreButton />
+            <motion.div variants={fadeInUp} className="mt-7 flex flex-col gap-4 w-full max-w-sm lg:max-w-none">
+              <div className="flex items-center gap-3 justify-center lg:justify-start">
+                <div className="glow-primary rounded-md">
+                  <GooglePlayButton />
                 </div>
+                <AppStoreButton />
               </div>
 
               <p className="text-xs text-muted-foreground flex items-center justify-center gap-1.5 lg:justify-start">
@@ -573,14 +580,114 @@ export function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* ── Right: animated phone mockup ──────────────────────────── */}
+          {/* ── Right: hero image — anchored to bottom, bleeds out ── */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="flex justify-center lg:justify-end"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="flex justify-center lg:justify-start self-end lg:-ml-8"
           >
-            <HeroAppMockup />
+            <div className="relative w-full max-w-[420px] lg:max-w-[480px]">
+
+              {/* Glow under car */}
+              <div
+                className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-4/5 h-16 rounded-full"
+                style={{ background: "radial-gradient(ellipse, rgba(0,229,209,0.18) 0%, transparent 70%)", filter: "blur(16px)" }}
+              />
+
+              {/* ── Píldoras flotantes ─────────────────────────────── */}
+
+              {/* GPS activo — zona superior, desplazada a la derecha */}
+              <FloatingNotification
+                delay={0.7}
+                className="absolute z-30 left-[30%] top-3 flex items-center gap-2"
+              >
+                <PulseRing />
+                <div>
+                  <p className="text-xs font-semibold text-foreground">GPS activo</p>
+                  <p className="text-[10px] text-muted-foreground leading-tight">Actualización en vivo</p>
+                </div>
+              </FloatingNotification>
+
+              {/* Protegido — derecha media, fuera del teléfono */}
+              <FloatingNotification
+                delay={0.9}
+                className="absolute z-30 -right-4 top-[52%] flex items-center gap-2"
+              >
+                <Shield className="h-4 w-4 shrink-0 text-primary" />
+                <div>
+                  <p className="text-xs font-semibold text-foreground">Protegido</p>
+                  <p className="text-[10px] text-muted-foreground leading-tight">Geocerca activa</p>
+                </div>
+              </FloatingNotification>
+
+              {/* +50K — esquina inferior derecha, fuera del carro */}
+              <FloatingNotification
+                delay={1.1}
+                className="absolute z-30 right-0 bottom-[18%] flex items-center gap-2"
+              >
+                <Activity className="h-4 w-4 shrink-0 text-success" />
+                <div>
+                  <p className="text-xs font-semibold text-foreground">+50K dispositivos</p>
+                  <p className="text-[10px] text-muted-foreground leading-tight">En toda Colombia</p>
+                </div>
+              </FloatingNotification>
+
+              {/* Faro izquierdo */}
+              <motion.div
+                className="absolute z-20 pointer-events-none"
+                style={{ left: "22%", top: "70%", width: 28, height: 12 }}
+                animate={{ opacity: [0.6, 1, 0.7, 1, 0.85, 1] }}
+                transition={{ duration: 0.4, delay: 0.8, times: [0, 0.1, 0.2, 0.35, 0.6, 1], repeat: Infinity, repeatDelay: 4 }}
+              >
+                <div className="w-full h-full rounded-full bg-amber-100 blur-[6px] opacity-90" />
+                <div className="absolute inset-0 w-full h-full rounded-full bg-white blur-[2px]" />
+              </motion.div>
+
+              {/* Cono de luz izquierdo */}
+              <motion.div
+                className="absolute z-10 pointer-events-none"
+                style={{
+                  left: "4%", top: "70%", width: 90, height: 45,
+                  background: "linear-gradient(135deg, rgba(255,255,220,0.2) 0%, transparent 70%)",
+                  filter: "blur(10px)", transformOrigin: "right center", transform: "rotate(-15deg)",
+                }}
+                animate={{ opacity: [0, 0.9, 0.7, 0.9, 0.75, 0.9] }}
+                transition={{ duration: 0.4, delay: 0.8, times: [0, 0.1, 0.2, 0.35, 0.6, 1], repeat: Infinity, repeatDelay: 4 }}
+              />
+
+              {/* Faro derecho */}
+              <motion.div
+                className="absolute z-20 pointer-events-none"
+                style={{ left: "52%", top: "67%", width: 24, height: 10 }}
+                animate={{ opacity: [0.6, 1, 0.7, 1, 0.85, 1] }}
+                transition={{ duration: 0.4, delay: 0.85, times: [0, 0.1, 0.2, 0.35, 0.6, 1], repeat: Infinity, repeatDelay: 4 }}
+              >
+                <div className="w-full h-full rounded-full bg-amber-100 blur-[6px] opacity-90" />
+                <div className="absolute inset-0 w-full h-full rounded-full bg-white blur-[2px]" />
+              </motion.div>
+
+              {/* Cono de luz derecho */}
+              <motion.div
+                className="absolute z-10 pointer-events-none"
+                style={{
+                  left: "36%", top: "67%", width: 75, height: 38,
+                  background: "linear-gradient(135deg, rgba(255,255,220,0.16) 0%, transparent 70%)",
+                  filter: "blur(9px)", transformOrigin: "right center", transform: "rotate(-10deg)",
+                }}
+                animate={{ opacity: [0, 0.9, 0.7, 0.9, 0.75, 0.9] }}
+                transition={{ duration: 0.4, delay: 0.85, times: [0, 0.1, 0.2, 0.35, 0.6, 1], repeat: Infinity, repeatDelay: 4 }}
+              />
+
+              <Image
+                src="/auto.png"
+                alt="Vehículo monitoreado con Simon Movilidad"
+                width={640}
+                height={480}
+                className="relative z-10 w-full h-auto"
+                priority
+              />
+            </div>
           </motion.div>
 
         </div>

@@ -1,11 +1,12 @@
 "use client"
 
 import { motion, AnimatePresence } from "framer-motion"
-import { Shield, ArrowRight, Smartphone, Bell, CheckCircle2, Activity, Fuel, Lock, Building2, Download } from "lucide-react"
+import { Shield, ArrowRight, CheckCircle2, Activity, Fuel, Lock, Building2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { GooglePlayButton, AppStoreButton } from "./store-buttons"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
+import Image from "next/image"
 import { useEffect, useState } from "react"
 
 // ─── Static particle data (avoids hydration mismatch) ────────────────────────
@@ -557,14 +558,27 @@ export function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* ── Right: animated phone mockup ───────────────────── */}
+          {/* ── Right: hero image ───────────────────── */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.15 }}
             className="flex justify-center lg:justify-end"
           >
-            <HeroAppMockup />
+            <div className="relative w-full max-w-xl">
+              {/* Ambient glow */}
+              <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+                <div className="h-72 w-72 rounded-full bg-primary/10 blur-[80px]" />
+              </div>
+              <Image
+                src="/auto.png"
+                alt="Vehículo monitoreado con Simon Movilidad"
+                width={640}
+                height={480}
+                className="relative z-10 w-full h-auto drop-shadow-[0_0_40px_rgba(0,229,209,0.15)]"
+                priority
+              />
+            </div>
           </motion.div>
 
         </div>

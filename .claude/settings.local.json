@@ -33,7 +33,16 @@
       "Bash(ls \"/c/Users/coben/OneDrive/Desktop/Simon/Web/Version1/simonweb - Copy \\(2\\)/\")",
       "Bash(grep -l \"Todo en un solo\" \"/c/Users/coben/OneDrive/Desktop/Simon/Web/Version1/simonweb - Copy \\(2\\)/components/landing/\"*)",
       "Bash(grep -l \"Todo en un solo\" \"/c/Users/coben/OneDrive/Desktop/Simon/Web/Version1/simonweb - Copy/components/landing/\"*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(powershell -Command \"Copy-Item 'C:\\\\Users\\\\coben\\\\OneDrive\\\\Desktop\\\\Simon\\\\Web\\\\Version1\\\\simonweb\\\\public\\\\auto.png' -Destination 'C:\\\\Users\\\\coben\\\\OneDrive\\\\Desktop\\\\Simon\\\\Web\\\\Version1\\\\simonweb - Copy \\(2\\)\\\\public\\\\auto.png'\")",
+      "Bash(powershell -Command \"Test-Path 'C:\\\\Users\\\\coben\\\\OneDrive\\\\Desktop\\\\Simon\\\\Web\\\\Version1\\\\simonweb - Copy \\(2\\)\\\\public\\\\auto.png'\")",
+      "Bash(powershell -Command \"Get-ChildItem 'C:\\\\Users\\\\coben\\\\OneDrive\\\\Desktop\\\\Simon\\\\Web\\\\Version1\\\\simonweb - Copy \\(2\\)\\\\components\\\\landing\\\\' | Select-Object Name\")",
+      "Bash(powershell -Command \"Test-Path 'C:\\\\Users\\\\coben\\\\OneDrive\\\\Desktop\\\\Simon\\\\Web\\\\Version1\\\\simonweb\\\\public\\\\auto.png'\")",
+      "Bash(powershell -Command \"Get-ChildItem 'C:\\\\Users\\\\coben\\\\OneDrive\\\\Desktop\\\\Simon\\\\Web\\\\Version1\\\\simonweb' -Directory | Select-Object Name\")",
+      "Bash(powershell -Command \"Get-ChildItem 'C:\\\\Users\\\\coben\\\\OneDrive\\\\Desktop\\\\Simon\\\\Web\\\\Version1\\\\simonweb\\\\public' | Select-Object Name\")",
+      "Bash(powershell -Command \"Get-ChildItem 'C:\\\\Users\\\\coben\\\\OneDrive\\\\Desktop\\\\Simon\\\\Web\\\\Version1\\\\simonweb\\\\public\\\\images' | Select-Object Name\")",
+      "Bash(powershell -Command \"Get-ChildItem 'C:\\\\Users\\\\coben\\\\OneDrive\\\\Desktop\\\\Simon\\\\Web\\\\Version1\\\\simonweb\\\\app' -Recurse | Select-Object FullName\")",
+      "Bash(powershell -Command \"Select-String -Path 'C:\\\\Users\\\\coben\\\\OneDrive\\\\Desktop\\\\Simon\\\\Web\\\\Version1\\\\simonweb\\\\components\\\\landing-v3\\\\hero.tsx' -Pattern 'Right|mockup|HeroApp|justify-end' | Select-Object LineNumber, Line\")"
     ]
   }
 }

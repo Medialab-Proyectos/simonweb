@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Auditoría UX — Simon Movilidad App</title>
+<style>
+  :root {
+    --cyan: #00F1C7;
+    --dark: #0a0f14;
+    --card: #10161D;
+    --border: #1e2d3d;
+    --text: #F5F7FA;
+    --muted: #8b9db0;
+    --red: #FF4D4D;
+    --orange: #FF8904;
+    --yellow: #f5c842;
+    --green: #2AD67A;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
+  /* ── Cover ── */
+  .cover {
+    background: linear-gradient(160deg, #050a0e 0%, #0a1a14 60%, #071a12 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 80px 72px;
+    page-break-after: always;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 480px; height: 480px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,241,199,0.08) 0%, transparent 70%);
+  }
+  .cover-tag {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 24px;
+    font-weight: 600;
+  }
+  .cover-title {
+    font-size: 44px;
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 16px;
+    max-width: 640px;
+  }
+  .cover-title span { color: var(--cyan); }
+  .cover-subtitle {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 500px;
+    margin-bottom: 48px;
+    line-height: 1.7;
+  }
+  .cover-meta {
+    display: flex;
+    gap: 40px;
+    margin-top: 8px;
+  }
+  .cover-meta-item { display: flex; flex-direction: column; gap: 4px; }
+  .cover-meta-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); }
+  .cover-meta-value { font-size: 13px; font-weight: 600; color: var(--text); }
+  .cover-skills {
+    margin-top: 56px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .skill-tag {
+    background: rgba(0,241,199,0.08);
+    border: 1px solid rgba(0,241,199,0.2);
+    color: var(--cyan);
+    font-size: 10px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+  }
+  .cover-line {
+    width: 60px;
+    height: 3px;
+    background: var(--cyan);
+    margin-bottom: 32px;
+    border-radius: 2px;
+  }
+
+  /* ── Page layout ── */
+  .page {
+    padding: 56px 64px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* ── Section headings ── */
+  .section {
+    margin-bottom: 48px;
+    page-break-inside: avoid;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-number {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    background: rgba(0,241,199,0.12);
+    color: var(--cyan);
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.3px;
+  }
+  h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+    margin-top: 24px;
+  }
+  p { color: #c8d5e0; margin-bottom: 10px; }
+  strong { color: var(--text); font-weight: 600; }
+
+  /* ── Severity badges ── */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-right: 8px;
+  }
+  .badge-critical { background: rgba(255,77,77,0.15); color: var(--red); border: 1px solid rgba(255,77,77,0.3); }
+  .badge-high     { background: rgba(255,137,4,0.15); color: var(--orange); border: 1px solid rgba(255,137,4,0.3); }
+  .badge-medium   { background: rgba(245,200,66,0.15); color: var(--yellow); border: 1px solid rgba(245,200,66,0.3); }
+  .badge-low      { background: rgba(42,214,122,0.15); color: var(--green); border: 1px solid rgba(42,214,122,0.3); }
+
+  /* ── Finding cards ── */
+  .finding {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    page-break-inside: avoid;
+  }
+  .finding-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .finding-num {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: rgba(0,241,199,0.1);
+    color: var(--cyan);
+    font-size: 10px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .finding-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  .finding-body { padding-left: 36px; }
+  .finding-body p { margin-bottom: 6px; font-size: 12.5px; }
+  .finding-evidence {
+    background: rgba(0,241,199,0.05);
+    border-left: 3px solid var(--cyan);
+    padding: 8px 12px;
+    border-radius: 0 6px 6px 0;
+    margin: 10px 0;
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+  }
+  .finding-action {
+    background: rgba(0,241,199,0.06);
+    border: 1px solid rgba(0,241,199,0.15);
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--cyan);
+  }
+  .finding-action::before { content: '→ '; font-weight: 700; }
+
+  /* ── Friction map ── */
+  .friction-map {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    overflow-x: auto;
+  }
+  .friction-map pre {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 11px;
+    color: #8b9db0;
+    white-space: pre;
+    line-height: 1.7;
+  }
+  .friction-map pre .critical { color: var(--red); font-weight: bold; }
+  .friction-map pre .high { color: var(--orange); }
+  .friction-map pre .ok { color: var(--green); }
+
+  /* ── Table ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    margin-top: 12px;
+  }
+  thead tr {
+    background: rgba(0,241,199,0.08);
+  }
+  th {
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--cyan);
+    font-weight: 700;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(30,45,61,0.7);
+    color: #c8d5e0;
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* ── Journey map ── */
+  .journey {
+    overflow-x: auto;
+  }
+  .journey-row {
+    display: grid;
+    grid-template-columns: 140px 1fr 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+  }
+  .journey-row:first-child > * { border-radius: 8px 8px 0 0; }
+  .journey-row:last-child > * { border-radius: 0 0 8px 8px; }
+  .journey-cell {
+    background: var(--card);
+    padding: 10px 12px;
+    font-size: 11.5px;
+  }
+  .journey-header .journey-cell {
+    background: rgba(0,241,199,0.08);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--cyan);
+  }
+  .journey-step { font-weight: 700; color: var(--text); font-size: 12px; }
+  .journey-state { color: #c8d5e0; }
+  .em-high { color: var(--orange); font-weight: 600; }
+  .em-critical { color: var(--red); font-weight: 700; }
+  .em-positive { color: var(--green); font-weight: 600; }
+  .risk-critical { color: var(--red); font-size: 11px; }
+  .risk-high { color: var(--orange); font-size: 11px; }
+  .risk-medium { color: var(--yellow); font-size: 11px; }
+  .risk-ok { color: var(--green); font-size: 11px; }
+
+  /* ── KLM table ── */
+  .klm-table { width: 100%; }
+
+  /* ── Quick wins ── */
+  .qw-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .qw-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .qw-num {
+    width: 24px; height: 24px;
+    background: rgba(0,241,199,0.12);
+    color: var(--cyan);
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .qw-content { flex: 1; }
+  .qw-action { font-size: 12.5px; color: var(--text); font-weight: 600; margin-bottom: 4px; }
+  .qw-effort { font-size: 11px; color: var(--cyan); }
+
+  /* ── Structural ── */
+  .structure-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    page-break-inside: avoid;
+  }
+  .structure-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--cyan);
+    margin-bottom: 12px;
+  }
+
+  /* ── Behavioral ── */
+  .behavior-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 14px;
+    page-break-inside: avoid;
+  }
+  .behavior-bias {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--orange);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .behavior-title {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  /* ── Conclusion ── */
+  .conclusion-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .conclusion-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--cyan);
+    border-radius: 0 0 10px 10px;
+    padding: 16px;
+  }
+  .conclusion-num {
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--cyan);
+    opacity: 0.4;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .conclusion-text {
+    font-size: 12px;
+    color: #c8d5e0;
+    line-height: 1.6;
+  }
+
+  /* ── Divider ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0;
+  }
+
+  /* ── Print ── */
+  @media print {
+    body { background: #0a0f14; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .cover { page-break-after: always; }
+    .section { page-break-inside: avoid; }
+    .finding { page-break-inside: avoid; }
+  }
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════ COVER ══════════ -->
+<div class="cover">
+  <div class="cover-line"></div>
+  <div class="cover-tag">Auditoría UX · Flujo Completo</div>
+  <h1 class="cover-title">Simon <span>Movilidad</span><br/>App</h1>
+  <p class="cover-subtitle">Análisis end-to-end del flujo onboarding → autenticación → dashboard → detalle de vehículo. 7 pantallas, 10 hallazgos, 6 quick wins.</p>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <span class="cover-meta-label">Pantallas auditadas</span>
+      <span class="cover-meta-value">7 screens</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="cover-meta-label">Hallazgos</span>
+      <span class="cover-meta-value">10 findings</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="cover-meta-label">Críticos</span>
+      <span class="cover-meta-value" style="color: var(--red)">2 críticos</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="cover-meta-label">Quick wins</span>
+      <span class="cover-meta-value" style="color: var(--cyan)">6 acciones</span>
+    </div>
+  </div>
+  <div class="cover-skills">
+    <span class="skill-tag">ia-ux-architect</span>
+    <span class="skill-tag">ux-ui-patterns</span>
+    <span class="skill-tag">ux-accessibility-ergonomics</span>
+    <span class="skill-tag">ux-microcopy-audit</span>
+    <span class="skill-tag">ux-klm-goms</span>
+    <span class="skill-tag">behavioral-ux</span>
+    <span class="skill-tag">ux-core-cognitive-biases</span>
+    <span class="skill-tag">ux-engagement</span>
+  </div>
+</div>
+
+<!-- ══════════ CONTENT ══════════ -->
+<div class="page">
+
+  <!-- 1. DIAGNÓSTICO -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">01</div>
+      <h2>Diagnóstico del flujo</h2>
+    </div>
+    <p>El flujo cubre 7 pantallas en secuencia lógica correcta: <strong>onboarding educativo → autenticación → dashboard → detalle de activo</strong>. La arquitectura de navegación es sólida en su estructura conceptual. Sin embargo, presenta tres problemas estructurales que comprometen la calidad end-to-end como producto premium.</p>
+
+    <div class="finding">
+      <div class="finding-header">
+        <div class="finding-num">A</div>
+        <div>
+          <span class="badge badge-critical">Crítico</span>
+          <span class="finding-title">Fractura de identidad visual en el HOME</span>
+        </div>
+      </div>
+      <div class="finding-body">
+        <p>El flujo inicia en modo oscuro (onboarding: fondo negro, foto nocturna, acentos cian) y termina en modo claro (HOME: fondo <strong>#f9f7f7</strong> casi blanco). Esta inversión no es una decisión deliberada — viola el principio de identidad que establece uso exclusivo de fondos negros/gris profundo con acentos cian.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="finding-header">
+        <div class="finding-num">B</div>
+        <div>
+          <span class="badge badge-high">Alta</span>
+          <span class="finding-title">Onboarding con carga informativa decreciente y sin arco narrativo</span>
+        </div>
+      </div>
+      <div class="finding-body">
+        <p>Pantalla 1 muestra 6 features, pantalla 2 muestra 3, pantalla 3 muestra 2. No hay progresión de valor ni gancho emocional. El remate ("Tu vehículo, en buenas manos" con 2 íconos) es el momento más vacío cuando debería ser el de mayor compromiso emocional.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="finding-header">
+        <div class="finding-num">C</div>
+        <div>
+          <span class="badge badge-critical">Crítico</span>
+          <span class="finding-title">HOME viola la regla de negocio de 6 servicios máximos</span>
+        </div>
+      </div>
+      <div class="finding-body">
+        <p>El grid de servicios tiene <strong>8 elementos</strong> (Localización, Guantera, Simon Pay, Mis créditos, Seguros, Asistencias, Planes, Opciones) en un grid 4×2. La regla de negocio documentada establece máximo 6. Además usa "Guantera" en lugar de "Documentos del vehículo".</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. MAPA DE FRICCIÓN -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">02</div>
+      <h2>Mapa de fricción</h2>
+    </div>
+    <div class="friction-map">
+      <pre>
+ONBOARDING 1        ONBOARDING 2        ONBOARDING 3
+6 features          3 features          2 features
+Impacto alto        Hilo se pierde      Remate vacío
+[Media]             [Baja]              [ALTA — abandono]
+     |                   |                    |
+     └───────────────────┴────────────────────┘
+                         |
+               LOGIN_01 ──── LOGIN_02
+               Splash innec.  Formulario OK
+               [ALTA fricción] Bio terciaria
+                               [Media]
+                         |
+                        HOME
+             8 servicios (viola regla 6)
+             Fondo blanco (viola modo oscuro)
+             5 zonas en competencia simultánea
+             [CRÍTICO]
+                         |
+               DETALLE VEHÍCULO
+               "Guantera" (nombre incorrecto)
+               Fecha SOAT 31/02/2026 inválida
+               Documentos sin CTA de acción
+               [Media-Alta]
+      </pre>
+    </div>
+  </div>
+
+  <!-- 3. HALLAZGOS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">03</div>
+      <h2>Hallazgos priorizados</h2>
+    </div>
+
+    <div class="finding">
+      <div class="finding-header">
+        <div class="finding-num">1</div>
+        <div>
+          <span class="badge badge-critical">Crítico</span>
+          <span class="finding-title">HOME rompe el modo oscuro y la identidad de marca</span>
+        </div>
+      </div>
+      <div class="finding-body">
+        <div class="finding-evidence">Fondo #f9f7f7 en la pantalla más importante del producto. El onboarding establece la estética premium en oscuro y el dashboard la destruye.</div>
+        <p><strong>Impacto usuario:</strong> Desorientación visual. Sensación de cambio de producto, no de continuidad.</p>
+        <p><strong>Impacto negocio:</strong> Debilita directamente el posicionamiento tech-premium. El modo claro no acompaña la propuesta de marca.</p>
+        <div class="finding-action">Aplicar fondo oscuro (#10161D o #080808) al HOME. Las cards de vehículos con gradient cian-negro ya existen y funcionan — el fondo blanco es una decisión aislada.</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="finding-header">
+        <div class="finding-num">2</div>
+        <div>
+          <span class="badge badge-critical">Crítico</span>
+          <span class="finding-title">Grid de servicios con 8 elementos viola la regla de negocio documentada</span>
+        </div>
+      </div>
+      <div class="finding-body">
+        <div class="finding-evidence">HOME muestra 8 servicios en grid 4×2. La regla establece máximo 6 en grid de 2 columnas.</div>
+        <p><strong>Impacto usuario:</strong> Parálisis de decisión. 8 destinos con igual peso visual — el usuario no identifica una acción principal.</p>
+        <p><strong>Impacto negocio:</strong> Tráfico diluido. Los servicios core (Localización, Asistencias) no tienen ventaja visual sobre Planes u Opciones.</p>
+        <div class="finding-action">Reducir a 6 servicios visibles. Mover "Planes" y "Opciones" a navegación secundaria (perfil o menú lateral).</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="finding-header">
+        <div class="finding-num">3</div>
+        <div>
+          <span class="badge badge-high">Alta</span>
+          <span class="finding-title">"Guantera" visible en HOME y Detalle Vehículo</span>
+        </div>
+      </div>
+      <div class="finding-body">
+        <div class="finding-evidence">Ícono del grid en HOME = "Guantera". Card en Detalle Vehículo = "Card Guantera". La regla establece "Documentos del vehículo" en interfaces técnicas.</div>
+        <p><strong>Impacto usuario:</strong> Ambigüedad en el descubrimiento. "Guantera" puede no ser obvia para usuarios jóvenes o B2B.</p>
+        <div class="finding-action">Renombrar ícono del grid a "Documentos". En Detalle Vehículo: título "Documentos del vehículo".</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="finding-header">
+        <div class="finding-num">4</div>
+        <div>
+          <span class="badge badge-high">Alta</span>
+          <span class="finding-title">LOGIN_01 es un paso redundante sin valor</span>
+        </div>
+      </div>
+      <div class="finding-body">
+        <div class="finding-evidence">Pantalla splash con logo + botón "Ingresar" → lleva directamente al formulario. El copy puede ser el header de LOGIN_02.</div>
+        <p><strong>Impacto usuario:</strong> Tap adicional antes de autenticarse. En urgencias (asistencia vial, consulta de placa rápida) tiene costo real.</p>
+        <div class="finding-action">Eliminar LOGIN_01 como pantalla independiente. Fusionar con LOGIN_02. Se eliminan: 1 tap + 1 load + reading time del copy duplicado.</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="finding-header">
+        <div class="finding-num">5</div>
+        <div>
+          <span class="badge badge-high">Alta</span>
+          <span class="finding-title">Onboarding sin arco narrativo — el remate es el momento más débil</span>
+        </div>
+      </div>
+      <div class="finding-body">
+        <div class="finding-evidence">Pantalla 3 tiene 2 íconos y el título "Tu vehículo, en buenas manos" — el momento de mayor compromiso emocional es el más vacío.</div>
+        <p><strong>Impacto usuario:</strong> El usuario llega al botón "Ingresar" sin expectativa construida. El onboarding no prepara el terreno para el HOME.</p>
+        <div class="finding-action">Reestructurar en 3 actos: (1) Presentación — 6 features ✓, (2) Beneficio central — 1 feature desarrollada con imagen emocional, (3) CTA emocional — "Empieza hoy" con imagen de alta confianza.</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="finding-header">
+        <div class="finding-num">6</div>
+        <div>
+          <span class="badge badge-critical">Alta</span>
+          <span class="finding-title">Fecha SOAT "31/02/2026" es inválida</span>
+        </div>
+      </div>
+      <div class="finding-body">
+        <div class="finding-evidence">Detalle Vehículo muestra SOAT "Próximo a vencer" con fecha 31/02/2026. Febrero no tiene 31 días.</div>
+        <p><strong>Impacto usuario:</strong> Una fecha inválida en un documento legal crítico destruye la confianza en la precisión de todos los datos. El SOAT es obligatoriedad legal en Colombia.</p>
+        <div class="finding-action">Sanear dato antes de cualquier presentación o prueba de usuario. Establecer validación de fechas en el sistema.</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="finding-header">
+        <div class="finding-num">7</div>
+        <div>
+          <span class="badge badge-medium">Media</span>
+          <span class="finding-title">Biometría en LOGIN_02 como elemento terciario</span>
+        </div>
+      </div>
+      <div class="finding-body">
+        <div class="finding-evidence">El ícono "Ingresa con biometría" aparece debajo del botón primario con peso visual de elemento secundario.</div>
+        <p><strong>Impacto usuario:</strong> El usuario recurrente (uso diario) es penalizado — debe navegar el formulario para el acceso más rápido.</p>
+        <div class="finding-action">Para usuarios con biometría configurada: mostrar prompt biométrico automáticamente al abrir la app. El formulario es el flujo de recuperación, no el principal.</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="finding-header">
+        <div class="finding-num">8</div>
+        <div>
+          <span class="badge badge-medium">Media</span>
+          <span class="finding-title">Carrusel de beneficios con 4 puntos sin contexto</span>
+        </div>
+      </div>
+      <div class="finding-body">
+        <div class="finding-evidence">Banner inferior del HOME tiene pager de 4 puntos sin indicación de contenido ni distinción visible.</div>
+        <div class="finding-action">Indicador numérico "1 de 4" o peek pattern (mostrar borde del siguiente card para invitar al swipe).</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="finding-header">
+        <div class="finding-num">9</div>
+        <div>
+          <span class="badge badge-medium">Media</span>
+          <span class="finding-title">Chips de placas en Detalle Vehículo sin scroll indicator</span>
+        </div>
+      </div>
+      <div class="finding-body">
+        <div class="finding-evidence">Chips "ABC 123", "DFE 456", "HFL 098"... sin límite visible ni indicador de desbordamiento.</div>
+        <div class="finding-action">Máximo 3 chips visibles + "**+ 2 más**" explícito. Para flotas B2B considerar selector diferente.</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="finding-header">
+        <div class="finding-num">10</div>
+        <div>
+          <span class="badge badge-low">Baja</span>
+          <span class="finding-title">Estados de documentos sin acción asociada</span>
+        </div>
+      </div>
+      <div class="finding-body">
+        <div class="finding-evidence">RTM en naranja en HOME y SOAT "Próximo a vencer" en Detalle — estados informativos sin CTA.</div>
+        <p><strong>Oportunidad:</strong> Este es el diferencial más claro frente a apps de rastreo básico — y actualmente no está activado.</p>
+        <div class="finding-action">Micro-CTA en estados críticos: "Renovar", "Agendar RTM", "Ver cómo renovar". Convierte información pasiva en flujo transaccional.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. QUICK WINS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">04</div>
+      <h2>Quick wins</h2>
+    </div>
+    <div class="qw-grid">
+      <div class="qw-item">
+        <div class="qw-num">1</div>
+        <div class="qw-content">
+          <div class="qw-action">Cambiar fondo HOME de #f9f7f7 → #10161D</div>
+          <div class="qw-effort">1 variable CSS</div>
+        </div>
+      </div>
+      <div class="qw-item">
+        <div class="qw-num">2</div>
+        <div class="qw-content">
+          <div class="qw-action">Renombrar "Guantera" → "Documentos" en grid HOME</div>
+          <div class="qw-effort">1 string</div>
+        </div>
+      </div>
+      <div class="qw-item">
+        <div class="qw-num">3</div>
+        <div class="qw-content">
+          <div class="qw-action">Eliminar LOGIN_01 — fusionar copy con LOGIN_02</div>
+          <div class="qw-effort">1 pantalla eliminada</div>
+        </div>
+      </div>
+      <div class="qw-item">
+        <div class="qw-num">4</div>
+        <div class="qw-content">
+          <div class="qw-action">Reducir grid de 8 → 6 servicios</div>
+          <div class="qw-effort">Decisión de IA + 1 componente</div>
+        </div>
+      </div>
+      <div class="qw-item">
+        <div class="qw-num">5</div>
+        <div class="qw-content">
+          <div class="qw-action">Corregir fecha SOAT "31/02/2026" por fecha válida</div>
+          <div class="qw-effort">1 dato de prueba</div>
+        </div>
+      </div>
+      <div class="qw-item">
+        <div class="qw-num">6</div>
+        <div class="qw-content">
+          <div class="qw-action">Agregar asterisco (*) en card "Asistencias" del grid</div>
+          <div class="qw-effort">1 string + nota legal</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. JOURNEY MAP -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">05</div>
+      <h2>Journey map</h2>
+    </div>
+    <p style="margin-bottom:16px;">Usuario: Propietario B2C — primer uso de la app</p>
+    <div class="journey">
+      <div class="journey-row journey-header">
+        <div class="journey-cell">Pantalla</div>
+        <div class="journey-cell">Estado del usuario</div>
+        <div class="journey-cell">Emoción</div>
+        <div class="journey-cell">Riesgo</div>
+      </div>
+      <div class="journey-row">
+        <div class="journey-cell journey-step">Onboarding 1</div>
+        <div class="journey-cell journey-state">Ve 6 features, fondo dramático</div>
+        <div class="journey-cell em-positive">Curiosidad alta</div>
+        <div class="journey-cell risk-medium">Sobrecarga de íconos</div>
+      </div>
+      <div class="journey-row">
+        <div class="journey-cell journey-step">Onboarding 2</div>
+        <div class="journey-cell journey-state">Ve 3 features</div>
+        <div class="journey-cell em-high">Hilo narrativo se pierde</div>
+        <div class="journey-cell risk-high">Sin arco de beneficios</div>
+      </div>
+      <div class="journey-row">
+        <div class="journey-cell journey-step">Onboarding 3</div>
+        <div class="journey-cell journey-state">Ve 2 features + CTA "Ingresar"</div>
+        <div class="journey-cell em-high">Expectativa baja</div>
+        <div class="journey-cell risk-critical">Remate vacío → abandono</div>
+      </div>
+      <div class="journey-row">
+        <div class="journey-cell journey-step">LOGIN_01</div>
+        <div class="journey-cell journey-state">Pantalla logo + botón único</div>
+        <div class="journey-cell" style="color:var(--muted)">Neutral</div>
+        <div class="journey-cell risk-high">Fricción innecesaria</div>
+      </div>
+      <div class="journey-row">
+        <div class="journey-cell journey-step">LOGIN_02</div>
+        <div class="journey-cell journey-state">Formulario usuario/contraseña</div>
+        <div class="journey-cell" style="color:var(--muted)">Rutinario</div>
+        <div class="journey-cell risk-medium">Biometría no es prioritaria</div>
+      </div>
+      <div class="journey-row">
+        <div class="journey-cell journey-step">HOME</div>
+        <div class="journey-cell journey-state">Dashboard — primer momento productivo</div>
+        <div class="journey-cell em-critical">⚠ Confusión</div>
+        <div class="journey-cell risk-critical">Fondo claro, 8 servicios, 5 zonas en competencia</div>
+      </div>
+      <div class="journey-row">
+        <div class="journey-cell journey-step">Detalle Vehículo</div>
+        <div class="journey-cell journey-state">Datos técnicos + documentos</div>
+        <div class="journey-cell em-positive">Recuperación parcial</div>
+        <div class="journey-cell risk-high">"Guantera", fecha inválida, sin CTA en estados críticos</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. MEJORAS ESTRUCTURALES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">06</div>
+      <h2>Mejoras estructurales</h2>
+    </div>
+
+    <div class="structure-card">
+      <div class="structure-title">HOME — Rediseño de arquitectura de información</div>
+      <p>La pantalla actual tiene 5 zonas de atención en competencia: header, hero bar, cards de vehículos, grid de servicios, tarjetas de conveniencia, banner carrusel.</p>
+      <table style="margin-top:16px;">
+        <thead><tr><th>Zona</th><th>Contenido propuesto</th><th>Lógica</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Zona 1 — above the fold</strong></td><td>Card del vehículo activo</td><td>El vehículo es el eje central según design principles</td></tr>
+          <tr><td><strong>Zona 2</strong></td><td>Grid de 6 servicios core</td><td>Localización, Asistencias, Documentos, Simon Pay, Seguros, Créditos</td></tr>
+          <tr><td><strong>Zona 3</strong></td><td>Acceso rápido contextual</td><td>Pico y placa hoy, estado SOAT</td></tr>
+          <tr><td><strong>Zona 4 — scroll</strong></td><td>Beneficios, convenios, banners</td><td>Contenido secundario, no compite con servicios core</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:12px;font-size:12px;color:var(--cyan);">→ "Planes" y "Opciones" salen del grid e ingresan a la barra de navegación inferior o al menú de perfil.</p>
+    </div>
+
+    <div class="structure-card">
+      <div class="structure-title">ONBOARDING — Estructura narrativa en 3 actos</div>
+      <table>
+        <thead><tr><th>Acto</th><th>Objetivo</th><th>Contenido</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1 — "Esto es Simon"</strong></td><td>Presentación completa de capacidades</td><td>Grid 2×3 + fondo dramático ✓ (ya existe)</td></tr>
+          <tr><td><strong>2 — "Esto cambia tu día"</strong></td><td>Beneficio central que resuena</td><td>1 feature destacada con imagen emocional, sin grid</td></tr>
+          <tr><td><strong>3 — "Empieza ahora"</strong></td><td>CTA emocional, máxima confianza</td><td>Imagen de alta confianza, cero texto de servicio, CTA "Empieza hoy"</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="structure-card">
+      <div class="structure-title">DOCUMENTOS — Activar flujo transaccional</div>
+      <p>El sistema ya tiene el semáforo de colores (cian / naranja / rojo) pero no lo conecta con acciones. Esta es la conversión transaccional que el business goal requiere y el diseño actual no la activa.</p>
+      <table style="margin-top:12px;">
+        <thead><tr><th>Estado</th><th>Color actual</th><th>CTA propuesto</th></tr></thead>
+        <tbody>
+          <tr><td>Vigente</td><td style="color:var(--cyan)">● Cian</td><td>Ver detalles</td></tr>
+          <tr><td>Próximo a vencer</td><td style="color:var(--orange)">● Naranja</td><td>Renovar / Agendar cita</td></tr>
+          <tr><td>Vencido</td><td style="color:var(--red)">● Rojo</td><td>Renovar ahora — urgente</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 7. EVALUACIÓN DE EFICIENCIA -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">07</div>
+      <h2>Evaluación de eficiencia (KLM/GOMS)</h2>
+    </div>
+    <p style="margin-bottom:16px;"><strong>Tarea evaluada:</strong> Desde instalación hasta ver el estado del SOAT del vehículo.</p>
+    <table>
+      <thead><tr><th>Paso</th><th>Acciones</th><th>Costo KLM</th><th>Estado</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Onboarding (3 pantallas)</td>
+          <td>3 taps "Siguiente"</td>
+          <td>K(3) + H(3)</td>
+          <td style="color:var(--yellow)">Optimizable</td>
+        </tr>
+        <tr>
+          <td>LOGIN_01</td>
+          <td>1 tap "Ingresar"</td>
+          <td>K(1) + H(1) + load</td>
+          <td style="color:var(--red)">Eliminable</td>
+        </tr>
+        <tr>
+          <td>LOGIN_02</td>
+          <td>2 campos + 1 tap</td>
+          <td>K(3) + M(escritura)</td>
+          <td style="color:var(--green)">Correcto</td>
+        </tr>
+        <tr>
+          <td>HOME</td>
+          <td>Scan + 1 tap vehículo</td>
+          <td>M(escaneo 8 servicios) + P</td>
+          <td style="color:var(--red)">Carga cognitiva alta</td>
+        </tr>
+        <tr>
+          <td>Detalle Vehículo</td>
+          <td>Scroll + lectura</td>
+          <td>M(orientación bottom sheet)</td>
+          <td style="color:var(--yellow)">Aceptable</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:20px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <div>
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px;">Estado actual</div>
+        <div style="font-size:22px;font-weight:800;color:var(--red);">8+ taps</div>
+        <div style="font-size:12px;color:var(--muted);">antes del primer dato útil</div>
+      </div>
+      <div>
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px;">Con quick wins</div>
+        <div style="font-size:22px;font-weight:800;color:var(--cyan);">−1 pantalla</div>
+        <div style="font-size:12px;color:var(--muted);">−15% tiempo escaneo HOME · −2 pantallas de onboarding con baja densidad</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. EVALUACIÓN COMPORTAMENTAL -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">08</div>
+      <h2>Evaluación comportamental</h2>
+    </div>
+
+    <div class="behavior-card">
+      <div class="behavior-bias">Peak-End Rule</div>
+      <div class="behavior-title">El remate del onboarding es el punto más débil</div>
+      <p>La experiencia del onboarding se recordará por su inicio (impactante, 6 features, foto nocturna) y su final (2 íconos, imagen de camión, título genérico). El final define la decisión de continuar o abandonar. El último dot debe ser el de mayor impacto emocional, no el de menor carga visual.</p>
+    </div>
+
+    <div class="behavior-card">
+      <div class="behavior-bias">Hick's Law — Cognitive Overload</div>
+      <div class="behavior-title">8 servicios con igual peso visual activan parálisis de decisión</div>
+      <p>A mayor número de opciones equivalentes, mayor tiempo de procesamiento y mayor probabilidad de no actuar. El servicio más usado o más crítico debe tener distinción visual que guíe al usuario. No todos los servicios tienen igual probabilidad de uso diario.</p>
+    </div>
+
+    <div class="behavior-card" style="border-color:rgba(42,214,122,0.3);">
+      <div class="behavior-bias" style="color:var(--green);">Patrón positivo</div>
+      <div class="behavior-title">Card de vehículo con gradient cian-negro</div>
+      <p>Es el elemento mejor ejecutado del flujo completo. Información densa (placa, modelo, pico y placa, estados) en una unidad visual coherente. El gradient cian-negro refuerza la identidad. El TAG ACTIVO con borde dashed es una convención clara. <strong>Este patrón debe ser el modelo para otros elementos del dashboard.</strong></p>
+    </div>
+
+    <div class="behavior-card">
+      <div class="behavior-bias">Ausencia de refuerzo positivo</div>
+      <div class="behavior-title">Ningún momento de confirmación en todo el flujo</div>
+      <p>Ni al completar el onboarding, ni al autenticarse, ni al entrar al HOME hay feedback positivo. Un micro-mensaje post-login como <em>"Hola Juliana, todo bajo control — sin alertas activas"</em> daría la sensación de control que es el valor central de la propuesta de Simon.</p>
+    </div>
+  </div>
+
+  <!-- 9. CONCLUSIÓN ESTRATÉGICA -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">09</div>
+      <h2>Conclusión estratégica</h2>
+    </div>
+    <p style="margin-bottom:20px;">El flujo falla en tres dimensiones que comprometen el objetivo de producto. Las correcciones no requieren rediseño completo — requieren decisiones concretas.</p>
+    <div class="conclusion-grid">
+      <div class="conclusion-item">
+        <div class="conclusion-num">01</div>
+        <div class="conclusion-text"><strong>Fractura de identidad visual.</strong> El paso de modo oscuro a modo claro en el HOME no es un detalle estético. La propuesta tech-premium se establece en el onboarding y se destruye en la primera pantalla funcional. <strong>Mayor ROI visual del flujo.</strong></div>
+      </div>
+      <div class="conclusion-item">
+        <div class="conclusion-num">02</div>
+        <div class="conclusion-text"><strong>Violación de reglas de negocio propias.</strong> El grid de 8 servicios y el uso de "Guantera" son infracciones a reglas que el equipo ya definió. Los principios de producto no se están aplicando sistemáticamente en el diseño de la app.</div>
+      </div>
+      <div class="conclusion-item">
+        <div class="conclusion-num">03</div>
+        <div class="conclusion-text"><strong>Oportunidad transaccional no activada.</strong> Los estados documentales (SOAT, Tecnicomecánica) son el diferencial más claro frente a apps de rastreo básico. Sin CTA, no hay conversión transaccional. Ahí está el valor que el business goal requiere.</div>
+      </div>
+    </div>
+    <div style="margin-top:24px;background:rgba(0,241,199,0.05);border:1px solid rgba(0,241,199,0.2);border-radius:10px;padding:18px 20px;">
+      <p style="color:var(--cyan);font-weight:700;font-size:13px;margin-bottom:6px;">Prioridad máxima</p>
+      <p style="font-size:13px;">El <strong>fondo del HOME</strong> y el <strong>grid de servicios</strong> son los dos cambios con mayor impacto inmediato — son los que el usuario ve en cada sesión diaria. Ambos son ejecutables sin rediseño estructural.</p>
+    </div>
+  </div>
+
+</div><!-- /page -->
+</body>
+</html>
