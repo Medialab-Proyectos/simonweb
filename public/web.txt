@@ -1,0 +1,643 @@
+Quiero que construyas una aplicación web interna, profesional y fácil de usar para medir, analizar y estimar el desempeño del equipo UX de Simón Movilidad.
+
+OBJETIVO GENERAL
+Crear una herramienta web que sirva para 3 cosas al mismo tiempo:
+
+1. Registrar el desempeño real del equipo UX por proyecto, producto, flujo o módulo.
+2. Medir KPIs por rol usando producción, calidad, retrabajo, conexión, discovery y horas trabajadas.
+3. Funcionar como un estimador evolutivo que, con cada proyecto nuevo registrado, mejore la capacidad de estimación futura en horas y esfuerzo por rol.
+
+La herramienta debe servir para tomar decisiones de capacidad, planeación y carga de trabajo.
+
+==================================================
+ENFOQUE CLAVE DEL SISTEMA
+==================================================
+Este producto NO es solo un dashboard.
+Debe funcionar como un sistema híbrido entre:
+- registro histórico de desempeño
+- calculadora de KPIs
+- estimador de horas futuras por proyecto
+- guía interna para entender KPIs y resultados
+
+La lógica debe permitir:
+- ingresar datos reales de proyectos ya ejecutados
+- usar esos datos para estimar proyectos futuros
+- comparar horas estimadas vs horas reales
+- mejorar la precisión con el tiempo
+- explicar claramente qué significa cada KPI
+- explicar cómo interpretar cada resultado
+
+==================================================
+STACK
+==================================================
+Construye esto en:
+- Next.js
+- TypeScript
+- Tailwind CSS
+- shadcn/ui
+- recharts
+- react-hook-form
+- zod
+- localStorage para persistencia
+- sin backend real por ahora
+- estructura escalable
+
+==================================================
+NOMBRE DE LA APP
+==================================================
+“KPI UX Performance Tracker”
+
+==================================================
+MÓDULOS PRINCIPALES
+==================================================
+La aplicación debe tener estas secciones:
+
+1. Dashboard general
+2. Registro de proyecto real
+3. Estimador de proyecto nuevo
+4. KPIs por rol
+5. KPIs por producto
+6. Tendencias y curvas de desempeño
+7. Definición de KPIs
+8. Guía de uso e interpretación
+9. Resumen ejecutivo
+10. Configuración de metas, pesos y rangos
+
+==================================================
+1. DASHBOARD GENERAL
+==================================================
+Mostrar:
+- total de proyectos registrados
+- total de productos registrados
+- total de flujos o módulos
+- total de horas trabajadas
+- total de horas de investigación
+- vistas totales entregadas
+- promedio de retrabajo
+- promedio de calidad
+- promedio de conexión
+- entrega a tiempo promedio
+- capacidad efectiva total del equipo
+- precisión estimada histórica
+
+Gráficas:
+- throughput por rol
+- horas invertidas por rol
+- retrabajo por rol
+- capacidad efectiva por rol
+- investigación por rol
+- línea de tendencia de calidad
+- línea de tendencia de horas reales vs horas estimadas
+- curva de madurez de desempeño por rol
+
+Cada tarjeta y gráfica debe tener:
+- tooltip breve
+- texto “qué significa”
+- texto “cómo leerlo”
+
+==================================================
+2. REGISTRO DE PROYECTO REAL
+==================================================
+Esta sección debe permitir registrar proyectos ejecutados de forma fácil.
+
+Cada registro debe tener:
+
+A. DATOS GENERALES
+- Nombre del producto
+- Nombre del proyecto
+- Nombre del flujo o módulo
+- Fecha de inicio
+- Fecha de entrega
+- Plataforma:
+  - Mobile
+  - Web
+  - Ambos
+- Complejidad:
+  - Baja
+  - Media
+  - Alta
+- Tipo de trabajo:
+  - Nuevo flujo
+  - Mejora
+  - Ajuste
+  - Copia/adaptación
+  - Corrección
+- Estado:
+  - En proceso
+  - Entregado
+  - Aprobado
+  - Requiere ajustes
+
+B. PARTICIPACIÓN POR ROL
+Debe existir una card por rol:
+- Junior
+- Senior
+- Líder UX
+
+En cada rol primero preguntar:
+- ¿Participó en este proyecto?
+  - Sí
+  - No
+
+Si responde “No”, ocultar sus campos y dejarlo fuera del cálculo.
+
+Si responde “Sí”, mostrar estos campos:
+
+1. Horas de diseño
+- horas totales de diseño
+- horas de ajustes
+- horas de conexión de flujo
+- horas de organización de archivo si aplica
+
+2. Horas de investigación
+- ¿Participó en investigación/discovery?
+  - Sí
+  - No
+- horas de investigación o discovery
+- tipo de participación:
+  - entrevista
+  - análisis
+  - revisión de hallazgos
+  - definición funcional
+  - benchmark
+  - otro
+
+3. Producción
+- número de vistas principales
+- número de vistas responsive
+- número de vistas de estados extra o negativas
+- número de vistas corregidas o rehechas
+- número total de vistas asignadas a ese rol
+- número de vistas conectadas correctamente
+
+4. Calidad y entrega
+- número de revisiones recibidas
+- puntaje de calidad del stakeholder (1 a 10)
+- entregó a tiempo:
+  - sí
+  - no
+
+5. Notas por rol
+- observaciones
+- bloqueos
+- dependencias
+
+C. SISTEMA DE DISEÑO
+- componentes reutilizados
+- componentes nuevos creados
+- componentes totales usados
+
+D. TIEMPOS GLOBALES
+- horas totales reales del proyecto
+- horas totales estimadas del proyecto
+- desviación manual opcional
+- notas generales
+
+UX DEL FORMULARIO
+- debe ser muy fácil de llenar
+- secciones expandibles
+- modo rápido
+- modo completo
+- validaciones claras
+- poder duplicar proyectos similares
+- cargar ejemplo
+- editar y eliminar
+
+Además, en esta vista debe existir una ayuda contextual:
+- “Cómo llenar este formulario”
+- “Qué datos son obligatorios”
+- “Qué pasa si un rol no participó”
+- “Cómo registrar horas de investigación”
+- “Cómo registrar vistas corregidas”
+
+==================================================
+3. ESTIMADOR DE PROYECTO NUEVO
+==================================================
+Debe permitir ingresar un proyecto nuevo que aún no se ha hecho, para estimar:
+- horas por rol
+- horas de investigación por rol
+- horas totales
+- capacidad requerida
+- riesgo de retrabajo
+- tiempo estimado de entrega
+
+Campos del estimador:
+- nombre del producto
+- tipo de trabajo
+- plataforma
+- complejidad
+- número estimado de vistas principales
+- número estimado de vistas responsive
+- número estimado de estados extra
+- si requiere conexión entre flujos:
+  - sí / no
+- si requiere discovery:
+  - sí / no
+- nivel esperado de claridad del requerimiento:
+  - bajo
+  - medio
+  - alto
+- roles que participarán:
+  - junior sí/no
+  - senior sí/no
+  - líder sí/no
+
+Para cada rol participante permitir:
+- porcentaje estimado de participación
+- si participa en investigación sí/no
+
+El estimador debe usar el histórico de proyectos guardados para aproximar:
+- horas de diseño por rol
+- horas de investigación por rol
+- horas totales por complejidad
+- tasa esperada de retrabajo
+- capacidad efectiva esperada
+- rango de tiempo probable de entrega
+
+Debe mostrar:
+- estimación base
+- estimación conservadora
+- estimación probable
+- estimación optimista
+
+También debe mostrar:
+- “Cómo se calculó esta estimación”
+- “Qué variables afectan más el resultado”
+- “Qué tan confiable es esta estimación”
+- “Qué datos históricos se usaron”
+
+==================================================
+4. KPIs A CALCULAR
+==================================================
+Todos los KPIs deben relacionarse también con horas.
+
+A. Throughput por rol
+throughput = vistas entregadas / horas de trabajo
+
+B. Throughput ponderado
+throughput_ponderado = (vistas principales + vistas responsive * factor + estados extra * factor) / horas trabajadas
+
+Usa factores configurables:
+- responsive = 0.75
+- estado extra = 0.5
+Estos valores deben poder editarse.
+
+C. Velocidad por flujo
+velocidad = total de vistas del flujo / tiempo total transcurrido
+
+D. Tasa de retrabajo
+retrabajo = vistas corregidas / vistas totales entregadas * 100
+
+E. Índice de conexión
+conexion = vistas conectadas correctamente / total vistas asignadas * 100
+
+F. Puntaje de calidad
+promedio de score stakeholder
+
+G. Entrega a tiempo
+entrega_a_tiempo = entregas a tiempo / entregas totales * 100
+
+H. Eficiencia de investigación por rol
+eficiencia_investigacion = horas de investigación / horas totales del rol * 100
+
+I. Utilización productiva por rol
+utilizacion = horas productivas / horas totales registradas * 100
+
+J. Índice de revisiones
+revisiones_promedio = total revisiones / total flujos
+
+K. Cobertura de sistema de diseño
+cobertura_ds = componentes reutilizados / componentes totales * 100
+
+L. Capacidad efectiva por rol
+capacidad_efectiva = (vistas entregadas ponderadas * (1 - retrabajo_decimal)) / horas trabajadas
+
+M. Capacidad efectiva total
+suma de capacidad efectiva de todos los roles participantes
+
+N. Precisión de estimación
+precision = 1 - abs(horas_reales - horas_estimadas) / horas_estimadas
+
+Mostrar en porcentaje.
+
+O. Desviación de estimación
+desviacion = (horas_reales - horas_estimadas) / horas_estimadas * 100
+
+P. Carga de investigación por proyecto
+carga_investigacion = suma de horas de investigación de todos los roles
+
+Q. Participación real por rol
+participacion_rol = horas del rol / horas totales del proyecto * 100
+
+IMPORTANTE
+Cada KPI debe tener:
+- nombre visible
+- fórmula visible
+- definición breve
+- explicación del resultado
+- interpretación ejecutiva
+- rango recomendado
+- semáforo de salud
+- tooltip corto
+- opción para ver “más detalle”
+
+==================================================
+5. KPIs POR ROL
+==================================================
+Crear vista comparativa por rol:
+- Junior
+- Senior
+- Líder UX
+
+Mostrar:
+- horas totales trabajadas
+- horas promedio por proyecto
+- horas promedio de investigación
+- participación en investigación
+- throughput
+- throughput ponderado
+- retrabajo
+- calidad
+- conexión
+- revisiones
+- entrega a tiempo
+- capacidad efectiva
+- precisión de estimación histórica
+
+Agregar insights automáticos por rol.
+Ejemplos:
+- “El Junior participa en proyectos con baja complejidad, pero su retrabajo aún es alto.”
+- “El Senior mantiene alto throughput, aunque con caída en conexión de flujos.”
+- “El Líder UX concentra mejor precisión de estimación y calidad.”
+
+Además, para cada rol incluir:
+- “Qué significan estos resultados”
+- “Qué debería mejorar este rol”
+- “Qué señales son positivas”
+- “Qué señales requieren atención”
+
+==================================================
+6. KPIs POR PRODUCTO
+==================================================
+Vista con tabla y filtros por:
+- producto
+- proyecto
+- fecha
+- rol
+- complejidad
+- plataforma
+- tipo de trabajo
+
+Mostrar por producto:
+- número de proyectos
+- horas totales
+- horas de investigación
+- vistas totales
+- throughput
+- calidad
+- retrabajo
+- conexión
+- entrega a tiempo
+- capacidad efectiva
+- desviación promedio de estimación
+
+Agregar lectura resumida:
+- estado saludable / atención / crítico
+- explicación breve del motivo
+
+==================================================
+7. TENDENCIAS Y CURVAS DE DESEMPEÑO
+==================================================
+Mostrar curvas aproximadas de:
+- throughput por rol en el tiempo
+- retrabajo por rol
+- calidad por rol
+- horas promedio por flujo
+- horas de investigación por rol
+- capacidad efectiva por rol
+- precisión de estimación histórica
+- desviación entre estimado y real
+
+También mostrar una curva de aprendizaje aproximada por rol:
+- Junior: mejora o no en calidad, horas y retrabajo
+- Senior: consistencia en velocidad, orden y conexión
+- Líder UX: precisión, calidad y eficiencia
+
+Las curvas deben tener:
+- eje X tiempo
+- eje Y valor KPI
+- zonas saludable / atención / crítico
+- visualización ejecutiva clara
+
+Además incluir:
+- texto breve bajo cada gráfica
+- interpretación automática del comportamiento
+- explicación de si la tendencia mejora, empeora o está estable
+
+==================================================
+8. DEFINICIÓN DE KPIs
+==================================================
+Crear una sección documental dentro de la app.
+
+Cada KPI debe mostrar:
+- nombre
+- definición
+- fórmula
+- por qué importa
+- cómo interpretarlo
+- si impacta productividad, calidad, capacidad o estimación
+- rango recomendado
+- unidad:
+  - %
+  - horas
+  - score
+  - vistas por hora
+- ejemplo simple de lectura del resultado
+
+Ejemplo:
+- “Un retrabajo de 28% indica que casi 3 de cada 10 vistas requirieron corrección. Esto sugiere problemas de claridad inicial, ejecución o validación.”
+
+==================================================
+9. GUÍA DE USO E INTERPRETACIÓN
+==================================================
+Crear una sección adicional llamada:
+“Guía de uso e interpretación”
+
+Debe incluir bloques muy claros como:
+
+A. ¿Para qué sirve esta herramienta?
+B. ¿Cómo registrar un proyecto real?
+C. ¿Cómo usar el estimador?
+D. ¿Qué significa cada campo?
+E. ¿Qué significa cada KPI?
+F. ¿Cómo interpretar semáforos?
+G. ¿Cómo comparar roles sin sesgo?
+H. ¿Cómo leer horas estimadas vs reales?
+I. ¿Cómo leer una curva de desempeño?
+J. ¿Cómo usar esto para planificación de capacidad?
+
+Esta guía debe ser:
+- clara
+- breve
+- bien escrita
+- comprensible para personas no técnicas
+- presentada con cards, acordeones o tabs
+
+==================================================
+10. RESUMEN EJECUTIVO
+==================================================
+Debe generar automáticamente:
+- estado general del equipo
+- capacidad disponible estimada
+- principal fortaleza
+- principal cuello de botella
+- rol más eficiente
+- rol con más retrabajo
+- rol con mejor precisión de estimación
+- producto con mejor salud operativa
+- producto con más desviación entre estimado y real
+- recomendación de asignación de carga
+- recomendación de investigación por rol en próximos proyectos
+
+Ejemplos:
+- “Se recomienda que el Junior participe en discovery acompañado por Senior.”
+- “Los proyectos de complejidad alta requieren al menos participación parcial del Líder UX.”
+- “Cuando el Senior no conecta flujos desde el inicio, sube el retrabajo total.”
+- “La precisión de estimación mejora cuando se registran horas de investigación por rol.”
+
+Además incluir:
+- explicación del porqué de cada recomendación
+- lectura ejecutiva del estado actual
+- conclusiones simples para gerencia
+
+==================================================
+11. ENTRADAS DE DATOS FÁCILES
+==================================================
+La experiencia de ingreso debe ser sencilla para producto.
+
+Crear:
+- modo rápido
+- modo completo
+
+MODO RÁPIDO
+- producto
+- proyecto
+- complejidad
+- plataforma
+- roles participantes sí/no
+- horas por rol
+- horas de investigación por rol
+- vistas por rol
+- vistas corregidas por rol
+- calidad por rol
+- entrega a tiempo
+- horas estimadas
+- horas reales
+
+MODO COMPLETO
+- todos los campos
+
+Agregar:
+- exportar JSON
+- exportar CSV
+- importar JSON mock
+- duplicar proyecto similar
+
+==================================================
+12. LÓGICA DEL ESTIMADOR EVOLUTIVO
+==================================================
+El sistema debe aprender del histórico local.
+
+Usar reglas simples, no machine learning complejo.
+
+La estimación futura debe basarse en:
+- promedio histórico por complejidad
+- promedio por tipo de trabajo
+- promedio por plataforma
+- promedio por rol
+- promedio por cantidad de vistas
+- promedio por horas de investigación
+- promedio de retrabajo
+- promedio de conexión
+- precisión histórica de proyectos similares
+
+Si existen suficientes proyectos similares, priorizar esos.
+Si no, usar promedio general.
+
+Crear funciones como:
+- estimateProjectHours()
+- estimateResearchHoursByRole()
+- estimateDeliveryRange()
+- calculateEstimationAccuracy()
+- getSimilarProjects()
+- getRolePerformanceSummary()
+
+==================================================
+13. EXPERIENCIA VISUAL
+==================================================
+La interfaz debe ser:
+- profesional
+- sobria
+- ejecutiva
+- clara
+- moderna
+- fácil de leer
+- sin exceso visual
+
+Debe parecer una herramienta interna real.
+Priorizar:
+1. ingreso fácil
+2. lectura rápida
+3. buena comparación por rol
+4. claridad de horas y carga
+5. utilidad para estimar próximos proyectos
+6. comprensión clara de resultados
+
+==================================================
+14. DATOS MOCK
+==================================================
+Crear datos de ejemplo realistas con:
+- 4 productos
+- 12 a 15 proyectos o flujos
+- roles distintos participando o no
+- horas reales y estimadas
+- horas de investigación por rol
+- Junior con retrabajo más alto
+- Senior con buena velocidad y menor orden
+- Líder con mejor precisión y calidad
+
+==================================================
+15. ENTREGABLE TÉCNICO
+==================================================
+Necesito:
+- app funcional
+- código limpio
+- componentes reutilizables
+- cálculos separados en utilidades
+- tipos bien definidos
+- mocks
+- charts
+- formularios
+- documentación de fórmulas
+- documentación de interpretación
+- localStorage
+- estructura escalable
+
+Crear utilidades como:
+- calculateThroughput()
+- calculateWeightedThroughput()
+- calculateReworkRate()
+- calculateConnectionIndex()
+- calculateEffectiveCapacity()
+- calculateResearchEfficiency()
+- calculateEstimationAccuracy()
+- calculateEstimationDeviation()
+- estimateProjectHours()
+- estimateResearchHoursByRole()
+- generateExecutiveInsights()
+- getPerformanceStatus()
+- explainKpiResult()
+- getKpiInterpretation()
+
+Construye la aplicación completa, no solo el diseño.
+Genera pantallas, lógica, mocks, cálculos, dashboard funcional, instrucciones internas y guía de interpretación.
