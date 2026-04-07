@@ -144,8 +144,7 @@ export function Hero() {
             >
               {/* Wrapper: sin transform en mobile, scale(1.1) en desktop */}
               <div
-                className="relative w-[280px] lg:w-auto lg:scale-110 lg:translate-y-10"
-                style={{ transformOrigin: "center center" }}
+                className="relative w-[320px] lg:w-[520px] lg:translate-y-10"
               >
                 {/* Ambient glow */}
                 <div
@@ -160,11 +159,10 @@ export function Hero() {
                 <Image
                   src="/images/smart.png"
                   alt="App Simon Movilidad en smartphone"
-                  width={460}
-                  height={614}
+                  width={520}
+                  height={693}
                   className="relative z-10 w-full h-auto lg:-rotate-[5deg]"
                   style={{
-                    maxWidth: "100%",
                     filter: "drop-shadow(0 30px 80px rgba(0,0,0,0.55))",
                   }}
                   priority
