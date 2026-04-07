@@ -84,15 +84,8 @@ function nowTime() {
 // ─── Speed dial actions ────────────────────────────────────────────────────────
 const dialActions = [
   {
-    id: "chat",
-    label: "Chat con Simón",
-    icon: null, // uses SimonAvatar
-    bg: "bg-card border border-primary/30",
-    iconColor: "",
-  },
-  {
     id: "whatsapp",
-    label: "WhatsApp",
+    label: "Chat con Simon",
     href: WA_URL,
     icon: MessageCircle,
     bg: "bg-[#25D366]",
@@ -334,35 +327,20 @@ export function FloatingFab() {
                 </motion.span>
 
                 {/* Button */}
-                {action.id === "chat" ? (
-                  <motion.button
-                    onClick={openChat}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={cn(
-                      "flex h-12 w-12 items-center justify-center rounded-full shadow-lg",
-                      action.bg
-                    )}
-                    aria-label="Abrir chat con Simón"
-                  >
-                    <SimonAvatar size={34} />
-                  </motion.button>
-                ) : (
-                  <motion.a
-                    href={action.href}
-                    target={action.id === "whatsapp" ? "_blank" : undefined}
-                    rel={action.id === "whatsapp" ? "noopener noreferrer" : undefined}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={cn(
-                      "flex h-12 w-12 items-center justify-center rounded-full shadow-lg",
-                      action.bg
-                    )}
-                    aria-label={action.label}
-                  >
-                    {action.icon && <action.icon className={cn("h-5 w-5", action.iconColor)} aria-hidden="true" />}
-                  </motion.a>
-                )}
+                <motion.a
+                  href={action.href}
+                  target={action.id === "whatsapp" ? "_blank" : undefined}
+                  rel={action.id === "whatsapp" ? "noopener noreferrer" : undefined}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  className={cn(
+                    "flex h-12 w-12 items-center justify-center rounded-full shadow-lg",
+                    action.bg
+                  )}
+                  aria-label={action.label}
+                >
+                  {action.icon && <action.icon className={cn("h-5 w-5", action.iconColor)} aria-hidden="true" />}
+                </motion.a>
               </motion.div>
             ))}
           </motion.div>

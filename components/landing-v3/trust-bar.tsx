@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react"
 import { motion, useInView, animate } from "framer-motion"
-import { Cpu, Car, TrendingUp, Clock } from "lucide-react"
+import { Cpu, Car, TrendingUp } from "lucide-react"
 
 // ─── Animated counter ─────────────────────────────────────────────────────────
 function Counter({ from = 0, to, suffix = "", duration = 1.8 }: {
@@ -34,7 +34,6 @@ const stats: Stat[] = [
   { kind: "counter", prefix: "+", target: 50000, suffix: "", label: "Dispositivos instalados", icon: Cpu },
   { kind: "counter", prefix: "+", target: 44000, suffix: "", label: "Vehículos activos",        icon: Car },
   { kind: "counter", prefix: "+", target: 19000, suffix: "", label: "Vehículos productivos",    icon: TrendingUp },
-  { kind: "static",  value: "24/7",              label: "Monitoreo continuo",                   icon: Clock },
 ]
 
 const fadeInUp = {
@@ -68,7 +67,7 @@ export function TrustBar() {
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
           variants={stagger}
-          className="grid grid-cols-2 gap-8 md:grid-cols-4"
+          className="grid grid-cols-1 gap-8 sm:grid-cols-3"
         >
           {stats.map((stat) => (
             <motion.div

@@ -70,15 +70,14 @@ export function ProblemSection() {
               className="mt-5 text-3xl font-bold text-foreground sm:text-4xl lg:text-[2.75rem] leading-tight text-balance"
             >
               Más de 4 años impulsando la movilidad{" "}
-              <span className="gradient-text">inteligente en Colombia</span>
+              <span className="gradient-text">inteligente del país</span>
             </motion.h2>
 
             <motion.p
               variants={fadeInUp}
               className="mt-5 text-lg leading-relaxed text-muted-foreground max-w-xl"
             >
-              Construidos con cada vehículo conectado. Con tecnología de punta, soporte real y
-              cobertura nacional, somos el aliado que tu vehículo necesita.
+              Con más de 4 años impulsando la movilidad inteligente del país, Simon Movilidad es tu aliado tecnológico para una gestión vehicular más eficiente y segura. Integramos telemetría avanzada: Rastreo satelital, análisis de datos, optimización de rutas y protección de activos. Así transformamos tu experiencia en el camino.
             </motion.p>
 
             {/* Key differentiators */}

@@ -109,8 +109,8 @@ function HighwayBackground() {
 // ─── Segment content ──────────────────────────────────────────────────────────
 const segmentContent = {
   personas: {
-    headline: "Tu vehículo, siempre",
-    headlineAccent: "bajo control.",
+    headline: "La tecnología de rastreo",
+    headlineAccent: "más intuitiva en tus manos.",
     sub: "Monitorea, protege y gestiona tu carro desde el celular. Seguridad 24/7, documentos al día, alertas en tiempo real y Simon Pay para peajes.",
     microcopy: "Descarga gratuita · Android e iOS · Sin tarjeta de crédito",
   },

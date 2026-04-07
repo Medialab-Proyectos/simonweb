@@ -40,10 +40,10 @@ export function Footer() {
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-2 lg:grid-cols-4">
 
           {/* Col 1: Marca + contacto */}
-          <div className="col-span-2 sm:col-span-2 lg:col-span-1">
-            <Logo className="h-7 w-auto" />
-            <p className="mt-4 text-sm text-muted-foreground">
-              La tecnología que transforma tu movilidad.
+          <div className="col-span-2 sm:col-span-2 lg:col-span-1 flex flex-col items-center lg:items-start">
+            <Logo className="h-5 w-auto" />
+            <p className="mt-4 text-sm text-muted-foreground text-center lg:text-left">
+              Somos la tecnología que transforma tu movilidad. Te acompañamos con soluciones inteligentes para brindarte seguridad, ahorro y control total.
             </p>
             <address className="mt-5 not-italic space-y-2.5">
               <a href="https://wa.me/573105511862" target="_blank" rel="noopener noreferrer"
@@ -55,6 +55,11 @@ export function Footer() {
                 className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
                 <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
                 01 8000 189 890
+              </a>
+              <a href="tel:6013906972"
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+                <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
+                Bogotá (601) 390 6972
               </a>
               <a href="tel:#230"
                 className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">

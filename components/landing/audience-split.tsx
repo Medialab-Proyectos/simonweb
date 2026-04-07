@@ -125,7 +125,7 @@ export function AudienceSplit() {
               variants={fadeInUp}
               className="mt-5 text-lg leading-relaxed text-muted-foreground max-w-lg"
             >
-              Desde flotas de 1 vehículo hasta operaciones de cientos de unidades. Sin complicaciones, con datos reales.
+              Te brindamos una experiencia de movilidad con soluciones inteligentes que optimizan el control, mejoran la productividad y reducen costos. Te invitamos a agendar una demostración y a descubrir cómo transformamos la rentabilidad de tu operación.
             </motion.p>
 
             {/* Benefits grid */}
@@ -155,10 +155,16 @@ export function AudienceSplit() {
               <Button
                 size="lg"
                 className="bg-primary text-primary-foreground hover:bg-primary-hover glow-primary group"
-                onClick={openDemoModal}
+                asChild
               >
-                Agendar demo gratuita
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                <a
+                  href="https://wa.me/573105511862?text=Hola%2C+me+interesa+una+demo+de+Simon+Movilidad+para+empresas"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Agendar demo gratuita
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                </a>
               </Button>
             </motion.div>
           </motion.div>

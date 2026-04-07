@@ -37,7 +37,7 @@ const solutionsPersonas = [
     icon: FileText,
     title: "Documentos del vehículo",
     description:
-      "SOAT, tecnomecánica, seguros y más en un solo lugar — para uno o varios vehículos de tu familia. Alertas automáticas antes del vencimiento.",
+      "Gestiona y centraliza de forma segura tus documentos y mantenimientos clave, tales como SOAT, RTM, licencia de tránsito, póliza de seguro con acceso instantáneo desde la app.",
     color: "text-success",
     bgIcon: "bg-success/15",
     borderHover: "hover:border-success/40 hover:shadow-success/10",
@@ -248,11 +248,11 @@ export function SolutionsGrid() {
           </motion.h2>
           <motion.p
             variants={fadeInUp}
-            className="mx-auto mt-4 max-w-xl text-lg text-muted-foreground"
+            className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground"
           >
             {segment === "empresas"
               ? "Visibilidad, trazabilidad y control operativo — en una sola plataforma."
-              : "Seguridad, rastreo, documentos y pagos — todo desde una sola app."}
+              : "En Simon Movilidad, integramos en un solo sistema las soluciones claves que necesitas para gestionar tu movilidad de forma simple, segura y eficiente. Desde el rastreo satelital 24/7, asistencias de movilidad*, geocercas inteligentes, guantera digital y más beneficios exclusivos para ti*"}
           </motion.p>
         </motion.div>
 
