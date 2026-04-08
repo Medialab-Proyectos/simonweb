@@ -53,13 +53,21 @@ export function TrustBar() {
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section label */}
+        <motion.h2
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-3 text-center text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
+        >
+          Impacto Simon Movilidad
+        </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-10 text-center text-xs font-semibold uppercase tracking-widest text-primary"
+          className="mb-10 text-center text-base text-muted-foreground"
         >
-          Impacto Simon
+          Resultados que reflejan la confianza de nuestros usuarios.
         </motion.p>
 
         <motion.div

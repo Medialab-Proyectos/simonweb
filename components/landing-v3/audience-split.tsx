@@ -73,7 +73,7 @@ export function AudienceSplit() {
   return (
     <section
       id="personas"
-      className="bg-surface py-20 lg:py-28"
+      className="bg-surface py-12 lg:py-16"
       aria-labelledby="audience-heading"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">

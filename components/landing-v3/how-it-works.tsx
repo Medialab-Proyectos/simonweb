@@ -108,7 +108,7 @@ export function HowItWorks() {
   return (
     <section
       id="como-funciona"
-      className="py-20 lg:py-28"
+      className="py-12 lg:py-16"
       aria-labelledby="how-it-works-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

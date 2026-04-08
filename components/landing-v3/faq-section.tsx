@@ -85,7 +85,7 @@ export function FAQSection() {
   const faqs = segment === "empresas" ? faqsEmpresas : faqsPersonas
 
   return (
-    <section id="faq" className="bg-surface py-20 lg:py-28" aria-labelledby="faq-heading">
+    <section id="faq" className="bg-surface py-12 lg:py-16" aria-labelledby="faq-heading">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <motion.div

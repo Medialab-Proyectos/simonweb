@@ -42,7 +42,7 @@ const stagger = {
 
 export function BlogPreview() {
   return (
-    <section id="noticias" className="py-20 lg:py-28" aria-labelledby="blog-heading">
+    <section id="noticias" className="py-12 lg:py-16" aria-labelledby="blog-heading">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <motion.div

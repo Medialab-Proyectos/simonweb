@@ -7,13 +7,13 @@ import { Logo } from "./logo"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { useSegment } from "./segment-context"
-import { ThemeToggle } from "@/components/theme-toggle"
 
 const navLinks = [
-  { href: "#soluciones",      label: "Nosotros" },
-  { href: "#soluciones-grid", label: "Servicios" },
+  { href: "#soluciones",       label: "Nosotros" },
+  { href: "#soluciones-grid",  label: "Servicios" },
+  { href: "#personas-section", label: "Para personas" },
   { href: "#empresas-section", label: "Para empresas" },
-  { href: "#faq",             label: "FAQ" },
+  { href: "#faq",              label: "FAQ" },
 ]
 
 export function Header() {
@@ -37,8 +37,10 @@ export function Header() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isScrolled ? "glass py-3 shadow-sm" : "bg-transparent py-5"
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b",
+        isScrolled
+          ? "glass border-border/60 py-3 shadow-sm"
+          : "border-transparent bg-background/40 backdrop-blur-sm py-4"
       )}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -69,7 +71,6 @@ export function Header() {
 
           {/* Desktop: conversion CTA + Login */}
           <div className="hidden items-center gap-3 lg:flex">
-            <ThemeToggle />
             {segment === "personas" ? (
               <Link
                 href="https://play.google.com/store/apps/details?id=com.simonmovilidad"
@@ -110,24 +111,10 @@ export function Header() {
                 Acceder a mi cuenta
               </Link>
             )}
-            {/* R2: Login — jerarquía secundaria prominente */}
-            <Link
-              href="https://app.simonmovilidad.com/login"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={cn(
-                "rounded-lg border border-primary/30 px-4 py-2 text-sm font-medium text-primary",
-                "transition-all duration-200 hover:bg-primary/5 hover:border-primary",
-                "focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
-              )}
-            >
-              Login
-            </Link>
           </div>
 
           {/* Mobile: hamburger */}
           <div className="flex items-center gap-1 lg:hidden">
-            <ThemeToggle />
             <button
               className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-card"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

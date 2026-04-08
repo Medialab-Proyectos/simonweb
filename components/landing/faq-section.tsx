@@ -11,64 +11,49 @@ import {
 
 const faqs = [
   {
-    question: "¿Cómo funciona el monitoreo vehicular en tiempo real?",
+    question: "¿Cómo puedo comunicarme con Simon Movilidad?",
     answer:
-      "Instalamos un dispositivo GPS discreto en tu vehículo que transmite su ubicación cada segundo. Puedes ver la posición exacta, velocidad y recorrido desde nuestra app o web, disponible 24/7.",
+      "Contamos con diferentes canales de contacto: Telefónico — Línea nacional: 01 8000 189 890, Bogotá: 601 390 6972, Móvil: #230 (Movistar, Claro y Tigo). Whatsapp: 310 5511862. Correo electrónico: servicioalcliente@simonmovilidad.com.",
   },
   {
-    question: "¿Qué documentos puedo guardar en Simon?",
+    question: "¿Dónde puedo descargar la App para mis dispositivos móviles?",
     answer:
-      "Almacenas SOAT, tecnomecánica, seguro y más en un solo lugar accesible desde tu celular. Recibes alertas automáticas antes de los vencimientos para que nunca te sorprenda una multa.",
+      "La App de Simon Movilidad la puedes encontrar en dispositivos Android y iOS, disponible en Google Play y App Store.",
   },
   {
-    question: "¿Cuánto cuesta Simon?",
+    question: "¿Cómo puedo ingresar al portal web de Simon movilidad?",
     answer:
-      "Tenemos planes desde $29.900 COP/mes para personas con un vehículo. Para empresas el precio depende del tamaño de la flota. Escríbenos por WhatsApp al +57 310 5511862 o completa el formulario para recibir una propuesta personalizada.",
+      "Podrás acceder a la plataforma a través del siguiente link: https://www.simonmovilidad.com/app/login",
   },
   {
-    question: "¿Cómo se instala el dispositivo GPS?",
+    question: "¿Cómo puedo ingresar a la App y qué puedo encontrar en la misma?",
     answer:
-      "Nuestro equipo instala el dispositivo en tu vehículo en menos de 30 minutos, sin modificar ninguna pieza. Para flotas empresariales coordinamos la instalación en campo con nuestro equipo técnico. Una vez instalado, la app queda lista para usar.",
+      "Debes descargar la aplicación Simon Movilidad en tu celular e ingresar con tus credenciales de acceso. Desde la App podrás conocer la ubicación del vehículo, guantera digital, geocercas, reportes de recorrido e información clave de tu vehículo.",
   },
   {
-    question: "¿Simon funciona para vehículo particular y para empresas?",
+    question: "¿Cada cuánto se actualiza la ubicación de mi vehículo?",
     answer:
-      "Sí. Tenemos soluciones para personas con un solo vehículo y para empresas con flotas de cualquier tamaño. La plataforma se adapta a cada caso con funcionalidades específicas.",
+      "Cuando el vehículo se encuentra en movimiento reporta cada minuto y cuando el vehículo se encuentra apagado genera reporte cada dos horas.",
   },
   {
-    question: "¿Cómo funcionan las geocercas?",
+    question: "¿Se puede abrir la aplicación Simon Movilidad desde varios dispositivos?",
     answer:
-      "Las geocercas son zonas virtuales que defines en el mapa. Cuando tu vehículo entra o sale, recibes una alerta instantánea. Son ideales para controlar rutas, detectar uso no autorizado o saber cuándo tu familia llega a casa.",
+      "Sí, nuestra aplicación permite el ingreso e interacción desde diferentes dispositivos al mismo tiempo.",
   },
   {
-    question: "¿Cuántos vehículos necesita mi empresa para contratar Simon?",
+    question: "¿Cómo consulto el historial y recorrido de mi vehículo?",
     answer:
-      "Simon para empresas está disponible desde una sola unidad. Tenemos planes adaptados para flotas pequeñas, medianas y grandes. Escríbenos para recibir una propuesta personalizada según tu operación.",
+      "Debes ingresar con tus credenciales de acceso a nuestra página web y al ingresar encontrarás la sección de 'Reportes' para realizar la consulta.",
   },
   {
-    question: "¿El GPS funciona si el vehículo pierde señal de red?",
+    question: "¿Qué es una Geocerca y cómo funciona?",
     answer:
-      "Sí. El dispositivo almacena la ruta en memoria local cuando no hay cobertura. En cuanto el vehículo vuelve a zona con red, la trayectoria se sincroniza automáticamente en la app sin perder ningún punto del recorrido.",
+      "Con el servicio de geo-cerca podrás definir un perímetro en el mapa para que se genere una notificación vía mensaje de texto una vez el vehículo ingrese o salga de la zona previamente definida.",
   },
   {
-    question: "¿Puedo compartir el acceso con mi familia o equipo?",
+    question: "¿Para qué funciona la guantera digital en Simon Movilidad?",
     answer:
-      "Por supuesto. Puedes crear perfiles adicionales con distintos niveles de acceso. Los planes familiares permiten que varios miembros vean el vehículo desde sus propias cuentas; en planes empresariales puedes asignar roles por conductor, supervisor o administrador.",
-  },
-  {
-    question: "¿Simon incluye asistencia en carretera?",
-    answer:
-      "Algunos planes incluyen cobertura de asistencia en carretera. Consulta los detalles de tu plan o escríbenos para conocer la cobertura disponible en tu zona.",
-  },
-  {
-    question: "¿Cómo cancelo mi plan?",
-    answer:
-      "Puedes cancelar en cualquier momento desde la app o contactando a soporte. No hay cláusulas de permanencia en los planes mensuales. Para planes anuales, aplica la política de reembolso proporcional al tiempo restante.",
-  },
-  {
-    question: "¿Cómo es el soporte de Simon?",
-    answer:
-      "Soporte real, disponible 24/7. Puedes contactarnos por WhatsApp al +57 310 5511862, llamar al 01 8000 189 890 (línea gratuita), marcar #230 o #280 desde tu celular, o usar el chat de la app. El tiempo promedio de respuesta es menor a 1 hora en horario hábil.",
+      "La guantera digital de Simon Movilidad te permite almacenar y consultar documentos como el SOAT, la revisión técnico-mecánica y la licencia de conducción, de forma segura desde la app o el portal web.",
   },
 ]
 
@@ -83,7 +68,7 @@ const stagger = {
 
 export function FAQSection() {
   return (
-    <section id="faq" className="bg-background py-20 lg:py-28" aria-labelledby="faq-heading">
+    <section id="faq" className="bg-background py-12 lg:py-16" aria-labelledby="faq-heading">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <motion.div
@@ -97,15 +82,21 @@ export function FAQSection() {
             variants={fadeInUp}
             className="inline-block rounded-full bg-primary/10 px-4 py-1 text-sm text-primary"
           >
-            FAQ
+            Preguntas frecuentes
           </motion.span>
           <motion.h2
             id="faq-heading"
             variants={fadeInUp}
             className="mt-4 text-3xl font-bold text-foreground sm:text-4xl text-balance"
           >
-            Todo lo que necesitas saber antes de empezar
+            Centro de ayuda Simon Movilidad
           </motion.h2>
+          <motion.p
+            variants={fadeInUp}
+            className="mt-4 text-base text-muted-foreground"
+          >
+            Resolvemos tus dudas para que te muevas con tranquilidad. Encuentra aquí preguntas y respuestas sobre el uso de la app y tu servicio.
+          </motion.p>
         </motion.div>
 
         {/* Accordion */}

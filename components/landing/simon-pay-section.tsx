@@ -40,7 +40,7 @@ export function SimonPaySection() {
   return (
     <section
       id="simonpay"
-      className="relative bg-background py-20 lg:py-28 overflow-hidden"
+      className="relative bg-background py-12 lg:py-16 overflow-hidden"
       aria-labelledby="simonpay-heading"
     >
       {/* Ambient glow */}

@@ -10,7 +10,7 @@ const stagger = { visible: { transition: { staggerChildren: 0.1 } } }
 
 export function ProductShowcase() {
   return (
-    <section className="py-20 lg:py-28" aria-labelledby="showcase-heading">
+    <section className="py-12 lg:py-16" aria-labelledby="showcase-heading">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <motion.div

@@ -79,7 +79,7 @@ export function SolutionsGrid() {
   return (
     <section
       id="soluciones-grid"
-      className="relative bg-[#080808] py-20 lg:py-28 overflow-hidden"
+      className="relative bg-[#080808] py-12 lg:py-16 overflow-hidden"
       aria-labelledby="solutions-heading"
     >
       {/* Ambient glow */}

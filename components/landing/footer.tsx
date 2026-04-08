@@ -1,4 +1,4 @@
-import { Phone, Mail, MessageCircle, Hash } from "lucide-react"
+import { Phone, Mail, MessageCircle } from "lucide-react"
 import Link from "next/link"
 import { Logo } from "./logo"
 
@@ -15,7 +15,6 @@ const footerLinks = {
     { label: "Para empresas",    href: "#empresas-section" },
     { label: "Clientes",         href: "#clientes" },
     { label: "FAQ",              href: "#faq" },
-    { label: "Contacto",         href: "#demo" },
   ],
   legal: [
     { label: "Política de privacidad",  href: "/privacidad" },
@@ -29,23 +28,23 @@ export function Footer() {
   return (
     <footer
       id="contacto"
-      className="bg-background"
+      className="relative border-t border-border bg-background"
       aria-labelledby="footer-heading"
     >
       <h2 id="footer-heading" className="sr-only">Pie de página</h2>
 
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
 
         {/* Links grid — 4 columnas: Marca + Soluciones + Empresa + Legal */}
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-2 lg:grid-cols-4">
 
           {/* Col 1: Marca + contacto */}
-          <div className="col-span-2 sm:col-span-2 lg:col-span-1 flex flex-col items-center lg:items-start">
-            <Logo className="h-5 w-auto" />
-            <p className="mt-4 text-sm text-muted-foreground text-center lg:text-left">
-              Somos la tecnología que transforma tu movilidad. Te acompañamos con soluciones inteligentes para brindarte seguridad, ahorro y control total.
+          <div className="col-span-2 sm:col-span-2 lg:col-span-1 flex flex-col items-start">
+            <Logo className="h-12 w-auto" />
+            <p className="mt-4 text-sm text-muted-foreground max-w-xs">
+              La tecnología que transforma tu movilidad.
             </p>
-            <address className="mt-5 not-italic space-y-2.5">
+            <address className="mt-5 not-italic space-y-2 flex flex-col items-start">
               <a href="https://wa.me/573105511862" target="_blank" rel="noopener noreferrer"
                 className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
                 <MessageCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
@@ -56,27 +55,15 @@ export function Footer() {
                 <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
                 01 8000 189 890
               </a>
-              <a href="tel:6013906972"
-                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
-                <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
-                Bogotá (601) 390 6972
-              </a>
-              <a href="tel:#230"
-                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
-                <Hash className="h-4 w-4 shrink-0" aria-hidden="true" />
-                #230
-              </a>
-              <a href="tel:#280"
-                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
-                <Hash className="h-4 w-4 shrink-0" aria-hidden="true" />
-                #280
-              </a>
-              <a href="mailto:info@simonmovilidad.com"
+              <a href="mailto:servicioalcliente@simonmovilidad.com"
                 className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
                 <Mail className="h-4 w-4 shrink-0" aria-hidden="true" />
-                info@simonmovilidad.com
+                servicioalcliente@simonmovilidad.com
               </a>
             </address>
+            <p className="mt-4 text-xs text-muted-foreground/70">
+              Atención 24/7 · Bogotá, Colombia
+            </p>
           </div>
 
           {/* Col 2: Soluciones */}

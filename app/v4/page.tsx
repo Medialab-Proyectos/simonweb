@@ -8,6 +8,7 @@ import { PainPointsSection } from "@/components/landing/pain-points-section"
 import { ClientLogos } from "@/components/landing/client-logos"
 import { FAQSection } from "@/components/landing/faq-section"
 import { AudienceSplit } from "@/components/landing/audience-split"
+import { PersonasSplit } from "@/components/landing/personas-split"
 import { AppDownloadBanner } from "@/components/landing/app-download-banner"
 import { Footer } from "@/components/landing/footer"
 // ── V3 ─────────────────────────────────────────────────────────────────────────
@@ -183,7 +184,10 @@ export default function V4Page() {
             {/* 9. FAQ — Versión Principal */}
             <FAQSection />
 
-            {/* 10. Simon para Empresas — Versión Principal */}
+            {/* 10a. Simon para Personas — "Tu movilidad segura y bajo control" */}
+            <PersonasSplit />
+
+            {/* 10b. Simon para Empresas — Versión Principal */}
             <AudienceSplit />
 
             {/* 11. Descarga la app — V2 (componente de versión principal) */}

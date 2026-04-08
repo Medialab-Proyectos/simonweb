@@ -1,0 +1,526 @@
+html {
+	scroll-behavior: smooth;
+	/* Esto aplica la animación a toda la página */
+}
+
+.row {
+	display: flex;
+	justify-content: center;
+	/* Centra las columnas horizontalmente */
+	align-items: flex-start;
+	/* Alinea desde la parte superior */
+}
+
+.col_one_half {
+	width: 50%;
+	padding: 0;
+	/* Elimino padding interno para alinear con el título */
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.col_last {
+	float: right;
+}
+
+.header-faqs {
+	background-color: #000000;
+	/* Fondo negro */
+	color: #fff;
+	/* Texto blanco */
+	border-bottom: 1px solid #000000;
+	/* Opcional: línea inferior */
+}
+
+#section-features {
+	text-align: center;
+	margin-bottom: 0;
+}
+
+.feature-box {
+	margin-bottom: 0px;
+	width: 100%;
+	padding: 30px;
+	border-radius: 8px;
+}
+
+.fbox-icon img {
+	width: 50px;
+	height: 50px;
+}
+
+button {
+	display: inline-block;
+	padding: 10px 20px;
+	background-color: white;
+	/* Fondo blanco */
+	color: #00F1C7;
+	/* Letra en el color especificado */
+	text-decoration: none;
+	border-radius: 5px;
+	margin-top: 20px;
+	border: 2px solid #00F1C7;
+}
+
+/*Seccion para ti*/
+.container {
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0;
+}
+
+.row {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+}
+
+.col_one_half {
+	width: 50%;
+	padding: 0;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.col_last {
+	float: right;
+}
+
+#section-para-ti {
+	text-align: center;
+	margin-bottom: 0;
+}
+
+.button {
+	display: inline-block;
+	padding: 10px 20px;
+	background-color: white;
+	color: #00F1C7;
+	/* color: #007868; */
+	text-decoration: none;
+	border-radius: 5px;
+	margin-top: 20px;
+	border: 2px solid #00F1C7;
+}
+
+/*Seccion para confianza y soporte*/
+.container {
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0;
+}
+
+.row {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+}
+
+.col_one_half {
+	width: 50%;
+	padding: 0;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.col_last {
+	float: right;
+}
+
+#section-confianza-soporte {
+	text-align: center;
+	margin-bottom: 0;
+}
+
+.fbox-icon img {
+	width: 50px;
+	height: 50px;
+}
+
+.center {
+	text-align: center;
+	margin-top: 80px;
+}
+
+.button {
+	display: inline-block;
+	padding: 10px 20px;
+	color: #fff;
+	text-decoration: none;
+	border-radius: 5px;
+	margin: 0 10px;
+}
+
+.button-teal {
+	background-color: #00F1C7;
+	border: 2px solid #00F1C7;
+}
+
+.button-red {
+	background-color: #00F1C7;
+	border: 2px solid #00F1C7;
+}
+
+.button-3d {
+	box-shadow: 0 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.button-xlarge {
+	padding: 15px 30px;
+	font-size: 16px;
+}
+
+
+/* Efecto hover creativo: El mouse se convierte en un puntero y la tarjeta se levanta */
+.clickable-card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3) !important;
+}
+
+.clickable-card a:hover {
+	text-decoration: none;
+	/* Asegura que el enlace no tenga subrayado al hacer hover */
+}
+
+
+/* Estilos para el dropdown de Servicios */
+#primary-menu ul li ul {
+	background: linear-gradient(180deg, rgba(40, 40, 40, 0.98), rgba(30, 30, 30, 0.98));
+	border-radius: 12px;
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+	padding: 8px;
+	min-width: 200px;
+	border: 1px solid rgba(0, 241, 199, 0.1);
+}
+
+#primary-menu ul li ul li {
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+	margin: 0;
+}
+
+#primary-menu ul li ul li:last-child {
+	border-bottom: none;
+}
+
+#primary-menu ul li ul li a {
+	padding: 12px 15px;
+	font-size: 14px;
+	letter-spacing: 0.5px;
+	color: #fff;
+	transition: all 0.3s ease;
+	display: flex;
+	align-items: center;
+}
+
+#primary-menu ul li ul li a:before {
+	content: '';
+	width: 6px;
+	height: 6px;
+	background: #00F1C7;
+	border-radius: 50%;
+	margin-right: 12px;
+	opacity: 0;
+	transition: all 0.3s ease;
+}
+
+#primary-menu ul li ul li a:hover {
+	background: #3d3d3d;
+	color: #00F1C7;
+	padding-left: 20px;
+}
+
+#primary-menu ul li ul li a:hover:before {
+	opacity: 1;
+}
+
+/* Efecto de entrada suave */
+#primary-menu ul li:hover>ul {
+	animation: dropdownFade 0.3s ease forwards;
+}
+
+@keyframes dropdownFade {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+
+/* Estilos por defecto para escritorio (los botones están uno al lado del otro) */
+.responsive-buttons-container {
+	/* Asegura que el contenedor pueda alinear el contenido */
+	text-align: center;
+}
+
+.responsive-button {
+	/* Estilos generales para el botón */
+	margin: 10px 15px;
+	/* Añade margen alrededor de cada botón */
+	display: inline-block;
+	/* Permite que estén en línea por defecto */
+	/* Aquí irían otros estilos comunes como padding, font-size, etc. */
+}
+
+/* --- Media Query para pantallas pequeñas --- */
+@media (max-width: 768px) {
+	.responsive-buttons-container {
+		/* Fuerza a que los elementos dentro del contenedor se comporten como bloques */
+		display: flex;
+		flex-direction: column;
+		/* Apila los elementos verticalmente */
+		align-items: center;
+		/* Centra los elementos horizontalmente */
+	}
+
+	.responsive-button {
+		/* Hace que cada botón ocupe casi todo el ancho */
+		width: 90%;
+		margin: 8px 0;
+		/* Espaciado solo vertical */
+		padding: 15px 10px;
+		/* Ajusta el relleno para que se vean bien */
+		text-align: center;
+		display: block;
+		/* Asegura que el botón se comporte como un bloque */
+	}
+
+	.responsive-separator {
+		/* Oculta o cambia el separador "- O -" cuando los botones están apilados */
+		display: block !important;
+		/* Asegura que se muestre, pero lo forzamos a ser un bloque */
+		margin: 5px 0 !important;
+		/* Pequeño margen vertical */
+		font-size: 0.8em;
+		/* Opcional: reducir el tamaño */
+	}
+}
+
+
+
+@media (max-width: 991px) {
+	/* ** Tabletas y Móviles Grandes (Corte principal para columnas) ** */
+
+	/* 1. Reducir padding de la sección */
+	#section-specs {
+		padding: 50px 0 !important;
+		/* Reducir el padding de 100px a 50px */
+	}
+
+	/* 2. Forzar a que las columnas se apilen (ancho completo) */
+	.col_two_fifth,
+	.col_three_fifth {
+		width: 100%;
+		/* Ocupa el ancho completo */
+		padding: 0 15px;
+		/* Añadir padding lateral para el contenido */
+	}
+
+	/* 3. Ajustar el margen entre los bloques apilados */
+	.col_three_fifth {
+		margin-top: 30px;
+		/* Separación entre la imagen y el texto en móvil */
+	}
+
+	.col_last {
+		float: none;
+		/* Asegura que no haya problemas de float en móvil */
+	}
+
+	/* 4. Asegurar la posición y margen de las imágenes */
+	.col_two_fifth.center {
+		text-align: center;
+	}
+
+	.col_two_fifth img {
+		/* Aseguramos que la imagen use el ancho completo, respetando el padding del contenedor */
+		max-width: 100% !important;
+		margin-bottom: 20px !important;
+	}
+
+	/* 5. Ajustar el tamaño del texto para mejor legibilidad en móvil */
+	.heading-block h2 {
+		font-size: 1.5rem !important;
+		/* Reducir título principal */
+	}
+
+	.heading-block span,
+	.iconlist-large li {
+		font-size: 1rem !important;
+		/* Reducir texto y lista de beneficios */
+	}
+}
+
+@media (max-width: 767px) {
+	/* ** Móviles Pequeños ** */
+
+	/* Eliminar el topmargin de la cabecera ya que ahora está al inicio */
+	.heading-block.topmargin-sm {
+		margin-top: 0 !important;
+	}
+
+	.col_three_fifth {
+		padding: 0 15px;
+		/* Reafirmar el padding en el texto */
+	}
+}
+
+
+/* Estilos para el footer */
+footer {
+	background-color: #333;
+	color: #fff;
+	padding: 20px 0;
+}
+
+.container {
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0;
+}
+
+.footer-widgets-wrap {
+	display: flex;
+	justify-content: space-between;
+}
+
+.col_two_third {
+	width: 66.66%;
+	display: flex;
+}
+
+.col_one_third {
+	width: 29.33%;
+	padding: 0 15px;
+	box-sizing: border-box;
+}
+
+.col_last {
+	float: right;
+}
+
+.widget h4 {
+	color: #00F1C7;
+	margin-bottom: 10px;
+}
+
+.widget a {
+	color: #00F1C7;
+	text-decoration: none;
+}
+
+.widget a:hover {
+	text-decoration: underline;
+}
+
+.footer-logo {
+	margin-bottom: 15px;
+}
+
+address {
+	font-style: normal;
+	margin-bottom: 10px;
+}
+
+.social-icon {
+	margin-right: 5px;
+}
+
+.button {
+	display: inline-block;
+	padding: 10px 20px;
+	color: #fff;
+	text-decoration: none;
+	border-radius: 5px;
+	border: 2px solid #00F1C7;
+	background-color: #00F1C7;
+}
+
+.button-3d {
+	box-shadow: 0 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+#copyrights {
+	background-color: #222;
+	padding: 0px 0;
+	font-size: 14px;
+}
+
+.col_half {
+	width: 50%;
+	padding: 0 15px;
+	box-sizing: border-box;
+}
+
+.tright {
+	text-align: right;
+}
+
+.fright {
+	float: right;
+}
+
+@media (max-width: 768px) {
+	.footer-widgets-wrap {
+		display: block;
+		/* Cambia de flex (horizontal) a block (vertical) */
+	}
+
+	.col_one_third,
+	.col_half {
+		width: 100%;
+		padding: 0;
+		/* Elimina el padding lateral interno de las columnas */
+		margin-bottom: 30px;
+		/* Añade un poco de espacio entre las secciones apiladas */
+	}
+
+	.col_last {
+		float: none;
+		/* Desactiva el float right */
+	}
+
+	/* Centramos el contenido de la columna de Contacto y Links si es necesario */
+	.col_one_third:last-child {
+		margin-bottom: 0;
+		/* Elimina el margen inferior del último bloque */
+	}
+
+	/* Centra el texto del copyright en dispositivos móviles */
+	#copyrights .col_full {
+		text-align: center;
+	}
+
+	/* Centra el widget del logo en móvil para mejor presentación */
+	.widget.clearfix {
+		text-align: center;
+	}
+
+	.footer-logo {
+		margin: 0 auto 10px auto;
+		/* Centra la imagen del logo */
+	}
+}
+
+/* Added styles for the header in faqs.html */
+.header-faqs {
+	background-color: #000000;
+	/* Black background */
+	position: relative;
+	/* Ensures it doesn't interfere with other elements */
+	z-index: 10;
+	/* Adjusts stacking order */
+}

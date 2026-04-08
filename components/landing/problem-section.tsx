@@ -1,34 +1,37 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Shield, Award, Clock, Zap, CheckCircle2 } from "lucide-react"
+import { Shield, Award, Clock, Zap } from "lucide-react"
 
 const highlights = [
   {
-    icon: Clock,
-    title: "+4 años",
-    description: "Impulsando la movilidad inteligente del país",
+    icon: Shield,
+    title: "Seguridad",
+    description:
+      "Te brindamos seguridad, monitoreo constante y alertas instantáneas 24/7 para tu tranquilidad.",
     color: "text-primary",
     bg: "bg-primary/10",
   },
   {
-    icon: Award,
-    title: "12 meses de garantía",
-    description: "En todos nuestros equipos de rastreo",
+    icon: Zap,
+    title: "Monitoreo",
+    description:
+      "Tendrás el control total con soluciones digitales para la gestión de tu vehículo particular y optimización avanzada de flotas.",
     color: "text-secondary",
     bg: "bg-secondary/10",
   },
   {
-    icon: Shield,
-    title: "Soporte 24/7",
-    description: "Equipo dedicado disponible en todo momento",
+    icon: Award,
+    title: "Garantía",
+    description: "12 meses en equipos.",
     color: "text-success",
     bg: "bg-success/10",
   },
   {
-    icon: Zap,
-    title: "Tecnología de punta",
-    description: "Dispositivos GPS de última generación",
+    icon: Clock,
+    title: "Garantizamos tu movilidad",
+    description:
+      "Contamos con estándares de compliance y el aval del MinTIC que respalda la calidad y seguridad de nuestras soluciones tecnológicas.",
     color: "text-warning",
     bg: "bg-warning/10",
   },
@@ -42,7 +45,7 @@ const stagger = { visible: { transition: { staggerChildren: 0.1 } } }
 
 export function ProblemSection() {
   return (
-    <section id="soluciones" className="relative py-20 lg:py-28 overflow-hidden" aria-labelledby="about-heading">
+    <section id="soluciones" className="relative py-12 lg:py-16 overflow-hidden" aria-labelledby="about-heading">
       {/* Background */}
       <div className="absolute inset-0 bg-background" aria-hidden="true" />
       <div className="pointer-events-none absolute left-0 top-0 h-full w-1/2 bg-gradient-to-r from-primary/3 to-transparent" aria-hidden="true" />
@@ -61,7 +64,7 @@ export function ProblemSection() {
               variants={fadeInUp}
               className="inline-block rounded-full bg-primary/10 px-4 py-1.5 text-sm text-primary"
             >
-              Por qué confiar en Simon
+              ¿Quiénes somos?
             </motion.span>
 
             <motion.h2
@@ -69,8 +72,8 @@ export function ProblemSection() {
               variants={fadeInUp}
               className="mt-5 text-3xl font-bold text-foreground sm:text-4xl lg:text-[2.75rem] leading-tight text-balance"
             >
-              Más de 4 años impulsando la movilidad{" "}
-              <span className="gradient-text">inteligente del país</span>
+              Tu aliado estratégico en la vía, con tecnología que te da{" "}
+              <span className="gradient-text">control total</span>.
             </motion.h2>
 
             <motion.p
@@ -80,20 +83,6 @@ export function ProblemSection() {
               Con más de 4 años impulsando la movilidad inteligente del país, Simon Movilidad es tu aliado tecnológico para una gestión vehicular más eficiente y segura. Integramos telemetría avanzada: Rastreo satelital, análisis de datos, optimización de rutas y protección de activos. Así transformamos tu experiencia en el camino.
             </motion.p>
 
-            {/* Key differentiators */}
-            <motion.div variants={fadeInUp} className="mt-8 space-y-3">
-              {[
-                "Integración completa con app móvil y plataforma web",
-                "Alertas inteligentes y geocercas configurables",
-                "12 meses de garantía en todos los equipos",
-                "Cobertura a nivel nacional",
-              ].map((item) => (
-                <div key={item} className="flex items-center gap-3">
-                  <CheckCircle2 className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
-                  <span className="text-sm text-muted-foreground">{item}</span>
-                </div>
-              ))}
-            </motion.div>
           </motion.div>
 
           {/* ── Right: highlight cards grid ────────────── */}

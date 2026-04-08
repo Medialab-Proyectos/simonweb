@@ -11,33 +11,43 @@ import { useDemoModal } from "./demo-modal-context"
 // ─── Solutions segmentadas ────────────────────────────────────────────────────
 const solutionsPersonas = [
   {
-    icon: Shield,
-    title: "Seguridad vehicular",
+    icon: MapPin,
+    title: "Monitoreo en tiempo real 24/7",
     description:
-      "Protección 24/7 con monitoreo satelital, alertas instantáneas y geocercas inteligentes para mantener tu vehículo siempre seguro.",
-    highlight: true,
+      "Localiza tu vehículo estés donde estés, desde cualquier dispositivo con acceso a internet.",
     color: "text-primary",
     bgIcon: "bg-primary/15",
     borderHover: "hover:border-primary/40 hover:shadow-primary/10",
     badge: null,
-    video: "/videos/services/geocercas.mp4",
+    video: "/videos/services/monitoreo.mp4",
   },
   {
-    icon: MapPin,
-    title: "Rastreo satelital 24/7",
+    icon: Headphones,
+    title: "Asistencias",
     description:
-      "Ubicación exacta con actualizaciones al segundo. Accede desde cualquier dispositivo, en cualquier momento.",
+      "Soporte inmediato ante averías o contratiempos en la vía. Incluye servicio de grúa, carro taller, teleorientación mecánica y legal, cobertura para accesorios y protección de contenidos.",
+    color: "text-chart-5",
+    bgIcon: "bg-chart-5/15",
+    borderHover: "hover:border-chart-5/40 hover:shadow-chart-5/10",
+    badge: null,
+    video: "/videos/services/asistencias.mp4",
+  },
+  {
+    icon: Shield,
+    title: "Geocercas inteligentes",
+    description:
+      "Ubicación de zonas seguras, alertas si tu vehículo entra o sale de ellas. Máxima protección antirrobo desde tu móvil.",
     color: "text-secondary",
     bgIcon: "bg-secondary/15",
     borderHover: "hover:border-secondary/40 hover:shadow-secondary/10",
     badge: null,
-    video: "/videos/services/monitoreo.mp4",
+    video: "/videos/services/geocercas.mp4",
   },
   {
     icon: FileText,
-    title: "Documentos del vehículo",
+    title: "Guantera digital",
     description:
-      "Gestiona y centraliza de forma segura tus documentos y mantenimientos clave, tales como SOAT, RTM, licencia de tránsito, póliza de seguro con acceso instantáneo desde la app.",
+      "Gestiona y centraliza de forma segura tus documentos y mantenimientos clave, tales como SOAT, RTM licencia de tránsito, póliza de seguro con acceso instantáneo desde la app.",
     color: "text-success",
     bgIcon: "bg-success/15",
     borderHover: "hover:border-success/40 hover:shadow-success/10",
@@ -45,47 +55,19 @@ const solutionsPersonas = [
     video: "/videos/services/guantera.mp4",
   },
   {
-    icon: Headphones,
-    title: "Asistencias de movilidad*",
-    description:
-      "Llama al #280 desde la app con un toque. Grúa, cerrajería y carro taller disponibles en vía — sin buscar a quién llamar en un momento crítico.",
-    disclaimer: "* Sujeto a disponibilidad del prestador de servicio.",
-    color: "text-chart-5",
-    bgIcon: "bg-chart-5/15",
-    borderHover: "hover:border-chart-5/40 hover:shadow-chart-5/10",
-    badge: null,
-    ctaIcon: Hash,
-    ctaLabel: "#280 asistencia vial",
-    video: "/videos/services/asistencias.mp4",
-  },
-  {
-    icon: Wallet,
-    title: "Simon Pay — Peajes y pagos",
-    description:
-      "Paga peajes con Colpass, seguros y servicios de movilidad en una sola billetera integrada. Registra tu interés para acceso anticipado.",
-    color: "text-secondary",
-    bgIcon: "bg-secondary/15",
-    borderHover: "hover:border-secondary/40 hover:shadow-secondary/10",
-    badge: "Acceso anticipado",
-    video: null,
-  },
-]
-
-const solutionsEmpresas = [
-  ...solutionsPersonas.slice(0, -1), // todos excepto Simon Pay
-  {
     icon: BarChart3,
     title: "Reportes inteligentes",
     description:
-      "Detalle completo de desplazamientos, velocidad, paradas y consumos. Exporta reportes y toma decisiones informadas.",
+      "Genera reportes de recorrido. Conoce en detalle las direcciones y desplazamientos de tus viajes.",
     color: "text-warning",
     bgIcon: "bg-warning/15",
     borderHover: "hover:border-warning/40 hover:shadow-warning/10",
-    badge: "Resuelve: costos de flota",
+    badge: null,
     video: "/videos/services/reportes.mp4",
   },
-  solutionsPersonas[solutionsPersonas.length - 1], // Simon Pay siempre al final
 ]
+
+const solutionsEmpresas = solutionsPersonas
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 16 },
@@ -121,12 +103,12 @@ function SolutionCard({ item }: { item: SolutionItem }) {
   return (
     <motion.div
       variants={fadeInUp}
-      className="cursor-default"
+      className="cursor-default h-full"
       style={{ perspective: 1000 }}
     >
       {/* Flip container */}
       <div
-        className="relative transition-transform duration-500 [transform-style:preserve-3d]"
+        className="relative h-full transition-transform duration-500 [transform-style:preserve-3d]"
         style={{ transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)" }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -134,7 +116,7 @@ function SolutionCard({ item }: { item: SolutionItem }) {
         {/* ── FRONT ── */}
         <div
           className={cn(
-            "glass-card flex flex-col rounded-2xl p-6 transition-shadow",
+            "glass-card flex h-full flex-col rounded-2xl p-6 transition-shadow",
             item.borderHover,
             "[backface-visibility:hidden]"
           )}
@@ -176,7 +158,7 @@ function SolutionCard({ item }: { item: SolutionItem }) {
           ) : (
             <div className="mt-3 flex items-center gap-1 text-xs font-medium text-primary">
               <Zap className="h-3 w-3" aria-hidden="true" />
-              {item.badge === "Acceso anticipado" ? "Regístrate para acceso anticipado" : "Incluido en todos los planes"}
+              Ver más detalles
             </div>
           )}
         </div>
@@ -218,7 +200,7 @@ export function SolutionsGrid() {
   return (
     <section
       id="soluciones-grid"
-      className="bg-surface py-20 lg:py-28"
+      className="bg-surface py-12 lg:py-16"
       aria-labelledby="solutions-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -235,24 +217,26 @@ export function SolutionsGrid() {
             variants={fadeInUp}
             className="inline-block rounded-full bg-primary/10 px-4 py-1 text-sm text-primary"
           >
-            Todo en un solo lugar
+            Nuestros servicios
           </motion.span>
           <motion.h2
             id="solutions-heading"
             variants={fadeInUp}
             className="mt-4 text-3xl font-bold text-foreground sm:text-4xl text-balance"
           >
-            {segment === "empresas"
-              ? "Todo lo que necesita tu flota"
-              : "Control total de tu movilidad"}
+            Nuestros servicios
           </motion.h2>
           <motion.p
             variants={fadeInUp}
             className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground"
           >
-            {segment === "empresas"
-              ? "Visibilidad, trazabilidad y control operativo — en una sola plataforma."
-              : "En Simon Movilidad, integramos en un solo sistema las soluciones claves que necesitas para gestionar tu movilidad de forma simple, segura y eficiente. Desde el rastreo satelital 24/7, asistencias de movilidad*, geocercas inteligentes, guantera digital y más beneficios exclusivos para ti*"}
+            En Simon Movilidad, integramos en un solo sistema las soluciones claves que necesitas para gestionar tu movilidad de forma simple, segura y eficiente. Desde el rastreo satelital 24/7, asistencias de movilidad*, geocercas inteligentes, guantera digital y más beneficios exclusivos para ti*
+          </motion.p>
+          <motion.p
+            variants={fadeInUp}
+            className="mx-auto mt-3 max-w-2xl text-xs italic text-muted-foreground/60"
+          >
+            *Sujeto a disponibilidad del prestador de servicio.
           </motion.p>
         </motion.div>
 
@@ -295,10 +279,7 @@ export function SolutionsGrid() {
             animate="visible"
             exit={{ opacity: 0, y: -8, transition: { duration: 0.2 } }}
             variants={stagger}
-            className={cn(
-              "mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3",
-              solutions.length === 5 && "lg:[&>*:last-child]:col-start-2"
-            )}
+            className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr"
           >
             {solutions.map((item) => (
               <SolutionCard key={item.title} item={item} />

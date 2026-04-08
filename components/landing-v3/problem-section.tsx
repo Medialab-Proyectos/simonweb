@@ -69,7 +69,7 @@ export function ProblemSection() {
   const problems = activeTab === "personas" ? personasProblems : empresasProblems
 
   return (
-    <section id="soluciones" className="py-20 lg:py-28" aria-labelledby="problems-heading">
+    <section id="soluciones" className="py-12 lg:py-16" aria-labelledby="problems-heading">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
 
@@ -124,16 +124,10 @@ export function ProblemSection() {
             variants={stagger}
           >
             {/* Heading */}
-            <motion.span
-              variants={fadeInUp}
-              className="inline-block rounded-full bg-primary/10 px-4 py-1 text-sm text-primary"
-            >
-              El problema
-            </motion.span>
             <motion.h2
               id="problems-heading"
               variants={fadeInUp}
-              className="mt-4 text-3xl font-bold text-foreground sm:text-4xl text-balance"
+              className="text-3xl font-bold text-foreground sm:text-4xl text-balance"
             >
               ¿Te identificas con alguno de estos desafíos?
             </motion.h2>

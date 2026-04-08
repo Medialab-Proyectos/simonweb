@@ -28,9 +28,17 @@ export function ClientLogos() {
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-10 text-center text-xs font-semibold uppercase tracking-widest text-muted-foreground"
+          className="mb-3 text-center text-xs font-semibold uppercase tracking-widest text-muted-foreground"
         >
-          Confían en Simon
+          Nuestros clientes
+        </motion.p>
+        <motion.p
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-10 text-center text-base text-muted-foreground"
+        >
+          Quienes confían en nosotros, saben de movilidad.
         </motion.p>
 
         {/* Marquee */}
@@ -61,15 +69,6 @@ export function ClientLogos() {
           </div>
         </div>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-          className="mt-8 text-center text-xs text-muted-foreground/60"
-        >
-          Empresas líderes del sector automotriz y financiero de Colombia.
-        </motion.p>
       </div>
     </section>
   )
