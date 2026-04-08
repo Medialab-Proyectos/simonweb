@@ -106,15 +106,6 @@ export function Hero() {
               className="flex flex-col items-center text-center lg:items-start lg:text-left lg:mx-0"
               style={{ maxWidth: 520 }}
             >
-              {/* Badge */}
-              <motion.div
-                variants={fadeInUp}
-                className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/[0.08] px-4 py-1.5 text-xs font-medium tracking-wide text-primary mb-6"
-              >
-                <PulseRing />
-                Simon Movilidad
-              </motion.div>
-
               {/* Headline */}
               <motion.h1
                 id="hero-heading"

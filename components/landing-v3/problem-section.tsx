@@ -79,7 +79,7 @@ export function ProblemSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.55 }}
-            className="lg:sticky lg:top-28"
+            className="order-last lg:order-first lg:sticky lg:top-28"
           >
             <figure
               className="relative overflow-hidden rounded-2xl border border-border shadow-sm h-64 w-full sm:h-80 lg:h-[440px]"

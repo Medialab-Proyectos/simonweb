@@ -41,7 +41,7 @@ export function AppDownloadBanner() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.55, delay: 0.2 }}
-              className="relative z-10 flex items-end justify-center lg:justify-start order-last lg:order-first"
+              className="relative z-10 flex items-end justify-center lg:justify-start order-first"
               aria-hidden="true"
             >
               <div className="relative h-[320px] w-full sm:h-[420px] lg:h-[520px]">

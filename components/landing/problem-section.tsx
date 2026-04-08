@@ -91,7 +91,7 @@ export function ProblemSection() {
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
             variants={stagger}
-            className="grid grid-cols-2 gap-4"
+            className="grid grid-cols-1 sm:grid-cols-2 gap-4"
           >
             {highlights.map((item, idx) => (
               <motion.div

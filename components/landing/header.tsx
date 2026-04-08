@@ -111,6 +111,18 @@ export function Header() {
                 Acceder a mi cuenta
               </Link>
             )}
+            <Link
+              href="https://app.simonmovilidad.com/login"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(
+                "rounded-lg border border-primary/30 px-4 py-2 text-sm font-medium text-primary",
+                "transition-all duration-200 hover:bg-primary/5 hover:border-primary",
+                "focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
+              )}
+            >
+              Login
+            </Link>
           </div>
 
           {/* Mobile: hamburger */}
