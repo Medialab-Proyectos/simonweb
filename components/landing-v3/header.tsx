@@ -63,7 +63,7 @@ export function Header() {
           <div className="hidden items-center gap-3 lg:flex">
             {segment === "personas" ? (
               <Link
-                href="https://play.google.com/store/apps/details?id=com.simonmovilidad"
+                href="https://play.google.com/store/apps/details?id=ve.org.finanzauto&pcampaignid=web_share"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
@@ -88,7 +88,7 @@ export function Header() {
               </Link>
             )}
             <Link
-              href="https://app.simonmovilidad.com/login"
+              href="https://www.simonmovilidad.com/app/login"
               target="_blank"
               rel="noopener noreferrer"
               className={cn(
@@ -135,7 +135,7 @@ export function Header() {
                 <div className="mb-2">
                   {segment === "personas" ? (
                     <Link
-                      href="https://play.google.com/store/apps/details?id=com.simonmovilidad"
+                      href="https://play.google.com/store/apps/details?id=ve.org.finanzauto&pcampaignid=web_share"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center justify-center gap-2 w-full rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground"
@@ -167,7 +167,7 @@ export function Header() {
                 ))}
                 <div className="mt-4 border-t border-border pt-4">
                   <Link
-                    href="https://app.simonmovilidad.com/login"
+                    href="https://www.simonmovilidad.com/app/login"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block w-full rounded-xl border border-primary/60 px-5 py-3 text-center text-sm font-semibold text-primary hover:bg-primary hover:text-primary-foreground transition-all"

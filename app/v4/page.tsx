@@ -21,6 +21,7 @@ import { SolutionsGrid } from "@/components/landing-v3/solutions-grid"
 import { FloatingFab } from "@/components/landing-v3/floating-fab"
 import { DemoModalProvider } from "@/components/landing-v3/demo-modal-context"
 import { DemoModal } from "@/components/landing-v3/demo-form"
+import { CookieBanner } from "@/components/landing/cookie-banner"
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -202,6 +203,9 @@ export default function V4Page() {
 
           {/* Demo modal global */}
           <DemoModal />
+
+          {/* Cookie consent banner */}
+          <CookieBanner />
 
           </DemoModalProvider>
         </SegmentProviderV3>

@@ -131,7 +131,7 @@ interface StoreButtonProps {
 }
 
 export function GooglePlayButton({
-  href = "https://play.google.com/store/apps/details?id=com.simonmovilidad",
+  href = "https://play.google.com/store/apps/details?id=ve.org.finanzauto&pcampaignid=web_share",
   className,
 }: StoreButtonProps) {
   return (
@@ -150,7 +150,7 @@ export function GooglePlayButton({
 }
 
 export function AppStoreButton({
-  href = "https://apps.apple.com/co/app/simon-movilidad",
+  href = "https://apps.apple.com/co/app/simon-movilidad/id1569524088",
   className,
 }: StoreButtonProps) {
   return (

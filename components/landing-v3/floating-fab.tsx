@@ -18,12 +18,14 @@ function SimonAvatar({ size = 36 }: { size?: number }) {
       style={{ width: size, height: size }}
       className="relative shrink-0 overflow-hidden rounded-full"
     >
-      <Image
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
         src="/images/avatar.png"
         alt="Simón — Asesor de Simon Movilidad"
-        fill
-        className="object-cover object-center"
-        sizes={`${size}px`}
+        width={size * 3}
+        height={size * 3}
+        className="absolute inset-0 h-full w-full object-cover object-top"
+        style={{ imageRendering: "auto" }}
       />
     </div>
   )

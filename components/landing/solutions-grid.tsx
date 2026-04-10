@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Shield, Headphones, MapPin, FileText, BarChart3, Wallet, ArrowRight, Zap, Eye } from "lucide-react"
+import { Shield, Headphones, MapPin, FileText, BarChart3, Wallet, ArrowRight, Zap, Eye, ShieldCheck, FileCheck } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
@@ -52,6 +52,26 @@ const solutions = [
     color: "text-warning",
     bgIcon: "bg-warning/15",
     borderHover: "hover:border-warning/40 hover:shadow-warning/10",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Seguros vehiculares",
+    description:
+      "Cotiza, compara y adquiere seguros para tu vehículo directamente desde la app. Protección real, sin intermediarios y en minutos.",
+    color: "text-chart-4",
+    bgIcon: "bg-chart-4/15",
+    borderHover: "hover:border-chart-4/40 hover:shadow-chart-4/10",
+    badge: "Próximamente",
+  },
+  {
+    icon: FileCheck,
+    title: "SOAT digital",
+    description:
+      "Compra y renueva tu SOAT desde Simon sin filas ni trámites. Recibe tu póliza digital al instante y mantén tu vehículo siempre al día.",
+    color: "text-chart-3",
+    bgIcon: "bg-chart-3/15",
+    borderHover: "hover:border-chart-3/40 hover:shadow-chart-3/10",
+    badge: "Próximamente",
   },
   {
     icon: Wallet,
@@ -122,7 +142,7 @@ export function SolutionsGrid() {
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
           variants={stagger}
-          className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3"
+          className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
         >
           {solutions.map((item) => (
             <motion.div

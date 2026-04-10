@@ -1,15 +1,12 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Shield, MapPin, FileText, Headphones, BarChart3, Wallet, ArrowRight, Zap, Hash } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Shield, MapPin, FileText, Headphones, BarChart3, Zap, ShieldCheck, FileCheck, Play, X } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { useSegment } from "./segment-context"
-import { useDemoModal } from "./demo-modal-context"
 
-// ─── Solutions segmentadas ────────────────────────────────────────────────────
-const solutionsPersonas = [
+// ─── Servicios (presentación unificada — sin split personas/empresas) ─────────
+const solutions = [
   {
     icon: MapPin,
     title: "Monitoreo en tiempo real 24/7",
@@ -65,9 +62,31 @@ const solutionsPersonas = [
     badge: null,
     video: "/videos/services/reportes.mp4",
   },
+  {
+    // TODO: Copy final pendiente — equipo de marketing
+    icon: ShieldCheck,
+    title: "Seguros vehiculares",
+    description:
+      "Cotiza, compara y adquiere seguros para tu vehículo directamente desde la app. Protección real, sin intermediarios y en minutos.",
+    color: "text-chart-4",
+    bgIcon: "bg-chart-4/15",
+    borderHover: "hover:border-chart-4/40 hover:shadow-chart-4/10",
+    badge: "Próximamente",
+    video: null,
+  },
+  {
+    // TODO: Copy final pendiente — equipo de marketing
+    icon: FileCheck,
+    title: "SOAT digital",
+    description:
+      "Compra y renueva tu SOAT desde Simon sin filas ni trámites. Recibe tu póliza digital al instante y mantén tu vehículo siempre al día.",
+    color: "text-chart-3",
+    bgIcon: "bg-chart-3/15",
+    borderHover: "hover:border-chart-3/40 hover:shadow-chart-3/10",
+    badge: "Próximamente",
+    video: null,
+  },
 ]
-
-const solutionsEmpresas = solutionsPersonas
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 16 },
@@ -75,249 +94,229 @@ const fadeInUp = {
 }
 const stagger = { visible: { transition: { staggerChildren: 0.08 } } }
 
-// ─── SolutionCard with 3D flip to reveal video ───────────────────────────────
-type SolutionItem = (typeof solutionsPersonas)[number]
+// ─── Types ───────────────────────────────────────────────────────────────────
+type SolutionItem = (typeof solutions)[number]
 
-function SolutionCard({ item }: { item: SolutionItem }) {
+// ─── Video modal (backdrop blur + video centrado) ────────────────────────────
+function VideoModal({
+  item,
+  onClose,
+}: {
+  item: SolutionItem
+  onClose: () => void
+}) {
   const videoRef = useRef<HTMLVideoElement>(null)
-  const [flipped, setFlipped] = useState(false)
 
-  const handleMouseEnter = () => {
-    if (!item.video) return
-    setFlipped(true)
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose()
+    }
+    document.addEventListener("keydown", handleKey)
+    document.body.style.overflow = "hidden"
+    return () => {
+      document.removeEventListener("keydown", handleKey)
+      document.body.style.overflow = ""
+    }
+  }, [onClose])
+
+  useEffect(() => {
     if (videoRef.current) {
       videoRef.current.currentTime = 0
-      videoRef.current.play().catch(() => {/* autoplay blocked */})
+      videoRef.current.play().catch(() => {})
     }
-  }
-
-  const handleMouseLeave = () => {
-    if (!item.video) return
-    setFlipped(false)
-    if (videoRef.current) {
-      videoRef.current.pause()
-      videoRef.current.currentTime = 0
-    }
-  }
+  }, [])
 
   return (
     <motion.div
-      variants={fadeInUp}
-      className="cursor-default h-full"
-      style={{ perspective: 1000 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+      onClick={onClose}
+      role="dialog"
+      aria-label={`Video: ${item.title}`}
     >
-      {/* Flip container */}
-      <div
-        className="relative h-full transition-transform duration-500 [transform-style:preserve-3d]"
-        style={{ transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)" }}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+      {/* Backdrop blur */}
+      <div className="absolute inset-0 bg-black/70 backdrop-blur-md" />
+
+      {/* Modal content */}
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        transition={{ type: "spring", stiffness: 300, damping: 25 }}
+        className="relative w-full max-w-xs rounded-2xl overflow-hidden border border-border bg-card shadow-2xl shadow-black/50"
+        onClick={(e) => e.stopPropagation()}
       >
-        {/* ── FRONT ── */}
-        <div
-          className={cn(
-            "glass-card flex h-full flex-col rounded-2xl p-6 transition-shadow",
-            item.borderHover,
-            "[backface-visibility:hidden]"
-          )}
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+          aria-label="Cerrar video"
         >
-          {item.badge && (
-            <span className={cn(
-              "absolute top-4 right-4 rounded-full px-2 py-0.5 text-[10px] font-semibold",
-              item.badge === "Acceso anticipado"
-                ? "bg-primary/15 text-primary"
-                : item.badge.startsWith("Resuelve")
-                ? "bg-warning/15 text-warning"
-                : "bg-secondary/15 text-secondary"
-            )}>
-              {item.badge}
-            </span>
-          )}
+          <X className="h-4 w-4" />
+        </button>
 
-          <div
-            className={cn(
-              "mb-4 flex h-12 w-12 items-center justify-center rounded-xl",
-              item.bgIcon || "bg-primary/8"
-            )}
-          >
-            <item.icon className={cn("h-6 w-6", item.color || "text-primary")} aria-hidden="true" />
-          </div>
-
-          <h3 className="text-lg font-semibold text-foreground">{item.title}</h3>
-          <p className="mt-2 flex-grow text-sm leading-relaxed text-muted-foreground">{item.description}</p>
-
-          {item.disclaimer && (
-            <p className="mt-3 text-[11px] text-muted-foreground/55 italic">{item.disclaimer}</p>
-          )}
-
-          {"ctaLabel" in item && item.ctaLabel ? (
-            <div className="mt-3 flex items-center gap-1 text-xs font-medium text-chart-5">
-              {"ctaIcon" in item && item.ctaIcon && <item.ctaIcon className="h-3 w-3" aria-hidden="true" />}
-              {item.ctaLabel}
-            </div>
-          ) : (
-            <div className="mt-3 flex items-center gap-1 text-xs font-medium text-primary">
-              <Zap className="h-3 w-3" aria-hidden="true" />
-              Ver más detalles
-            </div>
-          )}
+        {/* Video */}
+        <div className="aspect-[9/16] w-full bg-black">
+          <video
+            ref={videoRef}
+            src={item.video!}
+            muted
+            loop
+            playsInline
+            className="h-full w-full object-contain"
+          />
         </div>
 
-        {/* ── BACK (video) — only rendered when there's a video ── */}
-        {item.video && (
+        {/* Title bar */}
+        <div className="flex items-center gap-3 px-4 py-3 bg-card border-t border-border">
           <div
             className={cn(
-              "absolute inset-0 rounded-2xl overflow-hidden border border-border",
-              "[backface-visibility:hidden] [transform:rotateY(180deg)]"
+              "flex h-9 w-9 shrink-0 items-center justify-center rounded-lg",
+              item.bgIcon
             )}
           >
-            <video
-              ref={videoRef}
-              src={item.video}
-              muted
-              loop
-              playsInline
-              preload="none"
-              className="h-full w-full object-contain"
-              aria-hidden="true"
-            />
-            {/* Title overlay at bottom */}
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent px-4 py-3">
-              <p className="text-sm font-semibold text-white">{item.title}</p>
-            </div>
+            <item.icon className={cn("h-5 w-5", item.color)} aria-hidden="true" />
           </div>
+          <p className="text-sm font-semibold text-foreground">{item.title}</p>
+        </div>
+      </motion.div>
+    </motion.div>
+  )
+}
+
+// ─── SolutionCard ────────────────────────────────────────────────────────────
+function SolutionCard({
+  item,
+  onPlay,
+}: {
+  item: SolutionItem
+  onPlay: (item: SolutionItem) => void
+}) {
+  return (
+    <motion.div
+      variants={fadeInUp}
+      whileHover={{ y: -4 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      className={cn(
+        "glass-card group relative flex h-full flex-col rounded-2xl p-6 transition-shadow",
+        item.borderHover,
+        item.video && "cursor-pointer"
+      )}
+      onClick={() => item.video && onPlay(item)}
+    >
+      {item.badge && (
+        <span className={cn(
+          "absolute top-4 right-4 rounded-full px-2 py-0.5 text-[10px] font-semibold",
+          "bg-secondary/15 text-secondary"
+        )}>
+          {item.badge}
+        </span>
+      )}
+
+      <div
+        className={cn(
+          "mb-4 flex h-12 w-12 items-center justify-center rounded-xl",
+          item.bgIcon || "bg-primary/8"
         )}
+      >
+        <item.icon className={cn("h-6 w-6", item.color || "text-primary")} aria-hidden="true" />
+      </div>
+
+      <h3 className="text-lg font-semibold text-foreground">{item.title}</h3>
+      <p className="mt-2 flex-grow text-sm leading-relaxed text-muted-foreground">{item.description}</p>
+
+      <div className="mt-3 flex items-center gap-1 text-xs font-medium text-primary">
+        <Zap className="h-3 w-3" aria-hidden="true" />
+        Ver más detalles
       </div>
     </motion.div>
   )
 }
 
 export function SolutionsGrid() {
-  const { segment, setSegment } = useSegment()
-  const { open: openDemoModal } = useDemoModal()
-  const solutions = segment === "empresas" ? solutionsEmpresas : solutionsPersonas
+  const [activeVideo, setActiveVideo] = useState<SolutionItem | null>(null)
+  const closeModal = useCallback(() => setActiveVideo(null), [])
 
   return (
-    <section
-      id="soluciones-grid"
-      className="bg-surface py-12 lg:py-16"
-      aria-labelledby="solutions-heading"
-    >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <>
+      <section
+        id="soluciones-grid"
+        className="bg-surface py-12 lg:py-16"
+        aria-labelledby="solutions-heading"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-        {/* Heading */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-          variants={stagger}
-          className="text-center"
-        >
-          <motion.span
-            variants={fadeInUp}
-            className="inline-block rounded-full bg-primary/10 px-4 py-1 text-sm text-primary"
-          >
-            Nuestros servicios
-          </motion.span>
-          <motion.h2
-            id="solutions-heading"
-            variants={fadeInUp}
-            className="mt-4 text-3xl font-bold text-foreground sm:text-4xl text-balance"
-          >
-            Nuestros servicios
-          </motion.h2>
-          <motion.p
-            variants={fadeInUp}
-            className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground"
-          >
-            En Simon Movilidad, integramos en un solo sistema las soluciones claves que necesitas para gestionar tu movilidad de forma simple, segura y eficiente. Desde el rastreo satelital 24/7, asistencias de movilidad*, geocercas inteligentes, guantera digital y más beneficios exclusivos para ti*
-          </motion.p>
-          <motion.p
-            variants={fadeInUp}
-            className="mx-auto mt-3 max-w-2xl text-xs italic text-muted-foreground/60"
-          >
-            *Sujeto a disponibilidad del prestador de servicio.
-          </motion.p>
-        </motion.div>
-
-        {/* Tabs Personas / Empresas */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.35 }}
-          className="mt-8 flex justify-center"
-        >
-          <div
-            className="flex gap-2 rounded-2xl border border-border bg-card/60 p-1.5"
-            role="group"
-            aria-label="Selecciona tu perfil"
-          >
-            {(["personas", "empresas"] as const).map((seg) => (
-              <button
-                key={seg}
-                onClick={() => setSegment(seg)}
-                className={cn(
-                  "rounded-xl px-6 py-2.5 text-sm font-semibold transition-all duration-200 capitalize",
-                  segment === seg
-                    ? "bg-primary text-primary-foreground shadow-sm"
-                    : "text-muted-foreground hover:text-foreground"
-                )}
-                aria-pressed={segment === seg}
-              >
-                {seg.charAt(0).toUpperCase() + seg.slice(1)}
-              </button>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Grid — con transición suave al cambiar segmento */}
-        <AnimatePresence mode="wait">
+          {/* Heading */}
           <motion.div
-            key={segment}
             initial="hidden"
-            animate="visible"
-            exit={{ opacity: 0, y: -8, transition: { duration: 0.2 } }}
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
             variants={stagger}
-            className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr"
+            className="text-center"
+          >
+            <motion.span
+              variants={fadeInUp}
+              className="inline-block rounded-full bg-primary/10 px-4 py-1 text-sm text-primary"
+            >
+              Nuestros servicios
+            </motion.span>
+            <motion.h2
+              id="solutions-heading"
+              variants={fadeInUp}
+              className="mt-4 text-3xl font-bold text-foreground sm:text-4xl text-balance"
+            >
+              Nuestros servicios
+            </motion.h2>
+            <motion.p
+              variants={fadeInUp}
+              className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground"
+            >
+              En Simon Movilidad, integramos en un solo sistema las soluciones claves que necesitas para gestionar tu movilidad de forma simple, segura y eficiente. Desde el rastreo satelital 24/7, asistencias de movilidad*, geocercas inteligentes, guantera digital y más beneficios exclusivos para ti*
+            </motion.p>
+            <motion.p
+              variants={fadeInUp}
+              className="mx-auto mt-3 max-w-2xl text-xs italic text-muted-foreground/60"
+            >
+              *Sujeto a disponibilidad del prestador de servicio.
+            </motion.p>
+          </motion.div>
+
+          {/* Grid — presentación unificada */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={stagger}
+            className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-rows-fr"
           >
             {solutions.map((item) => (
-              <SolutionCard key={item.title} item={item} />
+              <SolutionCard key={item.title} item={item} onPlay={setActiveVideo} />
             ))}
           </motion.div>
-        </AnimatePresence>
 
-        {/* Section disclaimer */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-          className="mt-6 text-center text-xs text-muted-foreground/60 italic"
-        >
-          * Sujeto a disponibilidad del prestador de servicio.
-        </motion.p>
-
-        {/* CTA — solo visible en tab Empresas */}
-        {segment === "empresas" && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-            className="mt-10 flex justify-center"
+          {/* Section disclaimer */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="mt-6 text-center text-xs text-muted-foreground/60 italic"
           >
-            <Button
-              size="lg"
-              className="bg-primary text-primary-foreground hover:bg-primary-hover glow-primary group"
-              onClick={openDemoModal}
-            >
-              Agendar demo gratuita
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-            </Button>
-          </motion.div>
-        )}
+            * Sujeto a disponibilidad del prestador de servicio.
+          </motion.p>
 
-      </div>
-    </section>
+        </div>
+      </section>
+
+      {/* Video modal — backdrop blur + video centrado */}
+      <AnimatePresence>
+        {activeVideo && activeVideo.video && (
+          <VideoModal item={activeVideo} onClose={closeModal} />
+        )}
+      </AnimatePresence>
+    </>
   )
 }

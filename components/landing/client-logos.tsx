@@ -11,6 +11,7 @@ const clients = [
   { name: "Equirent",        logo: "/logos/equirent.png" },
   { name: "Dongfeng",        logo: "/logos/dongfeng.png" },
   { name: "Confirmeza",      logo: "/logos/confirmeza.png" },
+  { name: "Forland",         logo: "/logos/forland.png" },
 ]
 
 // Double for seamless loop
@@ -61,7 +62,7 @@ export function ClientLogos() {
                 <img
                   src={client.logo}
                   alt={client.name}
-                  className="h-8 w-auto max-w-[110px] object-contain"
+                  className="h-12 w-auto max-w-[160px] object-contain"
                   loading="lazy"
                 />
               </div>

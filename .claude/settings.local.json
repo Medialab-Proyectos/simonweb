@@ -43,7 +43,11 @@
       "Bash(powershell -Command \"Get-ChildItem 'C:\\\\Users\\\\coben\\\\OneDrive\\\\Desktop\\\\Simon\\\\Web\\\\Version1\\\\simonweb\\\\public\\\\images' | Select-Object Name\")",
       "Bash(powershell -Command \"Get-ChildItem 'C:\\\\Users\\\\coben\\\\OneDrive\\\\Desktop\\\\Simon\\\\Web\\\\Version1\\\\simonweb\\\\app' -Recurse | Select-Object FullName\")",
       "Bash(powershell -Command \"Select-String -Path 'C:\\\\Users\\\\coben\\\\OneDrive\\\\Desktop\\\\Simon\\\\Web\\\\Version1\\\\simonweb\\\\components\\\\landing-v3\\\\hero.tsx' -Pattern 'Right|mockup|HeroApp|justify-end' | Select-Object LineNumber, Line\")",
-      "Bash(python -c ':*)"
+      "Bash(python -c ':*)",
+      "Bash(identify \"C:\\\\Users\\\\coben\\\\OneDrive\\\\Desktop\\\\Simon\\\\Web\\\\Version1\\\\simonweb\\\\public\\\\images\\\\avatar.png\")",
+      "Bash(npx tsc:*)",
+      "WebFetch(domain:www.simonmovilidad.com)",
+      "WebFetch(domain:simonmovilidad.com)"
     ]
   }
 }

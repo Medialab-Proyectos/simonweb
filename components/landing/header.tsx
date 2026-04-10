@@ -73,7 +73,7 @@ export function Header() {
           <div className="hidden items-center gap-3 lg:flex">
             {segment === "personas" ? (
               <Link
-                href="https://play.google.com/store/apps/details?id=com.simonmovilidad"
+                href="https://play.google.com/store/apps/details?id=ve.org.finanzauto&pcampaignid=web_share"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
@@ -99,7 +99,7 @@ export function Header() {
             ) : (
               /* R11: Finanzauto — acceso directo a cuenta */
               <Link
-                href="https://app.simonmovilidad.com/login"
+                href="https://www.simonmovilidad.com/app/login"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
@@ -112,7 +112,7 @@ export function Header() {
               </Link>
             )}
             <Link
-              href="https://app.simonmovilidad.com/login"
+              href="https://www.simonmovilidad.com/app/login"
               target="_blank"
               rel="noopener noreferrer"
               className={cn(
@@ -169,7 +169,7 @@ export function Header() {
                   {/* Primary conversion CTA */}
                   {segment === "personas" ? (
                     <Link
-                      href="https://play.google.com/store/apps/details?id=com.simonmovilidad"
+                      href="https://play.google.com/store/apps/details?id=ve.org.finanzauto&pcampaignid=web_share"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center justify-center gap-2 w-full rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary-hover transition-all"
@@ -188,7 +188,7 @@ export function Header() {
                   ) : (
                     /* R11: Finanzauto mobile */
                     <Link
-                      href="https://app.simonmovilidad.com/login"
+                      href="https://www.simonmovilidad.com/app/login"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center justify-center gap-2 w-full rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary-hover transition-all"
@@ -209,7 +209,7 @@ export function Header() {
                   </Link>
                   {/* Login */}
                   <Link
-                    href="https://app.simonmovilidad.com/login"
+                    href="https://www.simonmovilidad.com/app/login"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block w-full rounded-xl px-5 py-2.5 text-center text-sm text-muted-foreground hover:text-primary transition-colors"
