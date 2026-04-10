@@ -1,5 +1,8 @@
+"use client"
+
 import { Phone, Mail, MessageCircle } from "lucide-react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Logo } from "./logo"
 
 const footerLinks = {
@@ -17,6 +20,9 @@ const footerLinks = {
 }
 
 export function Footer() {
+  usePathname()
+  const sectionBasePath = "/v4"
+
   return (
     <footer
       id="contacto"
@@ -30,7 +36,13 @@ export function Footer() {
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {/* Col 1: Marca + contacto */}
           <div className="col-span-2 sm:col-span-2 lg:col-span-1 flex flex-col items-start">
-            <Logo className="h-12 w-auto" />
+            <Link
+              href="/v4"
+              className="rounded-lg focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 hover:opacity-90 transition-opacity"
+              aria-label="Simon Movilidad - Inicio"
+            >
+              <Logo className="h-12 w-auto" />
+            </Link>
             <p className="mt-4 max-w-xs text-sm text-muted-foreground">
               La tecnología que transforma tu movilidad.
             </p>
@@ -71,7 +83,7 @@ export function Footer() {
               {footerLinks.empresa.map((link) => (
                 <li key={link.label}>
                   <Link
-                    href={link.href}
+                    href={`${sectionBasePath}${link.href}`}
                     className="text-sm text-muted-foreground transition-colors hover:text-primary"
                   >
                     {link.label}

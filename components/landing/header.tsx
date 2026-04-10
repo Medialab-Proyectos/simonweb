@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, Download } from "lucide-react"
 import { Logo } from "./logo"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { useSegment } from "./segment-context"
 
@@ -20,6 +21,8 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { segment } = useSegment()
+  usePathname()
+  const sectionBasePath = "/v4"
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20)
@@ -48,7 +51,7 @@ export function Header() {
 
           {/* Logo */}
           <Link
-            href="/"
+            href="/v4"
             className="flex items-center gap-2.5 rounded-lg focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 hover:opacity-90 transition-opacity"
             aria-label="Simon Movilidad — Inicio"
           >
@@ -60,7 +63,7 @@ export function Header() {
             {navLinks.map((link) => (
               <Link
                 key={link.href}
-                href={link.href}
+                href={`${sectionBasePath}${link.href}`}
                 className="text-sm text-muted-foreground transition-colors hover:text-primary relative group"
               >
                 {link.label}
@@ -158,7 +161,7 @@ export function Header() {
                 {navLinks.map((link) => (
                   <Link
                     key={link.href}
-                    href={link.href}
+                    href={`${sectionBasePath}${link.href}`}
                     className="rounded-lg px-3 py-2.5 text-base text-muted-foreground transition-colors hover:bg-card hover:text-foreground"
                     onClick={closeMobileMenu}
                   >
