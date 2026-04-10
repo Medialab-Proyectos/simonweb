@@ -64,6 +64,13 @@ export function Footer() {
                 01 8000 189 890
               </a>
               <a
+                href="tel:%23230"
+                className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
+              >
+                <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
+                #230 (Tigo, Claro y Movistar)
+              </a>
+              <a
                 href="mailto:servicioalcliente@simonmovilidad.com"
                 className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
               >
