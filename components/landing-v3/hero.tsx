@@ -9,15 +9,15 @@ import Image from "next/image"
 // ─── Segment content ──────────────────────────────────────────────────────────
 const segmentContent = {
   personas: {
-    headline: "Gestión vehicular",
+    headline: "Control vehicular",
     headlineAccent: "inteligente",
-    sub: "Soluciones de vanguardia para tener el control total de tu flota o vehículo particular.",
+    sub: "Monitorea, protege y gestiona tu vehículo o flota en tiempo real.",
     microcopy: "",
   },
   empresas: {
-    headline: "Gestión vehicular",
+    headline: "Control vehicular",
     headlineAccent: "inteligente",
-    sub: "Soluciones de vanguardia para tener el control total de tu flota o vehículo particular.",
+    sub: "Monitorea, protege y gestiona tu vehículo o flota en tiempo real.",
     microcopy: "",
   },
 }
@@ -47,7 +47,7 @@ export function Hero() {
       {/* ── Background ────────────────────────────────────────────────── */}
       <div className="absolute inset-0" aria-hidden="true">
         <Image
-          src="/images/fondo1.png"
+          src="/images/fondo12.png"
           alt=""
           fill
           className="object-cover object-center"

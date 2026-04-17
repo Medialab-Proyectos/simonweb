@@ -75,19 +75,36 @@ export function Header() {
           {/* Desktop: conversion CTA + Login */}
           <div className="hidden items-center gap-3 lg:flex">
             {segment === "personas" ? (
-              <Link
-                href="https://play.google.com/store/apps/details?id=ve.org.finanzauto&pcampaignid=web_share"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={cn(
-                  "flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground",
-                  "transition-all duration-200 hover:bg-primary-hover hover:shadow-[0_0_16px_rgba(0,255,194,0.25)]",
-                  "focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
-                )}
-              >
-                <Download className="h-4 w-4" aria-hidden="true" />
-                Descargar app
-              </Link>
+              <div className="relative group">
+                <button
+                  className={cn(
+                    "flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground",
+                    "transition-all duration-200 hover:bg-primary-hover hover:shadow-[0_0_16px_rgba(0,255,194,0.25)]",
+                    "focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
+                  )}
+                >
+                  <Download className="h-4 w-4" aria-hidden="true" />
+                  Descargar app
+                </button>
+                <div className="invisible absolute right-0 top-full z-50 mt-2 min-w-44 rounded-lg border border-border bg-card p-1 opacity-0 shadow-xl transition-all group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                  <Link
+                    href="https://play.google.com/store/apps/details?id=ve.org.finanzauto&pcampaignid=web_share"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-primary/10 hover:text-primary"
+                  >
+                    Google Play
+                  </Link>
+                  <Link
+                    href="https://apps.apple.com/co/app/simon-movilidad/id1569524088"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-primary/10 hover:text-primary"
+                  >
+                    App Store
+                  </Link>
+                </div>
+              </div>
             ) : segment === "empresas" ? (
               <button
                 onClick={handleDemoScroll}
@@ -171,16 +188,27 @@ export function Header() {
                 <div className="mt-4 border-t border-border pt-4 flex flex-col gap-2">
                   {/* Primary conversion CTA */}
                   {segment === "personas" ? (
-                    <Link
-                      href="https://play.google.com/store/apps/details?id=ve.org.finanzauto&pcampaignid=web_share"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 w-full rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary-hover transition-all"
-                      onClick={closeMobileMenu}
-                    >
-                      <Download className="h-4 w-4" aria-hidden="true" />
-                      Descargar app
-                    </Link>
+                    <div className="grid grid-cols-2 gap-2">
+                      <Link
+                        href="https://play.google.com/store/apps/details?id=ve.org.finanzauto&pcampaignid=web_share"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary-hover transition-all"
+                        onClick={closeMobileMenu}
+                      >
+                        <Download className="h-4 w-4" aria-hidden="true" />
+                        Google Play
+                      </Link>
+                      <Link
+                        href="https://apps.apple.com/co/app/simon-movilidad/id1569524088"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary-hover transition-all"
+                        onClick={closeMobileMenu}
+                      >
+                        App Store
+                      </Link>
+                    </div>
                   ) : segment === "empresas" ? (
                     <button
                       className="w-full rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary-hover transition-all"

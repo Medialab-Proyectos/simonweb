@@ -229,7 +229,7 @@ export function FinalCTA() {
                   aria-label="Control de movilidad desde la aplicación Simon"
                 >
                   <Image
-                    src="/images/audience-personas-new.png"
+                    src="/images/audience-personas.png"
                     alt="Persona usando la app Simon en su vehículo"
                     fill
                     className="object-cover"

@@ -23,7 +23,7 @@ const segments = [
     ],
     image: {
       alt: "Persona usando la app Simon junto a su vehículo",
-      src: "/images/audience-personas-new.png",
+      src: "/images/audience-personas.png",
     },
     activeAccent: "border-primary/40 ring-2 ring-primary/20 shadow-lg shadow-primary/10",
     inactiveAccent: "border-border hover:border-primary/25 hover:shadow-md",

@@ -17,18 +17,18 @@ import { useSegment } from "./segment-context"
 
 const personasProblems = [
   {
-    problem: "No saber dónde está tu vehículo",
-    solution: "Ubicación en tiempo real desde tu celular",
+    problem: "No saber dónde está tu vehículo.",
+    solution: "Obtén la ubicación en tiempo real desde tu celular.",
     icon: MapPin,
   },
   {
-    problem: "Olvidar documentos y mantenimientos",
-    solution: "Documentos del vehículo con alertas automáticas",
+    problem: "Olvidar documentos y mantenimientos.",
+    solution: "Recibe alertas automáticas para que tengas el control.",
     icon: FileText,
   },
   {
-    problem: "Preocupación constante por la seguridad",
-    solution: "Monitoreo 24/7 y alertas instantáneas",
+    problem: "Preocupación constante por tu seguridad.",
+    solution: "Monitoreo 24/7 con alertas instantáneas.",
     icon: Shield,
   },
 ]
@@ -90,7 +90,7 @@ export function ProblemSection() {
             >
               <Image
                 src={activeTab === "personas"
-                  ? "/images/audience-personas-new.png"
+                  ? "/images/audience-personas.png"
                   : "/images/audience-empresas-new.png"}
                 alt={activeTab === "personas"
                   ? "Usuario verificando la ubicación de su vehículo desde el celular"
@@ -110,8 +110,7 @@ export function ProblemSection() {
             >
               <p className="text-sm leading-relaxed text-muted-foreground">
                 <span className="font-semibold text-foreground">Simon elimina esa incertidumbre.</span>{" "}
-                Sabe dónde está tu vehículo, cuándo vencen tus documentos y recibe alertas
-                en el momento justo — todo desde tu celular.
+                Gestionar tu vehículo debe ser tan fácil como tenerlo en la palma de tu mano.
               </p>
             </motion.div>
           </motion.div>
@@ -131,16 +130,23 @@ export function ProblemSection() {
             >
               ¿Te identificas con alguno de estos desafíos?
             </motion.h2>
+            <motion.p
+              variants={fadeInUp}
+              className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground"
+            >
+              Selecciona tu perfil para ver los problemas más comunes y cómo Simon los resuelve.
+            </motion.p>
 
             {/* Tab toggle */}
             <motion.div
               variants={fadeInUp}
-              className="mt-8"
+              className="mt-6"
             >
+              <p className="mb-3 text-sm font-medium text-foreground">Elige una opción:</p>
               <div
                 className="inline-flex rounded-xl border border-border bg-card p-1"
                 role="tablist"
-                aria-label="Segmento de cliente"
+                aria-label="Selecciona tu perfil"
               >
                 {(["personas", "empresas"] as Tab[]).map((tab) => (
                   <button
@@ -158,7 +164,7 @@ export function ProblemSection() {
                     ) : (
                       <Building2 className="h-4 w-4" aria-hidden="true" />
                     )}
-                    {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                    {tab === "personas" ? "Para personas" : "Para empresas"}
                   </button>
                 ))}
               </div>

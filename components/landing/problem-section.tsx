@@ -8,7 +8,7 @@ const highlights = [
     icon: Shield,
     title: "Seguridad",
     description:
-      "Te brindamos seguridad, monitoreo constante y alertas instantáneas 24/7 para tu tranquilidad.",
+      "Monitoreo constante y alertas instantáneas 24/7 para tu tranquilidad.",
     color: "text-primary",
     bg: "bg-primary/10",
   },
@@ -16,7 +16,7 @@ const highlights = [
     icon: Zap,
     title: "Monitoreo",
     description:
-      "Tendrás el control total con soluciones digitales para la gestión de tu vehículo particular y optimización avanzada de flotas.",
+      "Control total con soluciones digitales para la gestión de tu vehículo particular y optimización avanzada de flotas.",
     color: "text-secondary",
     bg: "bg-secondary/10",
   },
@@ -31,7 +31,7 @@ const highlights = [
     icon: Clock,
     title: "Garantizamos tu movilidad",
     description:
-      "Contamos con estándares de compliance y el aval del MinTIC que respalda la calidad y seguridad de nuestras soluciones tecnológicas.",
+      "Contamos con altos estándares de cumplimiento normativo y el aval del MinTIC, que respalda la calidad y seguridad de nuestras soluciones tecnológicas.",
     color: "text-warning",
     bg: "bg-warning/10",
   },
@@ -72,7 +72,7 @@ export function ProblemSection() {
               variants={fadeInUp}
               className="mt-5 text-3xl font-bold text-foreground sm:text-4xl lg:text-[2.75rem] leading-tight text-balance"
             >
-              Tu aliado estratégico en la vía, con tecnología que te da{" "}
+              Control inteligente en cada kilómetro con{" "}
               <span className="gradient-text">control total</span>.
             </motion.h2>
 
@@ -80,7 +80,7 @@ export function ProblemSection() {
               variants={fadeInUp}
               className="mt-5 text-lg leading-relaxed text-muted-foreground max-w-xl"
             >
-              Con más de 4 años impulsando la movilidad inteligente del país, Simon Movilidad es tu aliado tecnológico para una gestión vehicular más eficiente y segura. Integramos telemetría avanzada: Rastreo satelital, análisis de datos, optimización de rutas y protección de activos. Así transformamos tu experiencia en el camino.
+              En Simon Movilidad combinamos tecnología y datos para que gestiones tu vehículo y flota de forma más eficiente, segura y rentable. Con telemetría avanzada, rastreo en tiempo real y optimización inteligente de rutas, te damos visibilidad y control para tomar mejores decisiones en el camino. Así transformamos tu experiencia en el camino.
             </motion.p>
 
           </motion.div>

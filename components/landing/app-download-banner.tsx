@@ -9,7 +9,7 @@ import Image from "next/image"
 const features = [
   { icon: MapPin,   label: "Rastreo en tiempo real", color: "text-primary" },
   { icon: Bell,     label: "Alertas inteligentes", color: "text-warning" },
-  { icon: FileText, label: "Guantera digital", color: "text-secondary" },
+  { icon: FileText, label: "Documentos siempre al día", color: "text-secondary" },
   { icon: Shield,   label: "Seguridad 24/7", color: "text-success" },
 ]
 
@@ -73,15 +73,14 @@ export function AppDownloadBanner() {
                 variants={fadeInUp}
                 className="mt-4 text-3xl font-bold text-foreground sm:text-4xl text-balance"
               >
-                Simon en tu bolsillo,{" "}
-                <span className="gradient-text">siempre disponible</span>
+                Controla tu vehículo desde tu celular, en cualquier momento.
               </motion.h2>
 
               <motion.p
                 variants={fadeInUp}
                 className="mt-4 text-lg text-muted-foreground"
               >
-                Descarga Simon Movilidad y tendrás control total de tu vehículo o flota desde cualquier lugar, en cualquier momento.
+                Descarga gratis la app de Simon. Gestiona, protege y monitorea en tiempo real, desde donde estés.
               </motion.p>
 
               {/* Feature list with hover micro-interactions */}

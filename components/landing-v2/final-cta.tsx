@@ -121,7 +121,7 @@ export function FinalCTAV2() {
 
             <div className="mt-6 relative h-48 rounded-xl overflow-hidden border border-border">
               <Image
-                src="/images/audience-personas-new.png"
+                src="/images/audience-personas.png"
                 alt="Persona usando la app Simon en su vehículo"
                 fill
                 className="object-cover"

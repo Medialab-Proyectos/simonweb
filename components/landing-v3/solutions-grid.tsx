@@ -257,24 +257,18 @@ export function SolutionsGrid() {
             variants={stagger}
             className="text-center"
           >
-            <motion.span
-              variants={fadeInUp}
-              className="inline-block rounded-full bg-primary/10 px-4 py-1 text-sm text-primary"
-            >
-              Nuestros servicios
-            </motion.span>
             <motion.h2
               id="solutions-heading"
               variants={fadeInUp}
-              className="mt-4 text-3xl font-bold text-foreground sm:text-4xl text-balance"
+              className="text-3xl font-bold text-foreground sm:text-4xl text-balance"
             >
-              Nuestros servicios
+              Todo lo que necesitas para tener el control de tu vehículo.
             </motion.h2>
             <motion.p
               variants={fadeInUp}
               className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground"
             >
-              En Simon Movilidad, integramos en un solo sistema las soluciones claves que necesitas para gestionar tu movilidad de forma simple, segura y eficiente. Desde el rastreo satelital 24/7, asistencias de movilidad*, geocercas inteligentes, guantera digital y más beneficios exclusivos para ti*
+              Gestiona, protege y optimiza tu vehículo desde un solo lugar. Descubre cómo cada solución trabaja para ti:
             </motion.p>
             <motion.p
               variants={fadeInUp}

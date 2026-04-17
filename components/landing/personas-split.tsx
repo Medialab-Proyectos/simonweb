@@ -14,27 +14,27 @@ import {
 const benefits = [
   {
     icon: FileCheck,
-    title: "Todo bajo control y en orden",
+    title: "Todo en orden, sin esfuerzo.",
     description:
-      "Centralizamos toda tu documentación (SOAT…) y podrás gestionar tu vehículo de forma simple y eficiente desde un solo lugar.",
+      "Centraliza, recibe alertas y mantén tu vehículo al día, sin perder tiempo ni preocuparte por vencimientos.",
   },
   {
     icon: PiggyBank,
-    title: "Ahorra en cada kilómetro",
+    title: "Ahorro más en cada kilómetro.",
     description:
-      "Reduce significativamente los gastos de operación y mantenimiento, convirtiendo tu vehículo en una inversión inteligente y sostenible. Al conocer el estado y rendimiento real de tu unidad, podrás tomar decisiones proactivas basadas en datos para evitar fallas y optimizar su uso.",
+      "Con información en tiempo real, anticipas fallas, optimizas tu vehículo y tomas decisiones inteligentes que impactan directamente tu bolsillo.",
   },
   {
     icon: LineChart,
-    title: "Información para decidir mejor",
+    title: "Decide con inteligencia.",
     description:
-      "Accede a datos en tiempo real sobre el estado y rendimiento de tu vehículo. Toma decisiones proactivas basadas en información inteligente para evitar fallas y optimizar su uso.",
+      "Datos en tiempo real para anticiparte, optimizar tu vehículo y tomar decisiones que realmente marcan la diferencia.",
   },
   {
     icon: HeartHandshake,
-    title: "Vive sin estrés",
+    title: "Conduce sin preocupaciones.",
     description:
-      "Nuestra plataforma protege tu vehículo 24/7 y te respalda de forma automática en cualquier situación crítica.",
+      "Protección 24/7 y alertas en tiempo real para que siempre estés un paso adelante ante cualquier situación.",
   },
 ]
 
@@ -74,7 +74,7 @@ export function PersonasSplit() {
               className="inline-flex items-center gap-2 rounded-full bg-primary/10 border border-primary/20 px-4 py-1.5 text-sm text-primary"
             >
               <Car className="h-3.5 w-3.5" aria-hidden="true" />
-              Simon para personas
+              Para personas
             </motion.span>
 
             <motion.h2
@@ -82,15 +82,14 @@ export function PersonasSplit() {
               variants={fadeInUp}
               className="mt-5 text-3xl font-bold text-foreground sm:text-4xl lg:text-[2.75rem] leading-tight text-balance"
             >
-              Tu movilidad segura y{" "}
-              <span className="gradient-text">bajo control</span>
+              Tu vehículo, bajo control total.
             </motion.h2>
 
             <motion.p
               variants={fadeInUp}
               className="mt-5 text-lg leading-relaxed text-muted-foreground max-w-lg"
             >
-              Controla tu vehículo y protege a tu familia con la tecnología de rastreo más intuitiva del mercado.
+              Información en tiempo real para monitorear, proteger y decidir mejor, siempre.
             </motion.p>
 
             {/* Benefits — desplegables */}
@@ -138,7 +137,7 @@ export function PersonasSplit() {
           >
             <div className="relative h-[380px] lg:h-[480px] overflow-hidden rounded-2xl border border-white/10">
               <Image
-                src="/images/audience-personas-new.png"
+                src="/images/audience-personas.png"
                 alt="Usuario controlando su vehículo desde la app Simon Movilidad"
                 fill
                 className="object-cover"

@@ -20,16 +20,10 @@ export function ProductShowcase() {
           variants={stagger}
           className="text-center"
         >
-          <motion.span
-            variants={fadeInUp}
-            className="inline-block rounded-full bg-primary/10 px-4 py-1 text-sm text-primary"
-          >
-            El producto
-          </motion.span>
           <motion.h2
             id="showcase-heading"
             variants={fadeInUp}
-            className="mt-4 text-3xl font-bold text-foreground sm:text-4xl text-balance"
+            className="text-3xl font-bold text-foreground sm:text-4xl text-balance"
           >
             Así se ve Simon en tu día a día
           </motion.h2>

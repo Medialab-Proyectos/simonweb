@@ -179,19 +179,19 @@ export default function V4Page() {
             {/* 7. Todo en un solo lugar — V3 */}
             <SolutionsGrid />
 
-            {/* 8. Confían en Simon — Versión Principal */}
-            <ClientLogos />
-
-            {/* 9. FAQ — Versión Principal */}
-            <FAQSection />
-
-            {/* 10a. Simon para Personas — "Tu movilidad segura y bajo control" */}
+            {/* 8. Simon para Personas — "Tu vehículo, bajo control total" */}
             <PersonasSplit />
 
-            {/* 10b. Simon para Empresas — Versión Principal */}
+            {/* 9. Simon para Empresas — Versión Principal */}
             <AudienceSplit />
 
-            {/* 11. Descarga la app — V2 (componente de versión principal) */}
+            {/* 10. FAQ — Versión Principal */}
+            <FAQSection />
+
+            {/* 11. Confían en Simon — Versión Principal */}
+            <ClientLogos />
+
+            {/* 12. Descarga la app — V2 (componente de versión principal) */}
             <AppDownloadBanner />
           </main>
 

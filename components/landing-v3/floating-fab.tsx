@@ -109,6 +109,7 @@ export function FloatingFab() {
   const [isChatOpen,    setIsChatOpen]    = useState(false)
   const [hasUnread,     setHasUnread]     = useState(false)
   const [showTooltip,   setShowTooltip]   = useState(false)
+  const widgetRef = useRef<HTMLDivElement>(null)
 
   // Muestra el tooltip una sola vez, 3s después de cargar, durante 6s
   useEffect(() => {
@@ -128,6 +129,22 @@ export function FloatingFab() {
   const [isTyping,  setIsTyping]  = useState(false)
   const endRef   = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (!isDialOpen && !isChatOpen) return
+
+    const handlePointerDown = (event: PointerEvent) => {
+      const target = event.target
+      if (!(target instanceof Node)) return
+      if (widgetRef.current?.contains(target)) return
+
+      setIsDialOpen(false)
+      setIsChatOpen(false)
+    }
+
+    document.addEventListener("pointerdown", handlePointerDown)
+    return () => document.removeEventListener("pointerdown", handlePointerDown)
+  }, [isDialOpen, isChatOpen])
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" })
@@ -166,7 +183,7 @@ export function FloatingFab() {
   }
 
   return (
-    <>
+    <div ref={widgetRef}>
       {/* ── Chat panel ──────────────────────────────────────────────────── */}
       <AnimatePresence>
         {isChatOpen && (
@@ -363,7 +380,7 @@ export function FloatingFab() {
             setIsDialOpen((v) => !v)
           }
         }}
-        className="fixed bottom-6 right-6 z-50 flex h-16 w-16 items-center justify-center rounded-full bg-card border-2 border-border shadow-xl shadow-black/30 hover:border-primary/50 transition-colors"
+        className="fixed bottom-6 right-6 z-50 flex h-16 w-16 items-center justify-center rounded-full bg-background border-2 border-primary shadow-xl shadow-primary/25 ring-4 ring-background/70 hover:bg-card transition-colors"
         aria-label={isChatOpen ? "Cerrar chat" : isDialOpen ? "Cerrar contacto" : "Contactar a Simon"}
         aria-expanded={isDialOpen || isChatOpen}
       >
@@ -424,6 +441,6 @@ export function FloatingFab() {
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </div>
   )
 }

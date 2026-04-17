@@ -201,17 +201,11 @@ html.light .glass-card {
 
 /* ─── Gradient text ──────────────────────────────────────────────────── */
 .gradient-text {
-  background: linear-gradient(135deg, #00FFC2 0%, #19B5FF 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--primary);
 }
 
 html.light .gradient-text {
-  background: linear-gradient(135deg, #00CFC0 0%, #0EA5E9 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--primary);
 }
 
 /* ─── Glow ───────────────────────────────────────────────────────────── */

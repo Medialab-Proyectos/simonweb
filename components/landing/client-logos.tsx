@@ -29,7 +29,7 @@ export function ClientLogos() {
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-3 text-center text-xs font-semibold uppercase tracking-widest text-muted-foreground"
+          className="mb-3 text-center text-sm font-semibold uppercase tracking-widest text-primary"
         >
           Nuestros clientes
         </motion.p>
@@ -39,7 +39,7 @@ export function ClientLogos() {
           viewport={{ once: true }}
           className="mb-10 text-center text-base text-muted-foreground"
         >
-          Quienes confían en nosotros, saben de movilidad.
+          Empresas que ya gestionan su movilidad con mayor control, seguridad y eficiencia.
         </motion.p>
 
         {/* Marquee */}

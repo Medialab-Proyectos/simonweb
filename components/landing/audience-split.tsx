@@ -109,7 +109,7 @@ export function AudienceSplit() {
               className="inline-flex items-center gap-2 rounded-full bg-secondary/10 border border-secondary/20 px-4 py-1.5 text-sm text-secondary"
             >
               <Building2 className="h-3.5 w-3.5" aria-hidden="true" />
-              Simon para tu empresa
+              Para empresas
             </motion.span>
 
             <motion.h2
@@ -117,14 +117,14 @@ export function AudienceSplit() {
               variants={fadeInUp}
               className="mt-5 text-3xl font-bold text-foreground sm:text-4xl lg:text-[2.75rem] leading-tight text-balance"
             >
-              Simon para tu <span className="gradient-text">empresa</span>
+              Control total para tu operación en tiempo real.
             </motion.h2>
 
             <motion.p
               variants={fadeInUp}
               className="mt-5 text-lg leading-relaxed text-muted-foreground max-w-lg"
             >
-              Contáctanos y podrás vivir una experiencia con soluciones inteligentes que optimizan el control, reducen costos y mejoran la productividad de tu flota. Agenda una demostración personalizada y descubre cómo Simon transforma la rentabilidad de tu operación.
+              Centraliza la gestión de tu flota, obtén visibilidad en tiempo real y toma decisiones que optimizan costos y mejoran la productividad. Solicita un demo y descubre cómo mejorar la eficiencia y rentabilidad de tu operación.
             </motion.p>
 
             {/* Benefits grid */}
@@ -161,7 +161,7 @@ export function AudienceSplit() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Conoce nuestras soluciones
+                  Solicita tu demo aquí
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
                 </a>
               </Button>
