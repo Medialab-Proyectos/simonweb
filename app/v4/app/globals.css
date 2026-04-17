@@ -1,0 +1,355 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+/* ─── Simon Movilidad — Dark Theme (default) ─────────────────────────── */
+:root {
+  --background: #080808;
+  --foreground: #F5F7FA;
+
+  --card: #111118;
+  --card-foreground: #F5F7FA;
+
+  --surface: #0c0c12;
+
+  --popover: #111118;
+  --popover-foreground: #F5F7FA;
+
+  --primary: #00FFC2;
+  --primary-foreground: #0a0a0a;
+  --primary-hover: #00E5B3;
+
+  --secondary: #19B5FF;
+  --secondary-foreground: #0a0a0a;
+
+  --muted: #0c0c12;
+  --muted-foreground: #A7B4C2;
+
+  --accent: #00FFC2;
+  --accent-foreground: #0a0a0a;
+
+  --success: #2AD67A;
+  --warning: #FFB547;
+  --destructive: #FF4D4D;
+  --destructive-foreground: #F5F7FA;
+
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.08);
+  --ring: #00FFC2;
+
+  --chart-1: #00FFC2;
+  --chart-2: #19B5FF;
+  --chart-3: #2AD67A;
+  --chart-4: #FFB547;
+  --chart-5: #FF4D4D;
+
+  --radius: 0.75rem;
+
+  --sidebar: #0c0c12;
+  --sidebar-foreground: #F5F7FA;
+  --sidebar-primary: #00FFC2;
+  --sidebar-primary-foreground: #0a0a0a;
+  --sidebar-accent: #111118;
+  --sidebar-accent-foreground: #F5F7FA;
+  --sidebar-border: rgba(255, 255, 255, 0.08);
+  --sidebar-ring: #00FFC2;
+}
+
+/* ─── Simon Movilidad — Light Theme ──────────────────────────────────── */
+html.light {
+  --background: #F7FAFC;
+  --foreground: #0F1722;
+
+  --card: #FFFFFF;
+  --card-foreground: #0F1722;
+
+  --surface: #F1F6FA;
+
+  --popover: #FFFFFF;
+  --popover-foreground: #0F1722;
+
+  --primary: #00CFC0;
+  --primary-foreground: #FFFFFF;
+  --primary-hover: #00B8AB;
+
+  --secondary: #0EA5E9;
+  --secondary-foreground: #FFFFFF;
+
+  --muted: #F1F6FA;
+  --muted-foreground: #4B5B6B;
+
+  --accent: #00CFC0;
+  --accent-foreground: #FFFFFF;
+
+  --success: #16A34A;
+  --warning: #D97706;
+  --destructive: #DC2626;
+  --destructive-foreground: #FFFFFF;
+
+  --border: #D8E2EC;
+  --input: #D8E2EC;
+  --ring: #00CFC0;
+
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #0F1722;
+  --sidebar-primary: #00CFC0;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #F1F6FA;
+  --sidebar-accent-foreground: #0F1722;
+  --sidebar-border: #D8E2EC;
+  --sidebar-ring: #00CFC0;
+}
+
+@theme inline {
+  --font-sans: 'Inter', 'Geist', 'Geist Fallback', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback', monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-surface: var(--surface);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--background); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.22); }
+
+html.light ::-webkit-scrollbar-track { background: #F7FAFC; }
+html.light ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 4px; }
+html.light ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.22); }
+
+/* ─── Glass ──────────────────────────────────────────────────────────── */
+.glass {
+  background: rgba(8, 8, 8, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+html.light .glass {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+/* ─── Glassmorphism card ─────────────────────────────────────────────── */
+.glass-card {
+  background: rgba(17, 17, 24, 0.80);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+html.light .glass-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* ─── Gradient text ──────────────────────────────────────────────────── */
+.gradient-text {
+  color: var(--primary);
+}
+
+html.light .gradient-text {
+  color: var(--primary);
+}
+
+/* ─── Glow ───────────────────────────────────────────────────────────── */
+.glow-primary {
+  box-shadow: 0 0 24px rgba(0, 255, 194, 0.30);
+}
+
+html.light .glow-primary {
+  box-shadow: 0 0 20px rgba(0, 207, 192, 0.30);
+}
+
+.glow-primary-sm {
+  box-shadow: 0 0 12px rgba(0, 255, 194, 0.20);
+}
+
+/* ─── Highway light streak animations ───────────────────────────────── */
+@keyframes highway-l {
+  0%   { transform: translateX(-120%); opacity: 0; }
+  6%   { opacity: 1; }
+  88%  { opacity: 1; }
+  100% { transform: translateX(300vw);  opacity: 0; }
+}
+
+@keyframes highway-r {
+  0%   { transform: translateX(300vw);  opacity: 0; }
+  6%   { opacity: 1; }
+  88%  { opacity: 1; }
+  100% { transform: translateX(-120%); opacity: 0; }
+}
+
+/* ─── Hero Ken Burns (subtle zoom/pan) ───────────────────────────────── */
+@keyframes heroKenBurns {
+  0%   { transform: scale(1)    translate(0, 0); }
+  100% { transform: scale(1.08) translate(-1%, -1%); }
+}
+
+/* ─── Logo marquee ───────────────────────────────────────────────────── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee 22s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* ─── Shimmer border effect ──────────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer-border {
+  background: linear-gradient(
+    90deg,
+    rgba(0,255,194,0) 0%,
+    rgba(0,255,194,0.3) 25%,
+    rgba(25,181,255,0.3) 50%,
+    rgba(0,255,194,0.3) 75%,
+    rgba(0,255,194,0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+}
+
+/* ─── Float animation for decorative elements ────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float 4s ease-in-out 1s infinite;
+}
+
+.animate-float-slow {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* ─── Glow pulse animation ───────────────────────────────────────────── */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(0,255,194,0.15); }
+  50%      { box-shadow: 0 0 40px rgba(0,255,194,0.30); }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track,
+  .animate-float,
+  .animate-float-delayed,
+  .animate-float-slow,
+  .animate-glow-pulse,
+  .shimmer-border {
+    animation: none;
+  }
+}
+
+/* ─── Scrollbar hide ─────────────────────────────────────────── */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ─── Enhanced focus ring ────────────────────────────────────────────── */
+.focus-ring {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  transition: outline-color 0.2s;
+}
+.focus-ring:focus-visible {
+  outline-color: var(--primary);
+}
+
+/* ─── Hero city lights — parpadeo sutil ──────────────────────────────── */
+.city-light {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 9999px;
+  background: #ffffff;
+  box-shadow:
+    0 0 6px 2px rgba(255, 255, 255, 0.9),
+    0 0 14px 4px rgba(255, 255, 255, 0.4);
+  opacity: 0.25;
+  mix-blend-mode: screen;
+  animation: city-flicker 3.5s ease-in-out infinite;
+}
+@keyframes city-flicker {
+  0%, 100% { opacity: 0.2;  transform: scale(0.9); }
+  50%      { opacity: 0.9;  transform: scale(1.15); }
+}
+
