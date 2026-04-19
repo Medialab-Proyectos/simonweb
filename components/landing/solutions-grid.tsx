@@ -61,7 +61,6 @@ const solutions = [
     color: "text-chart-4",
     bgIcon: "bg-chart-4/15",
     borderHover: "hover:border-chart-4/40 hover:shadow-chart-4/10",
-    badge: "Próximamente",
   },
   {
     icon: FileCheck,
@@ -71,14 +70,12 @@ const solutions = [
     color: "text-chart-3",
     bgIcon: "bg-chart-3/15",
     borderHover: "hover:border-chart-3/40 hover:shadow-chart-3/10",
-    badge: "Próximamente",
   },
   {
     icon: Wallet,
     title: "SimonPay",
     description:
       "El ecosistema para pagos ágiles de peajes, seguros y servicios vehiculares en una sola billetera digital.",
-    badge: "Próximamente",
     color: "text-secondary",
     bgIcon: "bg-secondary/15",
     borderHover: "hover:border-secondary/40 hover:shadow-secondary/10",
@@ -159,13 +156,6 @@ export function SolutionsGrid() {
               {/* Hover glow */}
               <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none" />
 
-              {/* Badge (Próximamente) */}
-              {item.badge && (
-                <div className="absolute top-4 right-4 rounded-full bg-secondary/20 border border-secondary/30 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-secondary">
-                  {item.badge}
-                </div>
-              )}
-
               {/* Icon with animated glow on hover */}
               <motion.div
                 whileHover={{ scale: 1.1, rotate: 5 }}
@@ -188,16 +178,14 @@ export function SolutionsGrid() {
               </p>
 
               {/* Hover reveal: "Incluido" link */}
-              {!item.badge && (
-                <motion.div
-                  initial={{ opacity: 0, y: 4 }}
-                  whileInView={{ opacity: 0 }}
-                  className="mt-3 flex items-center gap-1 text-xs font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                >
-                  <Zap className="h-3 w-3" aria-hidden="true" />
-                  Incluido en tu plan
-                </motion.div>
-              )}
+              <motion.div
+                initial={{ opacity: 0, y: 4 }}
+                whileInView={{ opacity: 0 }}
+                className="mt-3 flex items-center gap-1 text-xs font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              >
+                <Zap className="h-3 w-3" aria-hidden="true" />
+                Incluido en tu plan
+              </motion.div>
             </motion.div>
           ))}
         </motion.div>

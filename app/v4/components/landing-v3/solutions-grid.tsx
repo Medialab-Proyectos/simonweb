@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Shield, MapPin, FileText, Headphones, BarChart3, Zap, ShieldCheck, FileCheck, Play, X } from "lucide-react"
+import { Shield, MapPin, FileText, Headphones, BarChart3, ShieldCheck, FileCheck, Play, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 // ─── Servicios (presentación unificada — sin split personas/empresas) ─────────
@@ -71,7 +71,7 @@ const solutions = [
     color: "text-chart-4",
     bgIcon: "bg-chart-4/15",
     borderHover: "hover:border-chart-4/40 hover:shadow-chart-4/10",
-    badge: "Próximamente",
+    badge: null,
     video: null,
   },
   {
@@ -83,7 +83,7 @@ const solutions = [
     color: "text-chart-3",
     bgIcon: "bg-chart-3/15",
     borderHover: "hover:border-chart-3/40 hover:shadow-chart-3/10",
-    badge: "Próximamente",
+    badge: null,
     video: null,
   },
 ]
@@ -207,15 +207,6 @@ function SolutionCard({
       )}
       onClick={() => item.video && onPlay(item)}
     >
-      {item.badge && (
-        <span className={cn(
-          "absolute top-4 right-4 rounded-full px-2 py-0.5 text-[10px] font-semibold",
-          "bg-secondary/15 text-secondary"
-        )}>
-          {item.badge}
-        </span>
-      )}
-
       <div
         className={cn(
           "mb-4 flex h-12 w-12 items-center justify-center rounded-xl",
@@ -228,10 +219,6 @@ function SolutionCard({
       <h3 className="text-lg font-semibold text-foreground">{item.title}</h3>
       <p className="mt-2 flex-grow text-sm leading-relaxed text-muted-foreground">{item.description}</p>
 
-      <div className="mt-3 flex items-center gap-1 text-xs font-medium text-primary">
-        <Zap className="h-3 w-3" aria-hidden="true" />
-        Ver más detalles
-      </div>
     </motion.div>
   )
 }
@@ -262,7 +249,8 @@ export function SolutionsGrid() {
               variants={fadeInUp}
               className="text-3xl font-bold text-foreground sm:text-4xl text-balance"
             >
-              Todo lo que necesitas para tener el control de tu vehículo.
+              Todo lo que necesitas para tener el control de{" "}
+              <span className="gradient-text">tu vehículo</span>.
             </motion.h2>
             <motion.p
               variants={fadeInUp}

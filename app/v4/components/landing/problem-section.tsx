@@ -16,7 +16,7 @@ const highlights = [
     icon: Zap,
     title: "Monitoreo",
     description:
-      "Control total con soluciones digitales para la gestión de tu vehículo particular y optimización avanzada de flotas.",
+      "Control total con soluciones digitales para la gestión de tu vehículo y optimización avanzada de flotas.",
     color: "text-secondary",
     bg: "bg-secondary/10",
   },
@@ -72,8 +72,8 @@ export function ProblemSection() {
               variants={fadeInUp}
               className="mt-5 text-3xl font-bold text-foreground sm:text-4xl lg:text-[2.75rem] leading-tight text-balance"
             >
-              Control inteligente en cada kilómetro con{" "}
-              <span className="gradient-text">control total</span>.
+              Control inteligente en{" "}
+              <span className="gradient-text">cada kilómetro</span>.
             </motion.h2>
 
             <motion.p

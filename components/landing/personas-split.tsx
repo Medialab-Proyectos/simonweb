@@ -82,7 +82,8 @@ export function PersonasSplit() {
               variants={fadeInUp}
               className="mt-5 text-3xl font-bold text-foreground sm:text-4xl lg:text-[2.75rem] leading-tight text-balance"
             >
-              Tu vehículo, bajo control total.
+              Tu vehículo, bajo{" "}
+              <span className="gradient-text">control total</span>.
             </motion.h2>
 
             <motion.p
@@ -137,7 +138,7 @@ export function PersonasSplit() {
           >
             <div className="relative h-[380px] lg:h-[480px] overflow-hidden rounded-2xl border border-white/10">
               <Image
-                src="/images/audience-personas.png"
+                src="/images/audience-personas2.png"
                 alt="Usuario controlando su vehículo desde la app Simon Movilidad"
                 fill
                 className="object-cover"

@@ -179,7 +179,7 @@ export default function V4Page() {
             {/* 7. Todo en un solo lugar — V3 */}
             <SolutionsGrid />
 
-            {/* 8. Simon para Personas — "Tu vehículo, bajo control total" */}
+            {/* 8. Simon para Personas */}
             <PersonasSplit />
 
             {/* 9. Simon para Empresas — Versión Principal */}

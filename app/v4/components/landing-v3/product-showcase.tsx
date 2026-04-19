@@ -25,7 +25,8 @@ export function ProductShowcase() {
             variants={fadeInUp}
             className="text-3xl font-bold text-foreground sm:text-4xl text-balance"
           >
-            Así se ve Simon en tu día a día
+            Así se ve Simon en tu{" "}
+            <span className="gradient-text">día a día</span>
           </motion.h2>
         </motion.div>
 

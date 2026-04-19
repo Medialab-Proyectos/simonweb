@@ -29,9 +29,10 @@ export function ClientLogos() {
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-3 text-center text-sm font-semibold uppercase tracking-widest text-primary"
+          className="mb-3 text-center text-3xl font-bold text-primary sm:text-4xl"
         >
-          Nuestros clientes
+          <span className="text-foreground">Nuestros</span>{" "}
+          clientes
         </motion.p>
         <motion.p
           initial={{ opacity: 0, y: 8 }}

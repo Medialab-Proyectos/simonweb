@@ -73,7 +73,8 @@ export function AppDownloadBanner() {
                 variants={fadeInUp}
                 className="mt-4 text-3xl font-bold text-foreground sm:text-4xl text-balance"
               >
-                Controla tu vehículo desde tu celular, en cualquier momento.
+                Controla tu vehículo desde tu celular, en{" "}
+                <span className="gradient-text">cualquier momento</span>.
               </motion.h2>
 
               <motion.p

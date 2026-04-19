@@ -89,7 +89,8 @@ export function FAQSection() {
             variants={fadeInUp}
             className="mt-4 text-3xl font-bold text-foreground sm:text-4xl text-balance"
           >
-            Centro de ayuda Simon Movilidad
+            Centro de ayuda Simon{" "}
+            <span className="gradient-text">Movilidad</span>
           </motion.h2>
           <motion.p
             variants={fadeInUp}

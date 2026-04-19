@@ -59,7 +59,8 @@ export function TrustBar() {
           viewport={{ once: true }}
           className="mb-3 text-center text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
         >
-          Impacto Simon Movilidad
+          Impacto Simon{" "}
+          <span className="gradient-text">Movilidad</span>
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 8 }}

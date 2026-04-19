@@ -117,7 +117,8 @@ export function AudienceSplit() {
               variants={fadeInUp}
               className="mt-5 text-3xl font-bold text-foreground sm:text-4xl lg:text-[2.75rem] leading-tight text-balance"
             >
-              Control total para tu operación en tiempo real.
+              Control total para tu operación en{" "}
+              <span className="gradient-text">tiempo real</span>.
             </motion.h2>
 
             <motion.p

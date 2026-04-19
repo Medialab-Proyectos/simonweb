@@ -91,7 +91,7 @@ export function ProblemSection() {
               <Image
                 src={activeTab === "personas"
                   ? "/images/audience-personas.png"
-                  : "/images/audience-empresas-new.png"}
+                  : "/images/audience-empresas-new2.png"}
                 alt={activeTab === "personas"
                   ? "Usuario verificando la ubicación de su vehículo desde el celular"
                   : "Administrador monitoreando flota de vehículos desde panel de control"}
@@ -128,7 +128,8 @@ export function ProblemSection() {
               variants={fadeInUp}
               className="text-3xl font-bold text-foreground sm:text-4xl text-balance"
             >
-              ¿Te identificas con alguno de estos desafíos?
+              ¿Te identificas con alguno de{" "}
+              <span className="gradient-text">estos desafíos</span>?
             </motion.h2>
             <motion.p
               variants={fadeInUp}
