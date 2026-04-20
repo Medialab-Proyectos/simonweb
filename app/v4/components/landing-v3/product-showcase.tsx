@@ -40,7 +40,7 @@ export function ProductShowcase() {
         >
           <figure className="relative overflow-hidden rounded-2xl border border-border shadow-sm h-64 w-full sm:h-80">
             <video
-              src="/videos/hero-bg.mp4"
+              src="/v4/videos/hero-bg.mp4"
               autoPlay
               loop
               muted

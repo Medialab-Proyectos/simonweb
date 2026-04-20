@@ -62,7 +62,7 @@ export function TestimonialsSection() {
             aria-label="Usuario verificando seguridad del vehículo desde la app"
           >
             <Image
-              src="/images/testimonials-new.png"
+              src="/v4/images/testimonials-new.png"
               alt="Usuario verificando seguridad del vehículo desde la app"
               fill
               className="object-cover"

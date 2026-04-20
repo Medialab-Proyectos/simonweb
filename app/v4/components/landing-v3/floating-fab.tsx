@@ -20,7 +20,7 @@ function SimonAvatar({ size = 36 }: { size?: number }) {
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/images/avatar.png"
+        src="/v4/images/avatar.png"
         alt="Simón — Asesor de Simon Movilidad"
         width={size * 3}
         height={size * 3}

@@ -47,7 +47,7 @@ export function Hero() {
       {/* ── Background ────────────────────────────────────────────────── */}
       <div className="absolute inset-0" aria-hidden="true">
         <Image
-          src="/images/fondo12.png"
+          src="/v4/images/fondo12.png"
           alt=""
           fill
           className="object-cover object-center"
@@ -155,7 +155,7 @@ export function Hero() {
               {/* Wrapper: celular protagonista, composición limpia */}
               <div className="relative w-[180px] sm:w-[210px] lg:w-[300px]">
                 <Image
-                  src="/images/smart.png"
+                  src="/v4/images/smart.png"
                   alt="App Simon Movilidad en smartphone"
                   width={560}
                   height={746}

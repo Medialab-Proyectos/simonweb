@@ -1,0 +1,10 @@
+services:
+  simon-v4:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: simon-v4:local
+    container_name: simon-v4
+    ports:
+      - "3000:3000"
+    restart: unless-stopped

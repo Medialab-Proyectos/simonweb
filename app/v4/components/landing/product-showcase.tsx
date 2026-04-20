@@ -179,7 +179,7 @@ export function ProductShowcase() {
             aria-label="Uso de la aplicación Simon para monitoreo vehicular"
           >
             <Image
-              src="/images/product-showcase-new.png"
+              src="/v4/images/product-showcase-new.png"
               alt="Uso de la aplicación Simon para monitoreo vehicular"
               fill
               className="object-cover"

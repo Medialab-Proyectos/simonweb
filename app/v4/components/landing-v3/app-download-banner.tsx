@@ -46,7 +46,7 @@ export function AppDownloadBanner() {
             >
               <div className="relative h-[560px] w-full">
                 <Image
-                  src="/images/simon-avatar-corregido.jpg"
+                  src="/v4/images/simon-avatar-corregido.jpg"
                   alt="Simón — Asistente de movilidad Simon"
                   fill
                   className="object-contain object-bottom"

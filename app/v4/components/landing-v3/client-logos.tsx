@@ -5,13 +5,13 @@ import { cn } from "@/lib/utils"
 
 // ─── Client list ──────────────────────────────────────────────────────────────
 const clients = [
-  { name: "Finanzauto",      logo: "/logos/finanzauto.svg",  type: "svg" },
-  { name: "Carfiao",         logo: "/logos/carfiao.svg",     type: "svg" },
-  { name: "Banco Finandina", logo: "/logos/finandina.svg",   type: "svg" },
-  { name: "Equirent",        logo: "/logos/equirent.svg",    type: "svg" },
-  { name: "Dongfeng",        logo: "/logos/dongfeng.svg",    type: "svg" },
-  { name: "Confirmeza",      logo: "/logos/confirmeza.png",  type: "png" },
-  { name: "FZ",              logo: "/logos/fz.svg",          type: "svg" },
+  { name: "Finanzauto",      logo: "/v4/logos/finanzauto.png",  type: "png" },
+  { name: "Carfiao",         logo: "/v4/logos/carfiao.png",     type: "png" },
+  { name: "Banco Finandina", logo: "/v4/logos/finandina.png",   type: "png" },
+  { name: "Equirent",        logo: "/v4/logos/equirent.png",    type: "png" },
+  { name: "Dongfeng",        logo: "/v4/logos/dongfeng.png",    type: "png" },
+  { name: "Confirmeza",      logo: "/v4/logos/confirmeza.png",  type: "png" },
+  { name: "Forland",         logo: "/v4/logos/forland.png",     type: "png" },
 ]
 
 // Double for seamless loop

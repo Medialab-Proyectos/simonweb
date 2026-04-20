@@ -70,7 +70,7 @@ export function TestimonialsSection() {
         >
           <figure className="relative overflow-hidden rounded-2xl border border-border shadow-sm h-64 w-full sm:h-80">
             <Image
-              src="/images/testimonials-new.png"
+              src="/v4/images/testimonials-new.png"
               alt="Usuario verificando seguridad del vehículo desde la app Simon"
               fill
               className="object-cover"

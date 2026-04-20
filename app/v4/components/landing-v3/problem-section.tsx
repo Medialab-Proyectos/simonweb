@@ -90,8 +90,8 @@ export function ProblemSection() {
             >
               <Image
                 src={activeTab === "personas"
-                  ? "/images/audience-personas.png"
-                  : "/images/audience-empresas-new2.png"}
+                  ? "/v4/images/audience-personas.png"
+                  : "/v4/images/audience-empresas-new2.png"}
                 alt={activeTab === "personas"
                   ? "Usuario verificando la ubicación de su vehículo desde el celular"
                   : "Administrador monitoreando flota de vehículos desde panel de control"}

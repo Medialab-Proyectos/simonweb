@@ -66,7 +66,7 @@ export function AudienceSplit() {
             {/* Image */}
             <div className="relative h-[380px] lg:h-[480px] overflow-hidden rounded-2xl border border-white/10">
               <Image
-                src="/images/audience-empresas-new.png"
+                src="/v4/images/audience-empresas-new.png"
                 alt="Administrador de flota monitoreando vehículos desde la plataforma Simon"
                 fill
                 className="object-cover"

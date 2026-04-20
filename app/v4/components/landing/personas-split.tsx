@@ -138,7 +138,7 @@ export function PersonasSplit() {
           >
             <div className="relative h-[380px] lg:h-[480px] overflow-hidden rounded-2xl border border-white/10">
               <Image
-                src="/images/audience-personas2.png"
+                src="/v4/images/audience-personas2.png"
                 alt="Usuario controlando su vehículo desde la app Simon Movilidad"
                 fill
                 className="object-cover"

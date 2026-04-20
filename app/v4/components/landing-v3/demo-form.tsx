@@ -147,7 +147,7 @@ export function DemoModal() {
                             {/* ── Left: image panel (desktop only) ── */}
                             <div className="relative hidden md:flex md:w-[42%] flex-col justify-end overflow-hidden bg-card">
                                 <Image
-                                    src="/images/audience-empresas-new.png"
+                                    src="/v4/images/audience-empresas-new.png"
                                     alt="Flota de vehículos monitoreada desde Simon"
                                     fill
                                     className="object-cover opacity-70"

@@ -2,6 +2,9 @@ node_modules
 .next
 out
 npm-debug.log
+*.log
+.env
+.env.*
 Dockerfile
 .git
 .gitignore

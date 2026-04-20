@@ -119,7 +119,7 @@ export function FinalCTA() {
             {/* Image */}
             <div className="mt-6 relative h-48 rounded-xl overflow-hidden border border-border">
               <Image
-                src="/images/companero-viaje.jpg"
+                src="/v4/images/companero-viaje.jpg"
                 alt="Persona usando la app Simon en su vehículo"
                 fill
                 className="object-cover"
@@ -212,7 +212,7 @@ export function FinalCTA() {
                       className="w-full rounded-xl"
                       aria-label="Demo de monitoreo de flota Simon"
                     >
-                      <source src="/videos/services/monitoreo.mp4" type="video/mp4" />
+                      <source src="/v4/videos/services/monitoreo.mp4" type="video/mp4" />
                     </video>
                   </motion.div>
                 )}
@@ -229,7 +229,7 @@ export function FinalCTA() {
             >
               <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-xl">
                 <Image
-                  src="/images/simon-avatar.jpg"
+                  src="/v4/images/simon-avatar.jpg"
                   alt="Simón — Asesor de movilidad"
                   fill
                   className="object-cover object-top"

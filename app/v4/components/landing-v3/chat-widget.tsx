@@ -13,7 +13,7 @@ function SimonAvatar({ size = 36 }: { size?: number }) {
             className="relative shrink-0 overflow-hidden rounded-full"
         >
             <Image
-                src="/images/simon-character.png"
+                src="/v4/images/simon-character.png"
                 alt="Simón — Tu asistente en la vía"
                 fill
                 className="object-cover object-top"

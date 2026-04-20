@@ -187,7 +187,7 @@ export function FinalCTA() {
               >
                 <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl">
                   <Image
-                    src="/images/simon-character.png"
+                    src="/v4/images/simon-character.png"
                     alt="Simón — Asesor de movilidad"
                     fill
                     className="object-cover object-top"
@@ -229,7 +229,7 @@ export function FinalCTA() {
                   aria-label="Control de movilidad desde la aplicación Simon"
                 >
                   <Image
-                    src="/images/audience-personas.png"
+                    src="/v4/images/audience-personas.png"
                     alt="Persona usando la app Simon en su vehículo"
                     fill
                     className="object-cover"

@@ -16,7 +16,7 @@ const solutions = [
     bgIcon: "bg-primary/15",
     borderHover: "hover:border-primary/40 hover:shadow-primary/10",
     badge: null,
-    video: "/videos/services/monitoreo.mp4",
+    video: "/v4/videos/services/monitoreo.mp4",
   },
   {
     icon: Headphones,
@@ -27,7 +27,7 @@ const solutions = [
     bgIcon: "bg-chart-5/15",
     borderHover: "hover:border-chart-5/40 hover:shadow-chart-5/10",
     badge: null,
-    video: "/videos/services/asistencias.mp4",
+    video: "/v4/videos/services/asistencias.mp4",
   },
   {
     icon: Shield,
@@ -38,7 +38,7 @@ const solutions = [
     bgIcon: "bg-secondary/15",
     borderHover: "hover:border-secondary/40 hover:shadow-secondary/10",
     badge: null,
-    video: "/videos/services/geocercas.mp4",
+    video: "/v4/videos/services/geocercas.mp4",
   },
   {
     icon: FileText,
@@ -49,7 +49,7 @@ const solutions = [
     bgIcon: "bg-success/15",
     borderHover: "hover:border-success/40 hover:shadow-success/10",
     badge: null,
-    video: "/videos/services/guantera.mp4",
+    video: "/v4/videos/services/guantera.mp4",
   },
   {
     icon: BarChart3,
@@ -60,7 +60,7 @@ const solutions = [
     bgIcon: "bg-warning/15",
     borderHover: "hover:border-warning/40 hover:shadow-warning/10",
     badge: null,
-    video: "/videos/services/reportes.mp4",
+    video: "/v4/videos/services/reportes.mp4",
   },
   {
     // TODO: Copy final pendiente — equipo de marketing

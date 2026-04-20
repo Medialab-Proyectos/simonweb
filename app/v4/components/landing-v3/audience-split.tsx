@@ -23,7 +23,7 @@ const segments = [
     ],
     image: {
       alt: "Persona usando la app Simon junto a su vehículo",
-      src: "/images/audience-personas.png",
+      src: "/v4/images/audience-personas.png",
     },
     activeAccent: "border-primary/40 ring-2 ring-primary/20 shadow-lg shadow-primary/10",
     inactiveAccent: "border-border hover:border-primary/25 hover:shadow-md",
@@ -45,7 +45,7 @@ const segments = [
     ],
     image: {
       alt: "Administrador de flota monitoreando vehículos desde la plataforma Simon",
-      src: "/images/audience-empresas-new.png",
+      src: "/v4/images/audience-empresas-new.png",
     },
     activeAccent: "border-secondary/40 ring-2 ring-secondary/20 shadow-lg shadow-secondary/10",
     inactiveAccent: "border-border hover:border-secondary/25 hover:shadow-md",
