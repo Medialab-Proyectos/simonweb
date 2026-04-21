@@ -25,14 +25,14 @@ export function ClientLogos() {
       aria-label="Clientes que confían en Simon"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.p
+        <motion.h2
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-3 text-center text-sm font-semibold text-primary"
+          className="mb-4 text-center text-3xl font-bold text-foreground sm:text-4xl lg:text-[2.75rem] text-balance"
         >
-          Nuestros clientes
-        </motion.p>
+          Nuestros <span className="gradient-text">clientes</span>
+        </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}

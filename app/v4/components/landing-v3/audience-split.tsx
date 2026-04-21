@@ -51,8 +51,8 @@ const segments = [
     inactiveAccent: "border-border hover:border-secondary/25 hover:shadow-md",
     iconBg: "bg-secondary/10",
     iconColor: "text-secondary",
-    badgeBg: "bg-secondary",
-    badgeText: "text-white",
+    badgeBg: "bg-primary",
+    badgeText: "text-primary-foreground",
     gradientFrom: "from-secondary/8",
   },
 ]
@@ -190,7 +190,7 @@ export function AudienceSplit() {
                       <div className="flex flex-col gap-2.5">
                         <Button
                           size="lg"
-                          className="w-full justify-center bg-secondary text-white hover:opacity-90 group"
+                          className="w-full justify-center bg-primary text-primary-foreground hover:opacity-90 group"
                           onClick={openDemoModal}
                         >
                           Agendar demo gratuita

@@ -202,10 +202,8 @@ function SolutionCard({
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       className={cn(
         "glass-card group relative flex h-full flex-col rounded-2xl p-6 transition-shadow",
-        item.borderHover,
-        item.video && "cursor-pointer"
+        item.borderHover
       )}
-      onClick={() => item.video && onPlay(item)}
     >
       <div
         className={cn(
@@ -258,12 +256,7 @@ export function SolutionsGrid() {
             >
               Gestiona, protege y optimiza tu vehículo desde un solo lugar. Descubre cómo cada solución trabaja para ti:
             </motion.p>
-            <motion.p
-              variants={fadeInUp}
-              className="mx-auto mt-3 max-w-2xl text-xs italic text-muted-foreground/60"
-            >
-              *Sujeto a disponibilidad del prestador de servicio.
-            </motion.p>
+
           </motion.div>
 
           {/* Grid — presentación unificada */}
@@ -285,12 +278,10 @@ export function SolutionsGrid() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="mt-6 text-center text-xs text-muted-foreground/60 italic"
+            className="mt-10 text-center text-sm font-medium text-muted-foreground/80 italic"
           >
             * Sujeto a disponibilidad del prestador de servicio.
-          </motion.p>
-
-        </div>
+          </motion.p>        </div>
       </section>
 
       {/* Video modal — backdrop blur + video centrado */}
