@@ -106,7 +106,7 @@ export function AudienceSplit() {
           >
             <motion.span
               variants={fadeInUp}
-              className="inline-flex items-center gap-2 rounded-full bg-secondary/10 border border-secondary/20 px-4 py-1.5 text-sm text-secondary"
+              className="inline-flex items-center gap-2 rounded-full bg-success/10 border border-success/20 px-4 py-1.5 text-sm text-success"
             >
               <Building2 className="h-3.5 w-3.5" aria-hidden="true" />
               Para empresas

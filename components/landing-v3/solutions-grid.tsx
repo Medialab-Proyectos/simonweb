@@ -1,8 +1,7 @@
 "use client"
 
-import { useRef, useState, useEffect, useCallback } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Shield, MapPin, FileText, Headphones, BarChart3, ShieldCheck, FileCheck, Play, X } from "lucide-react"
+import { motion } from "framer-motion"
+import { Shield, MapPin, FileText, Headphones, BarChart3, ShieldCheck, FileCheck } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 // ─── Servicios (presentación unificada — sin split personas/empresas) ─────────
@@ -97,208 +96,98 @@ const stagger = { visible: { transition: { staggerChildren: 0.08 } } }
 // ─── Types ───────────────────────────────────────────────────────────────────
 type SolutionItem = (typeof solutions)[number]
 
-// ─── Video modal (backdrop blur + video centrado) ────────────────────────────
-function VideoModal({
-  item,
-  onClose,
-}: {
-  item: SolutionItem
-  onClose: () => void
-}) {
-  const videoRef = useRef<HTMLVideoElement>(null)
-
-  useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose()
-    }
-    document.addEventListener("keydown", handleKey)
-    document.body.style.overflow = "hidden"
-    return () => {
-      document.removeEventListener("keydown", handleKey)
-      document.body.style.overflow = ""
-    }
-  }, [onClose])
-
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.currentTime = 0
-      videoRef.current.play().catch(() => {})
-    }
-  }, [])
-
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.25 }}
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
-      onClick={onClose}
-      role="dialog"
-      aria-label={`Video: ${item.title}`}
-    >
-      {/* Backdrop blur */}
-      <div className="absolute inset-0 bg-black/70 backdrop-blur-md" />
-
-      {/* Modal content */}
-      <motion.div
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.9, opacity: 0 }}
-        transition={{ type: "spring", stiffness: 300, damping: 25 }}
-        className="relative w-full max-w-xs rounded-2xl overflow-hidden border border-border bg-card shadow-2xl shadow-black/50"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="absolute top-3 right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
-          aria-label="Cerrar video"
-        >
-          <X className="h-4 w-4" />
-        </button>
-
-        {/* Video */}
-        <div className="aspect-[9/16] w-full bg-black">
-          <video
-            ref={videoRef}
-            src={item.video!}
-            muted
-            loop
-            playsInline
-            className="h-full w-full object-contain"
-          />
-        </div>
-
-        {/* Title bar */}
-        <div className="flex items-center gap-3 px-4 py-3 bg-card border-t border-border">
-          <div
-            className={cn(
-              "flex h-9 w-9 shrink-0 items-center justify-center rounded-lg",
-              item.bgIcon
-            )}
-          >
-            <item.icon className={cn("h-5 w-5", item.color)} aria-hidden="true" />
-          </div>
-          <p className="text-sm font-semibold text-foreground">{item.title}</p>
-        </div>
-      </motion.div>
-    </motion.div>
-  )
-}
-
 // ─── SolutionCard ────────────────────────────────────────────────────────────
-function SolutionCard({
-  item,
-  onPlay,
-}: {
-  item: SolutionItem
-  onPlay: (item: SolutionItem) => void
-}) {
+function SolutionCard({ item }: { item: SolutionItem }) {
   return (
     <motion.div
       variants={fadeInUp}
-      whileHover={{ y: -4 }}
+      whileHover={{ y: -6 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       className={cn(
-        "glass-card group relative flex h-full flex-col rounded-2xl p-6 transition-shadow",
+        "glass-card group relative flex h-full flex-col rounded-2xl p-6 transition-all cursor-default",
         item.borderHover,
-        item.video && "cursor-pointer"
+        "hover:shadow-xl"
       )}
-      onClick={() => item.video && onPlay(item)}
     >
-      <div
+      {/* Hover glow */}
+      <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none" />
+
+      <motion.div
+        whileHover={{ scale: 1.1, rotate: 5 }}
+        transition={{ type: "spring", stiffness: 400, damping: 15 }}
         className={cn(
-          "mb-4 flex h-12 w-12 items-center justify-center rounded-xl",
-          item.bgIcon || "bg-primary/8"
+          "mb-4 flex h-12 w-12 items-center justify-center rounded-xl transition-all",
+          item.bgIcon || "bg-primary/8",
+          "group-hover:shadow-lg"
         )}
       >
         <item.icon className={cn("h-6 w-6", item.color || "text-primary")} aria-hidden="true" />
-      </div>
+      </motion.div>
 
-      <h3 className="text-lg font-semibold text-foreground">{item.title}</h3>
-      <p className="mt-2 flex-grow text-sm leading-relaxed text-muted-foreground">{item.description}</p>
-
+      <h3 className="text-lg font-semibold text-foreground group-hover:text-foreground/90 transition-colors">{item.title}</h3>
+      <p className="mt-2 flex-grow text-sm leading-relaxed text-muted-foreground z-10 relative">{item.description}</p>
     </motion.div>
   )
 }
 
 export function SolutionsGrid() {
-  const [activeVideo, setActiveVideo] = useState<SolutionItem | null>(null)
-  const closeModal = useCallback(() => setActiveVideo(null), [])
-
   return (
-    <>
-      <section
-        id="soluciones-grid"
-        className="bg-surface py-12 lg:py-16"
-        aria-labelledby="solutions-heading"
-      >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section
+      id="soluciones-grid"
+      className="bg-surface py-12 lg:py-16"
+      aria-labelledby="solutions-heading"
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-          {/* Heading */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-80px" }}
-            variants={stagger}
-            className="text-center"
+        {/* Heading */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          variants={stagger}
+          className="text-center"
+        >
+          <motion.h2
+            id="solutions-heading"
+            variants={fadeInUp}
+            className="text-3xl font-bold text-foreground sm:text-4xl text-balance"
           >
-            <motion.h2
-              id="solutions-heading"
-              variants={fadeInUp}
-              className="text-3xl font-bold text-foreground sm:text-4xl text-balance"
-            >
-              Todo lo que necesitas para tener el control de{" "}
-              <span className="gradient-text">tu vehículo</span>.
-            </motion.h2>
-            <motion.p
-              variants={fadeInUp}
-              className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground"
-            >
-              Gestiona, protege y optimiza tu vehículo desde un solo lugar. Descubre cómo cada solución trabaja para ti:
-            </motion.p>
-            <motion.p
-              variants={fadeInUp}
-              className="mx-auto mt-3 max-w-2xl text-xs italic text-muted-foreground/60"
-            >
-              *Sujeto a disponibilidad del prestador de servicio.
-            </motion.p>
-          </motion.div>
-
-          {/* Grid — presentación unificada */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-80px" }}
-            variants={stagger}
-            className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-rows-fr"
-          >
-            {solutions.map((item) => (
-              <SolutionCard key={item.title} item={item} onPlay={setActiveVideo} />
-            ))}
-          </motion.div>
-
-          {/* Section disclaimer */}
+            Todo lo que necesitas para tener el control de{" "}
+            <span className="gradient-text">tu vehículo</span>.
+          </motion.h2>
           <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-            className="mt-6 text-center text-xs text-muted-foreground/60 italic"
+            variants={fadeInUp}
+            className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground"
           >
-            * Sujeto a disponibilidad del prestador de servicio.
+            Gestiona, protege y optimiza tu vehículo desde un solo lugar. Descubre cómo cada solución trabaja para ti:
           </motion.p>
+        </motion.div>
 
-        </div>
-      </section>
+        {/* Grid — presentación unificada */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          variants={stagger}
+          className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-rows-fr"
+        >
+          {solutions.map((item) => (
+            <SolutionCard key={item.title} item={item} />
+          ))}
+        </motion.div>
 
-      {/* Video modal — backdrop blur + video centrado */}
-      <AnimatePresence>
-        {activeVideo && activeVideo.video && (
-          <VideoModal item={activeVideo} onClose={closeModal} />
-        )}
-      </AnimatePresence>
-    </>
+        {/* Section disclaimer */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="mt-6 text-center text-xs text-muted-foreground/60 italic"
+        >
+          * Sujeto a disponibilidad del prestador de servicio.
+        </motion.p>
+
+      </div>
+    </section>
   )
 }
