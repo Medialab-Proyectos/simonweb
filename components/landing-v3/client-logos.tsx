@@ -11,6 +11,8 @@ const clients = [
   { name: "Equirent",        logo: "/logos/equirent.svg",    type: "svg" },
   { name: "Dongfeng",        logo: "/logos/dongfeng.svg",    type: "svg" },
   { name: "Confirmeza",      logo: "/logos/confirmeza.png",  type: "png" },
+  { name: "Motoriza",        logo: "/logos/motoriza.png",    type: "png" },
+  { name: "Sitrak",          logo: "/logos/sitrak.png",      type: "png" },
   { name: "FZ",              logo: "/logos/fz.svg",          type: "svg" },
 ]
 

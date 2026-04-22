@@ -49,8 +49,8 @@ export function AudienceSplit() {
       <div className="absolute inset-0 bg-background" aria-hidden="true" />
 
       {/* Ambient glows */}
-      <div className="pointer-events-none absolute -left-32 top-1/3 h-[400px] w-[400px] bg-secondary/6 blur-[120px] rounded-full" aria-hidden="true" />
-      <div className="pointer-events-none absolute -right-32 bottom-1/4 h-[350px] w-[350px] bg-primary/5 blur-[100px] rounded-full" aria-hidden="true" />
+      <div className="pointer-events-none absolute -left-32 top-1/3 h-[400px] w-[400px] bg-primary/6 blur-[120px] rounded-full" aria-hidden="true" />
+      <div className="pointer-events-none absolute -right-32 bottom-1/4 h-[350px] w-[350px] bg-secondary/5 blur-[100px] rounded-full" aria-hidden="true" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
@@ -106,7 +106,7 @@ export function AudienceSplit() {
           >
             <motion.span
               variants={fadeInUp}
-              className="inline-flex items-center gap-2 rounded-full bg-success/10 border border-success/20 px-4 py-1.5 text-sm text-success"
+              className="inline-flex items-center gap-2 rounded-full bg-primary/10 border border-primary/20 px-4 py-1.5 text-sm text-primary"
             >
               <Building2 className="h-3.5 w-3.5" aria-hidden="true" />
               Para empresas

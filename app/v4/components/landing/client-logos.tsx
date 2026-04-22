@@ -12,6 +12,8 @@ const clients = [
   { name: "Dongfeng",        logo: "/v4/logos/dongfeng.png" },
   { name: "Confirmeza",      logo: "/v4/logos/confirmeza.png" },
   { name: "Forland",         logo: "/v4/logos/forland.png" },
+  { name: "Motoriza",        logo: "/v4/logos/motoriza.png" },
+  { name: "Sitrak",          logo: "/v4/logos/sitrak.png" },
 ]
 
 // Double for seamless loop
